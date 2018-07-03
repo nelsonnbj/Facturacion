@@ -239,3 +239,148 @@
         });
     </script>
 }
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    var Mensaje = $("#mensaje");
+    var Campo = $('#OcultarCampos');
+    var focos = $('#focos');
+    var estrategias = $('#estrategias');
+    var ponderacion = $("#Ponderacion");
+    var ponderaciones = $("#ponderaciones");
+   
+
+    focos.change(function () {
+        MostrarEstrategias($(this).val());
+    });
+    function MostrarEstrategias(valorfoco) {
+        var url = finder.getAppFile('Metas/ConsultarEstrategias');
+        $.get(url, { foco: valorfoco })
+            .done(function (res) {
+                if (res.exists) {
+                    var aux = res.EstrategiasList;
+                    estrategias.empty();
+
+                    for (var i = 0, len = aux.length; i < len; i++) {
+                        estrategias.append($("<option />").val(aux[i].Value).text(aux[i].Text));
+                    }
+
+                }
+                else {
+                    if (valorfoco > 0) {
+                        toastr.info("El foco no tiene estrategias asociadas", 'Importante', { positionClass: 'toast-bottom-right' });
+                        estrategias.empty();
+                    }
+
+                }
+            })
+            .fail(function (res) {
+                alert("Error: ocurrió un problema de conexión" + res.status + ": " + res.statusText);
+            });
+    }
+
+
+    ponderacion.blur(function () {
+
+
+        var total = $('#totalponderacion').val();
+        var ponde = $('#Ponderacion').val();
+
+        var sumar = (parseInt(total) + parseInt(ponde));
+
+        console.log(sumar);
+
+        if (sumar > 100) {
+
+            $('#mensajeponderacion').text("! El valor de la ponderacion seleccionada supera el limite.! Debe insertar una ponderacion menor.");
+            $('#mensajeponderacion').show();
+            Campo.hide();
+        }
+        else {
+            $('#mensajeponderacion').hide();
+            Campo.show();
+        }
+
+
+    });
+
+    ponderacion.click(function () {
+
+
+        var total = $('#totalponderacion').val();
+        var ponde = $('#Ponderacion').val();
+
+        var sumar = (parseInt(total) + parseInt(ponde));
+
+        console.log(sumar);
+
+        if (sumar > 100) {
+
+            $('#mensajeponderacion').text("! El valor de la ponderacion seleccionada supera el limite.! Debe insertar una ponderacion menor.");
+            $('#mensajeponderacion').show();
+            Campo.hide();
+        }
+        else {
+            $('#mensajeponderacion').hide();
+            Campo.show();
+        }
+
+
+    });
+
+
+    ponderaciones.blur(function () {
+
+
+        var total = $('#totalponderacion').val();
+        var ponde = $('#ponderaciones').val();
+        var num2 = $('#num2').val();
+
+        var suma = (parseInt(total) - parseInt(num2));
+        var sumar = (parseInt(ponde) + parseInt(suma));
+
+        console.log(sumar);
+
+        if (sumar > 100) {
+
+            $('#mensajeponderacion').text("! El valor de la ponderacion seleccionada supera el limite.! Debe insertar una ponderacion menor.");
+            $('#mensajeponderacion').show();
+            Campo.hide();
+        }
+        else {
+            $('#mensajeponderacion').hide();
+            Campo.show();
+        }
+
+
+    });
+
+    ponderaciones.click(function () {
+
+
+        var total = $('#totalponderacion').val();
+        var ponde = $('#ponderaciones').val();
+        var num2 = $('#num2').val();
+
+        var suma = (parseInt(total) - parseInt(num2));
+        var sumar = (parseInt(ponde) + parseInt(suma));
+
+        console.log(sumar);
+
+        if (sumar > 100) {
+
+            $('#mensajeponderacion').text("! El valor de la ponderacion seleccionada supera el limite.! Debe insertar una ponderacion menor.");
+            $('#mensajeponderacion').show();
+            Campo.hide();
+        }
+        else {
+            $('#mensajeponderacion').hide();
+            Campo.show();
+        }
+
+
+    });
