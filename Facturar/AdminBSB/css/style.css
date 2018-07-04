@@ -2158,8 +2158,10 @@
 
 .demo-checkbox label,
 .demo-radio-button label {
-  min-width: 150px; }
-
+  min-width: 550px; }
+.demo-checkbox label { min-width:850px;
+                 width:158px; height:158px;
+}
 .demo-knob-chart div {
   margin-right: 15px; }
 

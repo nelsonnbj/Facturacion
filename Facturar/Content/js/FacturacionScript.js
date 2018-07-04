@@ -1,30 +1,30 @@
 ﻿
-$(document).ready(function () {
+//$(document).ready(function () {
 
-    var chimis = $("#chimi");
+//    var chimis = $("#chimi");
 
-   chimis.click(function () {
-       document.getElementById("#producto").innerHTML = "Chmi";
+//   chimis.click(function () {
+//       document.getElementById("#producto").innerHTML = "Chmi";
 
-    });
-});
+//    });
+//});
 
 
 //Add Multiple Order.
-//$("#addToList").click(function (e) {
-//    e.preventDefault();
+$("#addToList").click(function (e) {
+    e.preventDefault();
 
-//    if ($.trim($("#productName").val()) == "" || $.trim($("#price").val()) == "" || $.trim($("#quantity").val()) == "") return;
+    if ($.trim($("#produco").val()) == "" || $.trim($("#cantida").val()) == "" || $.trim($("#cliente").val()) == "") return;
 
-//    var productName = $("#productName").val(),
-//        price = $("#price").val(),
-//        quantity = $("#quantity").val(),
-//        detailsTableBody = $("#detailsTable tbody");
+    var producto = $("#produco").val(),
+       cantidad = $("#cantida").val(),
+       cliente = $("#cliente").val(),
+        detailsTableBody = $("#detailsTable tbody");
 
-//    var productItem = '<tr><td>' + productName + '</td><td>' + quantity + '</td><td>' + price + '</td><td>' + (parseFloat(price) * parseInt(quantity)) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
-//    detailsTableBody.append(productItem);
-//    clearItem();
-//});
+    var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt('2')) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+    detailsTableBody.append(productItem);
+    clearItem();
+});
 
 
 //After Add A New Order In The List, Clear Clean The Form For Add More Order.

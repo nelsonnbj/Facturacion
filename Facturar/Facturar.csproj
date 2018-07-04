@@ -267,11 +267,11 @@
     <Content Include="Content\images\image-gallery\7.jpg" />
     <Content Include="Content\images\image-gallery\8.jpg" />
     <Content Include="Content\images\image-gallery\9.jpg" />
-    <Content Include="Content\images\image-gallery\BeaconCheses.jpg" />
-    <Content Include="Content\images\image-gallery\Chimi.jpg" />
+    <Content Include="Content\images\image-gallery\thumb\BeaconCheses.jpg" />
+    <Content Include="Content\images\image-gallery\thumb\Chimi.jpg" />
     <Content Include="Content\images\image-gallery\Hamburger1.jpg" />
     <Content Include="Content\images\image-gallery\Hamburgerches.jpg" />
-    <Content Include="Content\images\image-gallery\pierna.jpg" />
+    <Content Include="Content\images\image-gallery\thumb\pierna.jpg" />
     <Content Include="Content\images\image-gallery\thumb\thumb-1.jpg" />
     <Content Include="Content\images\image-gallery\thumb\thumb-10.jpg" />
     <Content Include="Content\images\image-gallery\thumb\thumb-11.jpg" />
@@ -3914,6 +3914,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Facturas\Index.cshtml" />
+    <Content Include="Views\Facturas\MenuPrincipal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

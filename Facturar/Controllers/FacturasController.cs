@@ -14,6 +14,11 @@ namespace Facturar.Controllers
             return View();
         }
 
+        public ActionResult MenuPrincipal()
+        {
+            return View();
+        }
+
         // GET: Facturas/Details/5
         public ActionResult Details(int id)
         {

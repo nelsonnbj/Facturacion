@@ -2,6 +2,33 @@
     ViewBag.Title = "Index";
 }
 
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Editors | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="~/Content/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="~/Content/plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="~/Content/plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/Content/css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
 <h2>Facturacion</h2>
 
 <div class="row clearfix">
@@ -26,15 +53,14 @@
             <div class="body">
 
                 <div id="aniimated-thumbnials" class="col-md-6">
-
                     <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
-                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/Chimi.jpg" width="158" height="158" id="chimi">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-1.jpg" width="158" height="158" id="chimi">
                     </div>
                     <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
-                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/pierna.jpg" width="158" height="158" id="pierna">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-2.jpg" width="158" height="158" id="pierna">
                     </div>
                     <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
-                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/BeaconCheses.jpg" width="158" height="158" id="baconcheese">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-3.jpg" width="158" height="158" id="baconcheese">
                     </div>
                     <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-4.jpg" width="158" height="158" id="pablo">
@@ -53,6 +79,7 @@
 
                     </div>
                 </div>
+
                 <div class="form-group">
                     <h2 class="card-inside-title">Ingreientes</h2><br />
                     <div class="demo-checkbox">
@@ -110,21 +137,28 @@
                     <div class="row">
                         
                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                <div class="form-group">
+                                <div class="input-group">
+                                  
                                     <div class="form-line">
+                                      
                                         <input type="text" class="form-control" placeholder="Producto" id="producto" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                <div class="form-group">
+                                <div class="input-group">
                                     <div class="form-line">
                                         <input type="text" class="form-control" placeholder="Cantidad" id="cantidad" />
+                                      
                                     </div>
+                                  
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">person</i>
+                                    </span>
                                     <div class="form-line">
                                         <input type="text" class="form-control" placeholder="Cliente" id="cliente" />
                                     </div>
@@ -154,8 +188,9 @@
 
 
 
+@*@section scripts{
+<script>
 
-@*<script>
+        </script>
 
-    </script>*@
-
+    }*@
