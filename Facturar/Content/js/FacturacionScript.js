@@ -1,12 +1,12 @@
 ﻿
 $(document).ready(function () {
 
-   // var chimis = $("#chimi");
+    var chimis = $("#chimi");
 
-   //chimis.click(function () {
-   //    document.getElementById("#producto").innerHTML = "Chmi";
+   chimis.click(function () {
+       document.getElementById("#producto").innerHTML = "Chmi";
 
-   // });
+    });
 });
 
 

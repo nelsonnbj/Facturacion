@@ -3,181 +3,159 @@
 }
 
 <h2>Facturacion</h2>
-<section>
-    <div class="container-fluid">
-       
-        <!-- Input -->
-        <div class="row clearfix">
-            <div class="col-md-12 center">
-                <div class="card">
-                    <div class="header">
-                        <h2>
-                            Menu
-                            @*<small>Different sizes and widths</small>*@
-                        </h2>
-                        <ul class="header-dropdown m-r--5">
-                            <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">more_vert</i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="javascript:void(0);">Action</a></li>
-                                    <li><a href="javascript:void(0);">Another action</a></li>
-                                    <li><a href="javascript:void(0);">Something else here</a></li>
-                                </ul>
-                            </li>
+
+<div class="row clearfix">
+    <!-- Task Info -->
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="card">
+            <div class="header">
+                <h2>Menu</h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
                         </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+
+                <div id="aniimated-thumbnials" class="col-md-6">
+
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/Chimi.jpg" width="158" height="158" id="chimi">
                     </div>
-                    <div class="body">
-                        @*<h2 class="card-inside-title">Menu</h2>*@
-                        <div class="card-block">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/pierna.jpg" width="158" height="158" id="pierna">
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/BeaconCheses.jpg" width="158" height="158" id="baconcheese">
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-4.jpg" width="158" height="158" id="pablo">
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-5.jpg" width="158" height="158" id="locotron">
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-6.jpg" width="158" height="158" id="pechuga">
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-7.jpg" width="158" height="158" id="refresco">
+                    </div>
+                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-8.jpg" width="158" height="158">
 
-                                        <div class="col-md-12">
-                                            <div class="form-group ">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h2 class="card-inside-title">Ingreientes</h2><br />
+                    <div class="demo-checkbox">
+                        <input type="checkbox" id="cebolla" class="chk-col-red" checked />
+                        <label for="cebolla">Cebolla</label>
+                        <input type="checkbox" id="tomaste" class="chk-col-pink" checked />
+                        <label for="tomaste">Tomaste</label>
+                        <input type="checkbox" id="repollo" class="chk-col-purple" checked />
+                        <label for="repollo">Repollo</label>
+                        <input type="checkbox" id="catchut" class="chk-col-deep-purple" checked />
+                        <label for="catchut">Catchut</label>
+                        <input type="checkbox" id="mayonesa" class="chk-col-green" checked />
+                        <label for="mayonesa">Mayonesa</label>
+                        <input type="checkbox" id="picante" class="chk-col-blue" checked />
+                        <label for="picante">Picante</label>
+                        <input type="checkbox" id="mostaza" class="chk-col-light-blue" checked />
+                        <label for="mostaza">Mostaza</label>
+                    </div><br />
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                </div>
+               
+
+                <div class="row">
+                    <div class="form-group">
+                        <table id="detailsTable" class="table col-md-4">
+                            <thead>
+                                <tr>
+                                    <th style="width:30%">Product</th>
+                                    <th style="width:20%">Unit Price</th>
+                                    <th style="width:15%">Quantity</th>
+                                    <th style="width:25%">Amount</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="reset" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="saveOrder" type="submit" class="btn btn-danger">Save Order</button>
                             </div>
                         </div>
-                        <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
-                            <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-1.jpg" width="158" height="158" id="chimi">
-                            </div>
-                            <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-2.jpg" width="158" height="158" id="pierna">
-                            </div>
-                            <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-3.jpg" width="158" height="158" id="baconcheese">
-                            </div>
-                            <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-4.jpg" width="158" height="158" id="pablo">
-                            </div>
-                            <div class="col-lg-1 col-md-4 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-5.jpg" width="158" height="158" id="locotron">
-                            </div>
-                            <div class="col-lg-1 col-md-4 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-6.jpg" width="158" height="158" id="pechuga">
-                            </div>
-                            <div class="col-lg-1 col-md-4 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-7.jpg" width="158" height="158" id="refresco">
-                            </div>
-                            <div class="col-lg-1 col-md-4 col-sm-6 col-xs-12">
-                                <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-8.jpg" width="158" height="158">
-                            </div>
-                        </div>
-                            <h2 class="card-inside-title">Pedido</h2>
 
-                            <div class="row clearfix">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" placeholder="Producto"  id="producto"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" placeholder="Cantidad" id="cantidad" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="text" class="form-control" placeholder="Cliente" id="cliente"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                       
-                    </div>
-                    <div class="row ">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <div class="header">
-                                @*<ul class="header-dropdown m-r--5">
-                                        <li class="dropdown">
-                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                <i class="material-icons">more_vert</i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li><a href="javascript:void(0);">Action</a></li>
-                                                <li><a href="javascript:void(0);">Another action</a></li>
-                                                <li><a href="javascript:void(0);">Something else here</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>*@
-                              
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <h2 class="card-inside-title">Ingreientes</h2><br />
-                                            <div class="demo-checkbox">
-                                                <input type="checkbox" id="cebolla" class="chk-col-red" checked  />
-                                                <label for="cebolla">Cebolla</label>
-                                                <input type="checkbox" id="tomaste" class="chk-col-pink" checked />
-                                                <label for="tomaste">Tomaste</label>
-                                                <input type="checkbox" id="repollo" class="chk-col-purple" checked />
-                                                <label for="repollo">Repollo</label>
-                                                <input type="checkbox" id="catchut" class="chk-col-deep-purple" checked />
-                                                <label for="catchut">Catchut</label>
-                                                <input type="checkbox" id="mayonesa" class="chk-col-green" checked />
-                                                <label for="mayonesa">Mayonesa</label>
-                                                <input type="checkbox" id="picante" class="chk-col-blue" checked />
-                                                <label for="picante">Picante</label>
-                                                <input type="checkbox" id="mostaza" class="chk-col-light-blue" checked />
-                                                <label for="mostaza">Mostaza</label>
-                                              
-                                            </div><br/>
-
-                                            <div class="col-md-2 ">
-                                                <a id="addToList" class="btn btn-primary">Add To List</a>
-                                            </div><br />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group row">
-                                            <table id="detailsTable" class="table col-md-3">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width:30%">Product</th>
-                                                        <th style="width:20%">Unit Price</th>
-                                                        <th style="width:15%">Quantity</th>
-                                                        <th style="width:25%">Amount</th>
-                                                        <th style="width:10%"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                            <div class="col-md-2">
-                                                <button type="reset" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button id="saveOrder" type="submit" class="btn btn-danger">Save Order</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                          
-                        </div>                   
-                     
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+    <!-- #END# Task Info -->
+    <!-- Browser Usage -->
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+            <div class="body">
+                <div class="row">
+                    <div class="row">
+                        
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Producto" id="producto" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Cantidad" id="cantidad" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Cliente" id="cliente" />
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4 left ">
+                                    <a id="addToList" class="btn btn-primary">Agregar Lista</a>
+                                </div><br />
+                            </div>
+
+                       
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Browser Usage -->
+
 
 
 <head>
-    <script src="~/Scripts/FacturacionScript.js"></script>
+    <script src="~/Content/js/FacturacionScript.js"></script>
 </head>
 
 
 
 
-        @*<script>
-           
-        </script>*@
+@*<script>
+
+    </script>*@
 
