@@ -37,4 +37,6 @@ C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\bin\Factu
 C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\bin\Facturar.pdb
 C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\obj\Debug\Facturar.dll
 C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\obj\Debug\Facturar.pdb
-C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\obj\Debug\Facturar.csprojResolveAssemblyReference.cache
+C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\obj\Debug\Facturar.csprojAssemblyReference.cache
+C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\obj\Debug\Facturar.csproj.CoreCompileInputs.cache
+C:\Users\nbdejesus\Desktop\Documentacion\Proyecto\Facturacion\Facturar\obj\Debug\Facturar.csproj.CopyComplete
