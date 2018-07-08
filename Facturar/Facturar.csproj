@@ -101,6 +101,8 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -193,8 +195,44 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Factura_Burrito.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Factura_Chimi.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gastos.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Invetario.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NombreCliente.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductoChimi.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Telefono.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -3879,8 +3917,25 @@
     <Content Include="AdminBSB\scss\_waveseffect.scss" />
     <Content Include="bin\Facturar.dll.config" />
     <Content Include="Content\js\FacturacionScript.js" />
+    <Content Include="Models\ProductoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductoModel.edmx</DependentUpon>
+      <LastGenOutput>ProductoModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ProductoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProductoModel.edmx</DependentUpon>
+      <LastGenOutput>ProductoModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\ProductoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ProductoModel.edmx.diagram">
+      <DependentUpon>ProductoModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3941,6 +3996,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

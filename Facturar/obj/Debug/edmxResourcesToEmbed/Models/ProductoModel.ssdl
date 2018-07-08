@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FacturacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Factura_Burrito">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdProducto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+    <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+    <Property Name="Idnombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="Factura_Chimi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+    <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Facturacion.dbo.Gastos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Gastos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Invetario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="20" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Facturacion.dbo.NombreCliente' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="NombreCliente">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCliente" Type="nvarchar" MaxLength="20" />
+    <Property Name="IdTelefono" Type="nvarchar" MaxLength="12" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Facturacion.dbo.ProductoChimi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ProductoChimi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_producto" Type="nvarchar" MaxLength="20" />
+    <Property Name="Precio" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Telefono">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="12" />
+  </EntityType>
+  <Function Name="SP_Generar_Turno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="servicio" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="FacturacionModelStoreContainer">
+    <EntitySet Name="Factura_Burrito" EntityType="Self.Factura_Burrito" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura_Chimi" EntityType="Self.Factura_Chimi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invetario" EntityType="Self.Invetario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gastos" EntityType="Self.Gastos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Gastos].[id] AS [id], 
+    [Gastos].[Descripcion] AS [Descripcion], 
+    [Gastos].[Precio] AS [Precio], 
+    [Gastos].[Fecha] AS [Fecha], 
+    [Gastos].[Nombre] AS [Nombre]
+    FROM [dbo].[Gastos] AS [Gastos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="NombreCliente" EntityType="Self.NombreCliente" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [NombreCliente].[Id] AS [Id], 
+    [NombreCliente].[NombreCliente] AS [NombreCliente], 
+    [NombreCliente].[IdTelefono] AS [IdTelefono]
+    FROM [dbo].[NombreCliente] AS [NombreCliente]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ProductoChimi" EntityType="Self.ProductoChimi" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ProductoChimi].[id] AS [id], 
+    [ProductoChimi].[Nombre_producto] AS [Nombre_producto], 
+    [ProductoChimi].[Precio] AS [Precio]
+    FROM [dbo].[ProductoChimi] AS [ProductoChimi]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Telefono" EntityType="Self.Telefono" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Telefono].[id] AS [id], 
+    [Telefono].[Telefono] AS [Telefono]
+    FROM [dbo].[Telefono] AS [Telefono]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
