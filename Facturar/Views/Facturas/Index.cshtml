@@ -22,7 +22,7 @@
     <link href="~/Content/css/style.css" rel="stylesheet">
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="~/Content/css/themes/all-themes.css" rel="stylesheet" />
-    <link href="~/Content/js/FacturacionScript.js"/>
+    <link href="~/Content/js/FacturacionScript.js" />
 </head>
 
 <h2>Facturacion</h2>
@@ -47,77 +47,95 @@
                 </ul>
             </div>
             <div class="body">
-
-                <div id="aniimated-thumbnials" class="col-md-6">
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                <div id="aniimated-thumbnials" class="col-md-12">
+                    <div class="col-lg-2 col-md-12 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-1.jpg" width="158" height="158" id="chimi">
-                        
+
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-12 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-2.jpg" width="158" height="158" id="pierna">
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-3.jpg" width="158" height="158" id="baconcheese">
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-4.jpg" width="158" height="158" id="pablo">
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-5.jpg" width="158" height="158" id="locotron">
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-6.jpg" width="158" height="158" id="Chimi_pechuga">
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-7.jpg" width="158" height="158" id="Chimi_DobleCarne">
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-8.jpg" width="158" height="158" id="Pechuga_Empanizada">
 
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-8.jpg" width="158" height="158" id="Hamburger_Res">
 
                     </div>
-                    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
                         <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-6.jpg" width="158" height="158" id="Hambuerger_pechuga">
                     </div>
-               
-                <div class="col-lg-6 col-md-4 col-sm-6 col-xs-12">
-                    <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-6.jpg" width="158" height="158" id="Hambuerger_pierna">
-                </div>
-            </div>
 
-                <div class="form-group">
-                    <h2 class="card-inside-title">Ingreientes</h2><br />
-                    <div class="demo-checkbox">
-                        <input type="checkbox" id="cebolla" class="chk-col-red" checked />
-                        <label for="cebolla">Cebolla</label>
-                        <input type="checkbox" id="tomaste" class="chk-col-pink" checked />
-                        <label for="tomaste">Tomaste</label>
-                        <input type="checkbox" id="repollo" class="chk-col-purple" checked />
-                        <label for="repollo">Repollo</label>
-                        <input type="checkbox" id="catchut" class="chk-col-deep-purple" checked />
-                        <label for="catchut">Catchut</label>
-                        <input type="checkbox" id="mayonesa" class="chk-col-green" checked />
-                        <label for="mayonesa">Mayonesa</label>
-                        <input type="checkbox" id="picante" class="chk-col-blue" checked />
-                        <label for="picante">Picante</label>
-                        <input type="checkbox" id="mostaza" class="chk-col-light-blue" checked />
-                        <label for="mostaza">Mostaza</label>
-                    </div><br />
+                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+                        <img class="img-responsive thumbnail" src="~/Content/images/image-gallery/thumb/thumb-6.jpg" width="158" height="158" id="Hambuerger_pierna">
+                    </div>
+                </div>                          
+              
 
+
+                @*////////////////////////Modal/////////////////////*@
+
+                <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <h2 class="card-inside-title">Ingreientes</h2><br />
+                                    <div class="demo-checkbox">
+                                        <input type="checkbox" id="cebolla" class="chk-col-red" checked />
+                                        <label for="cebolla">Cebolla</label>
+                                        <input type="checkbox" id="tomaste" class="chk-col-pink" checked />
+                                        <label for="tomaste">Tomaste</label>
+                                        <input type="checkbox" id="repollo" class="chk-col-purple" checked />
+                                        <label for="repollo">Repollo</label>
+                                        <input type="checkbox" id="catchut" class="chk-col-deep-purple" checked />
+                                        <label for="catchut">Catchut</label>
+                                        <input type="checkbox" id="mayonesa" class="chk-col-green" checked />
+                                        <label for="mayonesa">Mayonesa</label>
+                                        <input type="checkbox" id="picante" class="chk-col-blue" checked />
+                                        <label for="picante">Picante</label>
+                                        <input type="checkbox" id="mostaza" class="chk-col-light-blue" checked />
+                                        <label for="mostaza">Mostaza</label>
+                                    </div>
+                                </div><br />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 left ">
+                                    <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-success">Agregar</button>
+
+                                </div>
+                                </div>
+                            </div>
+                    </div>
                 </div>
-               
+
 
                 <div class="row">
                     <div class="form-group">
                         <table id="detailsTable" class="table col-md-4">
                             <thead>
                                 <tr>
-                                    <th style="width:30%">Product</th>
-                                    <th style="width:20%">Unit Price</th>
-                                    <th style="width:15%">Quantity</th>
+                                    <th style="width:30%">Producto</th>
+                                    <th style="width:20%">Cantidad</th>
+                                    <th style="width:15%">Cliente</th>
                                     <th style="width:25%">Amount</th>
                                     <th style="width:10%"></th>
                                 </tr>
@@ -143,42 +161,48 @@
             <div class="body">
                 <div class="row">
                     <div class="row">
-                        
-                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                <div class="input-group">
-                                  
-                                    <div class="form-line">
-                                      
-                                        <input type="text" class="form-control" placeholder="Producto" id="producto" value=""/>
-                                    </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="input-group">
+
+                                <div class="form-line">
+
+                                    <input type="text" class="form-control" placeholder="Producto" id="producto" value="" />
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                <div class="input-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Cantidad" id="cantidad" />
-                                      
-                                    </div>
-                                  
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">person</i>
-                                    </span>
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Cliente" id="cliente" />
-                                    </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="input-group">
+                                <div class="form-line">
+                                    <input type="text" class="form-control" placeholder="Cantidad" id="cantidad" />
 
                                 </div>
 
-                                <div class="col-md-4 left ">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">person</i>
+                                </span>
+                                <div class="form-line">
+                                    <input type="text" class="form-control" placeholder="Cliente" id="cliente" />
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 left ">
                                     <a id="addToList" class="btn btn-primary">Agregar Lista</a>
+                                    @*///////////////////////////////////LLama el Modal/////////////////////////////////////*@
+
+                                    <button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Ingredientes</button>
+
                                 </div><br />
                             </div>
+                           
+                        </div>
 
-                       
+
                     </div>
 
                 </div>
@@ -187,18 +211,17 @@
     </div>
 </div>
 <!-- #END# Browser Usage -->
-
 @*<script src="../../plugins/jquery/jquery.min.js"></script>*@
 
 
-    @*<script src="~/Content/js/FacturacionScript.js"></script>*@
+@*<script src="~/Content/js/FacturacionScript.js"></script>*@
 
 
 
 
 @*@section scripts{
-<script>
+    <script>
 
-        </script>
+            </script>
 
-    }*@
+        }*@

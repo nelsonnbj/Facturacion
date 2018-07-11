@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Facturar.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace Facturar.Controllers
 {
     public class FacturasController : Controller
     {
+
+        private FacturacionEntities1 db = new FacturacionEntities1();
         // GET: Facturas
         public ActionResult Index()
         {
@@ -17,6 +20,33 @@ namespace Facturar.Controllers
         public ActionResult MenuPrincipal()
         {
             return View();
+        }
+        public JsonResult SaveOrder(string name, String address, Factura_Chimi_T[] order, string data)
+        {
+            string result = "Error! Orden No Completada!";
+            if (name != null && address != null && order != null)
+            {
+                //    var cutomerId = Guid.NewGuid();
+                //    Factura_Chimi_T model = new Factura_Chimi_T();
+
+                //    model. = order;
+                //    model.Name = name;
+                //    model.Address = address;
+                //    model.OrderDate = DateTime.Now;
+                //    db.Customes.Add(model);
+
+                foreach (var item in order)
+                {
+
+                    Factura_Chimi_T O = new Factura_Chimi_T();
+                    O.Cantidad= item.Cantidad;
+                    O.nombre = item.nombre;
+                    db.Factura_Chimi_T.Add(O);
+                }
+                db.SaveChanges();
+                result = "Success! Order Is Complete!";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Facturas/Details/5

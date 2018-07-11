@@ -196,24 +196,33 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Factura_Burrito.cs">
-      <DependentUpon>ProductoModel.tt</DependentUpon>
+      <DependentUpon>PruebaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Factura_Burrito_T.cs">
+      <DependentUpon>PruebaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura_Chimi.cs">
-      <DependentUpon>ProductoModel.tt</DependentUpon>
+      <DependentUpon>PruebaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Factura_Chimi_T.cs">
+      <DependentUpon>PruebaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gasto.cs">
+      <DependentUpon>PruebaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gastos.cs">
       <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invetario.cs">
-      <DependentUpon>ProductoModel.tt</DependentUpon>
+      <DependentUpon>PruebaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NombreCliente.cs">
-      <DependentUpon>ProductoModel.tt</DependentUpon>
+      <DependentUpon>PruebaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductoChimi.cs">
-      <DependentUpon>ProductoModel.tt</DependentUpon>
+      <DependentUpon>PruebaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductoModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -230,8 +239,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductoModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PruebaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PruebaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PruebaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PruebaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PruebaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PruebaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>PruebaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Telefono.cs">
-      <DependentUpon>ProductoModel.tt</DependentUpon>
+      <DependentUpon>PruebaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -549,6 +576,65 @@
     <Content Include="Content\css\themes\theme-teal.min.css" />
     <Content Include="Content\css\themes\theme-yellow.css" />
     <Content Include="Content\css\themes\theme-yellow.min.css" />
+    <Content Include="Content\pages\changelogs.html" />
+    <Content Include="Content\pages\charts\chartjs.html" />
+    <Content Include="Content\pages\charts\flot.html" />
+    <Content Include="Content\pages\charts\jquery-knob.html" />
+    <Content Include="Content\pages\charts\morris.html" />
+    <Content Include="Content\pages\charts\sparkline.html" />
+    <Content Include="Content\pages\examples\404.html" />
+    <Content Include="Content\pages\examples\500.html" />
+    <Content Include="Content\pages\examples\blank.html" />
+    <Content Include="Content\pages\examples\forgot-password.html" />
+    <Content Include="Content\pages\examples\sign-in.html" />
+    <Content Include="Content\pages\examples\sign-up.html" />
+    <Content Include="Content\pages\forms\advanced-form-elements.html" />
+    <Content Include="Content\pages\forms\basic-form-elements.html" />
+    <Content Include="Content\pages\forms\editors.html" />
+    <Content Include="Content\pages\forms\form-examples.html" />
+    <Content Include="Content\pages\forms\form-validation.html" />
+    <Content Include="Content\pages\forms\form-wizard.html" />
+    <Content Include="Content\pages\helper-classes.html" />
+    <Content Include="Content\pages\maps\google.html" />
+    <Content Include="Content\pages\maps\jvectormap.html" />
+    <Content Include="Content\pages\maps\yandex.html" />
+    <Content Include="Content\pages\medias\carousel.html" />
+    <Content Include="Content\pages\medias\image-gallery.html" />
+    <Content Include="Content\pages\tables\editable-table.html" />
+    <Content Include="Content\pages\tables\jquery-datatable.html" />
+    <Content Include="Content\pages\tables\normal-tables.html" />
+    <Content Include="Content\pages\typography.html" />
+    <Content Include="Content\pages\ui\alerts.html" />
+    <Content Include="Content\pages\ui\animations.html" />
+    <Content Include="Content\pages\ui\badges.html" />
+    <Content Include="Content\pages\ui\breadcrumbs.html" />
+    <Content Include="Content\pages\ui\buttons.html" />
+    <Content Include="Content\pages\ui\collapse.html" />
+    <Content Include="Content\pages\ui\colors.html" />
+    <Content Include="Content\pages\ui\dialogs.html" />
+    <Content Include="Content\pages\ui\icons.html" />
+    <Content Include="Content\pages\ui\labels.html" />
+    <Content Include="Content\pages\ui\list-group.html" />
+    <Content Include="Content\pages\ui\media-object.html" />
+    <Content Include="Content\pages\ui\modals.html" />
+    <Content Include="Content\pages\ui\notifications.html" />
+    <Content Include="Content\pages\ui\pagination.html" />
+    <Content Include="Content\pages\ui\preloaders.html" />
+    <Content Include="Content\pages\ui\progressbars.html" />
+    <Content Include="Content\pages\ui\range-sliders.html" />
+    <Content Include="Content\pages\ui\sortable-nestable.html" />
+    <Content Include="Content\pages\ui\tabs.html" />
+    <Content Include="Content\pages\ui\thumbnails.html" />
+    <Content Include="Content\pages\ui\tooltips-popovers.html" />
+    <Content Include="Content\pages\ui\waves.html" />
+    <Content Include="Content\pages\widgets\cards\basic.html" />
+    <Content Include="Content\pages\widgets\cards\colored.html" />
+    <Content Include="Content\pages\widgets\cards\no-header.html" />
+    <Content Include="Content\pages\widgets\infobox\infobox-1.html" />
+    <Content Include="Content\pages\widgets\infobox\infobox-2.html" />
+    <Content Include="Content\pages\widgets\infobox\infobox-3.html" />
+    <Content Include="Content\pages\widgets\infobox\infobox-4.html" />
+    <Content Include="Content\pages\widgets\infobox\infobox-5.html" />
     <Content Include="Content\plugins\animate-css\animate.css" />
     <Content Include="Content\plugins\animate-css\animate.min.css" />
     <Content Include="Content\plugins\autosize\autosize.js" />
@@ -3927,6 +4013,16 @@
       <DependentUpon>ProductoModel.edmx</DependentUpon>
       <LastGenOutput>ProductoModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\PruebaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PruebaModel.edmx</DependentUpon>
+      <LastGenOutput>PruebaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PruebaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PruebaModel.edmx</DependentUpon>
+      <LastGenOutput>PruebaModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ProductoModel.edmx">
@@ -3935,6 +4031,13 @@
     </EntityDeploy>
     <Content Include="Models\ProductoModel.edmx.diagram">
       <DependentUpon>ProductoModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\PruebaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PruebaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PruebaModel.edmx.diagram">
+      <DependentUpon>PruebaModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
