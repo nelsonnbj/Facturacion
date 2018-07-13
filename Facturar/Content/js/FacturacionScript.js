@@ -21,7 +21,7 @@ $("#locotron").click(function () {
 });
 
 $("#Chimi_pechuga").click(function () {
-    document.getElementById("producto").value = " Chimi Pechuga";
+    document.getElementById("producto").value = "Chimi Pechuga";
 });
 
 $("#Chimi_DobleCarne").click(function () {
@@ -37,12 +37,23 @@ $("#Hamburger_Res").click(function () {
 });
 
 $("#Hambuerger_pechuga").click(function () {
-    document.getElementById("producto").value = " Hamburger Pechuga";
+    document.getElementById("producto").value = "Hamburger Pechuga";
 });
 $("#Hambuerger_pierna").click(function () {
-    document.getElementById("producto").value = " Hamburger Pierna";
+    document.getElementById("producto").value = "Hamburger Pierna";
 });
 
+
+//$("#producto").change(function () {
+//    var url = $('#agregar').data('request-url');
+//    $.get(url, { productos: $("#producto").val() }, function (data) {
+//        $("#precio").empty();
+//        $.each(data, function (index, row) {
+//            $("#precio").append("<option value='" + row.precio + "'>" + row.precio + "</option>")
+//        });
+
+//    });
+//})
 
 //Add Multiple Order.
 $("#addToList").click(function (e) {
@@ -54,18 +65,29 @@ $("#addToList").click(function (e) {
     var producto = document.getElementById("producto").value,
         cantidad = document.getElementById("cantidad").value,
         cliente = document.getElementById("cliente").value,
+        comentario = document.getElementById("ComentarioAgregado").value,
+       monto = 0,
         detailsTableBody = $("#detailsTable tbody");
 
-    var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt('2')) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+    var url = $('#agregar').data('request-url');
+    $.get(url, { productos: document.getElementById("producto").value }, function (data) {
+        $("#precio").empty();
+
+       monto = data;
+ 
+
+    var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>'+ comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
     detailsTableBody.append(productItem);
-    clearItem();
+        clearItem();
+    });
 });
 
 
 //After Add A New Order In The List, Clear Clean The Form For Add More Order.
 function clearItem() {
     producto = document.getElementById("producto").value="";
-    document.getElementById("cantidad").value="";
+    document.getElementById("cantidad").value = "";
+    document.getElementById("ComentarioAgregado").value = "";
 
 }
 
@@ -108,8 +130,9 @@ function saveOrder(data) {
                 orderArr.push({
                     producto: $(this).find('td:eq(0)').html(),
                     cantidad: $(this).find('td:eq(1)').html(),
-                    cliente: $(this).find('td:eq(2)').html(),
-                    amount: $(this).find('td:eq(3)').html()
+                    comenatrio: $(this).find('td:eq(2)').html(),
+                    nombre: $(this).find('td:eq(3)').html(),
+                    precio: $(this).find('td:eq(4)').html()
                 });
             });
 
@@ -126,3 +149,98 @@ function saveOrder(data) {
                 console.log(err);
             });
         });
+/////////////////////////Agregar Comentario////////////////
+
+$("#cebolla").click(function () {
+    var texto = document.getElementById("Comentario").value;
+   
+    if (this.checked) {
+     
+    }
+    else {
+        document.getElementById("Comentario").value = texto + "Sin Cebolla" + " / " ;
+    }
+});
+
+
+$("#tomaste").click(function () {
+    var texto = document.getElementById("Comentario").value;
+    if (this.checked) {
+
+    }
+    else {
+        document.getElementById("Comentario").value = texto + "Sin Cebolla" + " / " ;
+    }
+});
+
+
+$("#repollo").click(function () {
+    var texto = document.getElementById("Comentario").value;
+    if (this.checked) {
+
+    }
+    else {
+        document.getElementById("Comentario").value = texto + "Sin Repollo" + " / ";
+    }
+});
+
+$("#catchut").click(function () {
+    var texto = document.getElementById("Comentario").value;
+    if (this.checked) {
+
+    }
+    else {
+        document.getElementById("Comentario").value = texto + "Sin Ketchup" + " / ";
+    }
+});
+
+$("#mayonesa").click(function () {
+    var texto = document.getElementById("Comentario").value;
+    if (this.checked) {
+
+    }
+    else {
+        document.getElementById("Comentario").value = texto + "Sin Mayonesa" + " / ";
+    }
+});
+
+$("#picante").click(function () {
+    var texto = document.getElementById("Comentario").value;
+    if (this.checked) {
+
+    }
+    else {
+        document.getElementById("Comentario").value = texto + "Sin Picante" + " / ";
+    }
+});
+
+$("#mostaza").click(function () {
+    var texto = document.getElementById("Comentario").value;
+    if (this.checked) {
+
+    }
+    else {
+        document.getElementById("Comentario").value = texto + "Sin Mostaza" + " / ";
+    }
+});
+
+///////////////////////FUNCION UTILIZADA PARA AGREGAR EL COMENTARIO A LA LISTA ///////////
+function agregarComentario() {
+
+    var comentario = document.getElementById("Comentario").value;
+    document.getElementById("ComentarioAgregado").value = comentario;
+}
+
+////////////////////////FUNCION QUE LIMPIA LOS CHECHKBOX///////////////
+
+function actualizarChbox() {
+    document.getElementById("cebolla").checked = true;
+    document.getElementById("tomaste").checked = true;
+    document.getElementById("repollo").checked = true;
+    document.getElementById("catchut").checked = true; 
+    document.getElementById("mayonesa").checked = true;
+    document.getElementById("picante").checked = true;
+    document.getElementById("mostaza").checked = true;
+    document.getElementById("Comentario").value = "";
+
+}

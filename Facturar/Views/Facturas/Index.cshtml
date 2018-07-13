@@ -99,9 +99,9 @@
                                 <div class="form-group">
                                     <h2 class="card-inside-title">Ingreientes</h2><br />
                                     <div class="demo-checkbox">
-                                        <input type="checkbox" id="cebolla" class="chk-col-red" checked />
+                                        <input type="checkbox" id="cebolla" class="chk-col-red"  checked />
                                         <label for="cebolla">Cebolla</label>
-                                        <input type="checkbox" id="tomaste" class="chk-col-pink" checked />
+                                        <input type="checkbox" id="tomaste" class="chk-col-pink"   checked />
                                         <label for="tomaste">Tomaste</label>
                                         <input type="checkbox" id="repollo" class="chk-col-purple" checked />
                                         <label for="repollo">Repollo</label>
@@ -114,12 +114,17 @@
                                         <input type="checkbox" id="mostaza" class="chk-col-light-blue" checked />
                                         <label for="mostaza">Mostaza</label>
                                     </div>
+
+                                    <div class="form-line">
+
+                                        <input type="text" class="form-control" placeholder="Comentario" id="Comentario" value="" />
+                                    </div>
                                 </div><br />
                             </div>
                             <div class="row">
                                 <div class="col-md-6 left ">
                                     <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-success">Agregar</button>
+                                    <button type="button" class="btn btn-success" onclick="agregarComentario()" data-dismiss="modal">Agregar</button>
 
                                 </div>
                                 </div>
@@ -135,8 +140,9 @@
                                 <tr>
                                     <th style="width:30%">Producto</th>
                                     <th style="width:20%">Cantidad</th>
-                                    <th style="width:15%">Cliente</th>
-                                    <th style="width:25%">Amount</th>
+                                    <th style="width:30%">Comenatrio</th>
+                                    <th style="width:15%">nombre</th>
+                                    <th style="width:25%">Precio</th>
                                     <th style="width:10%"></th>
                                 </tr>
                             </thead>
@@ -160,68 +166,66 @@
         <div class="card">
             <div class="body">
                 <div class="row">
-                    <div class="row">
 
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                            <div class="input-group">
 
-                                <div class="form-line">
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                        <div class="input-group">
 
-                                    <input type="text" class="form-control" placeholder="Producto" id="producto" value="" />
-                                </div>
+                            <div class="form-line">
+
+                                <input type="text" class="form-control" placeholder="Producto" id="producto" value="" />
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                            <div class="input-group">
-                                <div class="form-line">
-                                    <input type="text" class="form-control" placeholder="Cantidad" id="cantidad" />
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                        <div class="input-group">
+                            <div class="form-line">
+                                <input type="text" class="form-control" placeholder="Cantidad" id="cantidad" />
 
-                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" class="form-control" placeholder="Cliente" id="cliente" />
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">person</i>
-                                </span>
-                                <div class="form-line">
-                                    <input type="text" class="form-control" placeholder="Cliente" id="cliente" />
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 left ">
-                                    <a id="addToList" class="btn btn-primary">Agregar Lista</a>
-                                    @*///////////////////////////////////LLama el Modal/////////////////////////////////////*@
-
-                                    <button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Ingredientes</button>
-
-                                </div><br />
-                            </div>
-                           
-                        </div>
-
 
                     </div>
+                    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                        <div class="input-group">
+                            <div class="form-line" id="agregar" data-request-url="@Url.Action("TiposActivos", "Facturas")">
+
+                                <input type="text" class="form-control" placeholder="Comentario" id="ComentarioAgregado" value="" />
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 left ">
+                            <a id="addToList" class="btn btn-primary" onclick="actualizarChbox()">Agregar Lista</a>
+
+
+                            @*///////////////////////////////////LLama el Modal/////////////////////////////////////*@
+
+                            <button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">Ingredientes</button>
+
+                        </div><br />
+                    </div>
+
+
+
+
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- #END# Browser Usage -->
-@*<script src="../../plugins/jquery/jquery.min.js"></script>*@
-
-
-@*<script src="~/Content/js/FacturacionScript.js"></script>*@
-
-
-
-
-@*@section scripts{
-    <script>
-
-            </script>
-
-        }*@

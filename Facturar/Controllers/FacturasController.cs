@@ -21,10 +21,10 @@ namespace Facturar.Controllers
         {
             return View();
         }
-        public JsonResult SaveOrder(string name, String address, Factura_Chimi_T[] order, string data)
+        public JsonResult SaveOrder(string name, string comentario, Factura_Chimi_T[] order, string data)
         {
             string result = "Error! Orden No Completada!";
-            if (name != null && address != null && order != null)
+            if (name != null && order != null)
             {
                 //    var cutomerId = Guid.NewGuid();
                 //    Factura_Chimi_T model = new Factura_Chimi_T();
@@ -40,7 +40,10 @@ namespace Facturar.Controllers
 
                     Factura_Chimi_T O = new Factura_Chimi_T();
                     O.Cantidad= item.Cantidad;
-                    O.nombre = item.nombre;
+                    O.nombre = name;
+                    O.comenatrio = item.comenatrio;
+                    O.Precio = item.Precio;
+                    O.Producto = item.Producto;
                     db.Factura_Chimi_T.Add(O);
                 }
                 db.SaveChanges();
@@ -48,6 +51,14 @@ namespace Facturar.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult TiposActivos(string productos)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+           var Tipos = db.ProductoChimis.Where(x => x.Nombre_producto == productos).Select(x=>x.Precio).ToList();
+            return Json(Tipos, JsonRequestBehavior.AllowGet);
+        }
+
 
         // GET: Facturas/Details/5
         public ActionResult Details(int id)
