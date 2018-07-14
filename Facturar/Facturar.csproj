@@ -196,33 +196,30 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Factura_Burrito.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura_Burrito_T.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura_Chimi.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura_Chimi_T.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Gasto.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gastos.cs">
       <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invetario.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NombreCliente.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductoChimi.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductoModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -239,26 +236,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductoModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\PruebaModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PruebaModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PruebaModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PruebaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PruebaModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PruebaModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Telefono.cs">
-      <DependentUpon>PruebaModel.tt</DependentUpon>
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -4013,16 +3992,6 @@
       <DependentUpon>ProductoModel.edmx</DependentUpon>
       <LastGenOutput>ProductoModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PruebaModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PruebaModel.edmx</DependentUpon>
-      <LastGenOutput>PruebaModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\PruebaModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PruebaModel.edmx</DependentUpon>
-      <LastGenOutput>PruebaModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ProductoModel.edmx">
@@ -4031,13 +4000,6 @@
     </EntityDeploy>
     <Content Include="Models\ProductoModel.edmx.diagram">
       <DependentUpon>ProductoModel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\PruebaModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PruebaModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\PruebaModel.edmx.diagram">
-      <DependentUpon>PruebaModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

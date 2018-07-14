@@ -59,8 +59,8 @@ E:\Facturacion-master\Facturacion-master\Facturar\obj\Debug\Facturar.pdb
 C:\Nelson\Proyectos\Facturacion\Facturar\bin\Facturar.dll.config
 C:\Nelson\Proyectos\Facturacion\Facturar\bin\Facturar.dll
 C:\Nelson\Proyectos\Facturacion\Facturar\bin\Facturar.pdb
-C:\Nelson\Proyectos\Facturacion\Facturar\obj\Debug\Facturar.csprojResolveAssemblyReference.cache
 C:\Nelson\Proyectos\Facturacion\Facturar\obj\Debug\Facturar.csproj.CoreCompileInputs.cache
 C:\Nelson\Proyectos\Facturacion\Facturar\obj\Debug\Facturar.csproj.CopyComplete
 C:\Nelson\Proyectos\Facturacion\Facturar\obj\Debug\Facturar.dll
 C:\Nelson\Proyectos\Facturacion\Facturar\obj\Debug\Facturar.pdb
+C:\Nelson\Proyectos\Facturacion\Facturar\obj\Debug\Facturar.csprojResolveAssemblyReference.cache

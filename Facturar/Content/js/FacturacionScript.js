@@ -1,11 +1,11 @@
 ﻿
 
 $("#chimi").click(function () {
-        document.getElementById("producto").value = "Chmi";
+        document.getElementById("producto").value = "Chimi";
 });
 
 $("#pierna").click(function () {
-    document.getElementById("producto").value = " Chimi Pierna";
+    document.getElementById("producto").value = "Chimi Pierna";
 });
 
 $("#baconcheese").click(function () {

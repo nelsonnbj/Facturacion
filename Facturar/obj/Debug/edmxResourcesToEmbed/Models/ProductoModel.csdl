@@ -14,7 +14,35 @@
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="Idtelefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="Factura_Burrito_T">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProducto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Precio" Type="Int32" />
+    <Property Name="comenatrio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Idnombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="Idtelefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Factura_Chimi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Precio" Type="Int32" />
+    <Property Name="comenatrio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Factura_Chimi_T">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -73,7 +101,9 @@
   </EntityType>
   <EntityContainer Name="FacturacionEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Factura_Burrito" EntityType="Self.Factura_Burrito" />
+    <EntitySet Name="Factura_Burrito_T" EntityType="Self.Factura_Burrito_T" />
     <EntitySet Name="Factura_Chimi" EntityType="Self.Factura_Chimi" />
+    <EntitySet Name="Factura_Chimi_T" EntityType="Self.Factura_Chimi_T" />
     <EntitySet Name="Invetario" EntityType="Self.Invetario" />
     <EntitySet Name="Gastos" EntityType="Self.Gastos" />
     <EntitySet Name="NombreCliente" EntityType="Self.NombreCliente" />
@@ -81,6 +111,7 @@
     <EntitySet Name="Telefono" EntityType="Self.Telefono" />
     <FunctionImport Name="SP_Generar_Turno" ReturnType="Collection(String)">
       <Parameter Name="servicio" Mode="In" Type="String" />
+      <Parameter Name="turno1" Mode="InOut" Type="String" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

@@ -4,14 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3b1b9254dbdb4f1db29c192d6cd04223" Name="Diagram1">
+      <Diagram DiagramId="01e2ed7ad84243e8972180afa4fba9c2" Name="Diagram1">
         <EntityTypeShape EntityType="FacturacionModel.Factura_Burrito" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FacturacionModel.Factura_Chimi" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FacturacionModel.Invetario" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FacturacionModel.Gastos" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FacturacionModel.NombreCliente" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FacturacionModel.ProductoChimi" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FacturacionModel.Telefono" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.Factura_Burrito_T" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.Factura_Chimi" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.Factura_Chimi_T" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.Invetario" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.Gastos" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.NombreCliente" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.ProductoChimi" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FacturacionModel.Telefono" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

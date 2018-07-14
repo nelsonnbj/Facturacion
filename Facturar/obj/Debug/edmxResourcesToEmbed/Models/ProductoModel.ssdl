@@ -14,7 +14,35 @@
     <Property Name="fecha" Type="datetime" />
     <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
   </EntityType>
+  <EntityType Name="Factura_Burrito_T">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdProducto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+    <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+    <Property Name="Idnombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
+  </EntityType>
   <EntityType Name="Factura_Chimi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+    <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="Factura_Chimi_T">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -81,10 +109,13 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
   </EntityType>
   <Function Name="SP_Generar_Turno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="servicio" Type="varchar" Mode="In" />
+    <Parameter Name="turno1" Type="varchar" Mode="InOut" />
   </Function>
   <EntityContainer Name="FacturacionModelStoreContainer">
     <EntitySet Name="Factura_Burrito" EntityType="Self.Factura_Burrito" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura_Burrito_T" EntityType="Self.Factura_Burrito_T" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Factura_Chimi" EntityType="Self.Factura_Chimi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura_Chimi_T" EntityType="Self.Factura_Chimi_T" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Invetario" EntityType="Self.Invetario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Gastos" EntityType="Self.Gastos" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

@@ -10,7 +10,7 @@ namespace Facturar.Controllers
     public class FacturasController : Controller
     {
 
-        private FacturacionEntities1 db = new FacturacionEntities1();
+        private FacturacionEntities db = new FacturacionEntities();
         // GET: Facturas
         public ActionResult Index()
         {
@@ -35,17 +35,23 @@ namespace Facturar.Controllers
                 //    model.OrderDate = DateTime.Now;
                 //    db.Customes.Add(model);
 
+                //var turno = db.SP_Generar_Turno("Chimi").ToString();
+                
                 foreach (var item in order)
                 {
 
-                    Factura_Chimi_T O = new Factura_Chimi_T();
-                    O.Cantidad= item.Cantidad;
-                    O.nombre = name;
-                    O.comenatrio = item.comenatrio;
-                    O.Precio = item.Precio;
-                    O.Producto = item.Producto;
-                    db.Factura_Chimi_T.Add(O);
+                    Factura_Chimi_T Orden = new Factura_Chimi_T();
+                    Orden.Cantidad= item.Cantidad;
+                    Orden.nombre = name;
+                    Orden.comenatrio = item.comenatrio;
+                    Orden.Precio = item.Precio;
+                    Orden.Producto = item.Producto;
+                    //Orden.Ticket = turno.ToString();
+                    Orden.fecha = DateTime.Now;
+                    db.Factura_Chimi_T.Add(Orden);
                 }
+
+              
                 db.SaveChanges();
                 result = "Success! Order Is Complete!";
             }
@@ -55,7 +61,7 @@ namespace Facturar.Controllers
         public JsonResult TiposActivos(string productos)
         {
             db.Configuration.ProxyCreationEnabled = false;
-           var Tipos = db.ProductoChimis.Where(x => x.Nombre_producto == productos).Select(x=>x.Precio).ToList();
+           var Tipos = db.ProductoChimi.Where(x => x.Nombre_producto == productos).Select(x=>x.Precio).ToList();
             return Json(Tipos, JsonRequestBehavior.AllowGet);
         }
 

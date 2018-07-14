@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FacturacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FacturacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Factura_Burrito">
           <Key>
             <PropertyRef Name="id" />
@@ -19,7 +19,35 @@
           <Property Name="fecha" Type="datetime" />
           <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
         </EntityType>
+        <EntityType Name="Factura_Burrito_T">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdProducto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio" Type="int" />
+          <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+          <Property Name="Idnombre" Type="nvarchar" MaxLength="20" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
+        </EntityType>
         <EntityType Name="Factura_Chimi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio" Type="int" />
+          <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="20" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="Factura_Chimi_T">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -86,10 +114,13 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
         </EntityType>
         <Function Name="SP_Generar_Turno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="servicio" Type="varchar" Mode="In" />
+          <Parameter Name="turno1" Type="varchar" Mode="InOut" />
         </Function>
         <EntityContainer Name="FacturacionModelStoreContainer">
           <EntitySet Name="Factura_Burrito" EntityType="Self.Factura_Burrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura_Burrito_T" EntityType="Self.Factura_Burrito_T" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factura_Chimi" EntityType="Self.Factura_Chimi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura_Chimi_T" EntityType="Self.Factura_Chimi_T" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invetario" EntityType="Self.Invetario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gastos" EntityType="Self.Gastos" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -121,8 +152,7 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
     FROM [dbo].[Telefono] AS [Telefono]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FacturacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -140,7 +170,35 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="Idtelefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Factura_Burrito_T">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdProducto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio" Type="Int32" />
+          <Property Name="comenatrio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Idnombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="Idtelefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="Factura_Chimi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio" Type="Int32" />
+          <Property Name="comenatrio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Factura_Chimi_T">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -199,14 +257,17 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
         </EntityType>
         <EntityContainer Name="FacturacionEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Factura_Burrito" EntityType="Self.Factura_Burrito" />
+          <EntitySet Name="Factura_Burrito_T" EntityType="Self.Factura_Burrito_T" />
           <EntitySet Name="Factura_Chimi" EntityType="Self.Factura_Chimi" />
+          <EntitySet Name="Factura_Chimi_T" EntityType="Self.Factura_Chimi_T" />
           <EntitySet Name="Invetario" EntityType="Self.Invetario" />
           <EntitySet Name="Gastos" EntityType="Self.Gastos" />
           <EntitySet Name="NombreCliente" EntityType="Self.NombreCliente" />
           <EntitySet Name="ProductoChimi" EntityType="Self.ProductoChimi" />
           <EntitySet Name="Telefono" EntityType="Self.Telefono" />
           <FunctionImport Name="SP_Generar_Turno" ReturnType="Collection(String)">
-            <Parameter Name="servicio" Mode="In" Type="String" />
+          <Parameter Name="servicio" Mode="In" Type="String" />
+            <Parameter Name="turno1" Mode="InOut" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -230,9 +291,39 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Factura_Burrito_T">
+            <EntityTypeMapping TypeName="FacturacionModel.Factura_Burrito_T">
+              <MappingFragment StoreEntitySet="Factura_Burrito_T">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="comenatrio" ColumnName="comenatrio" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+                <ScalarProperty Name="Idnombre" ColumnName="Idnombre" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Idtelefono" ColumnName="Idtelefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Factura_Chimi">
             <EntityTypeMapping TypeName="FacturacionModel.Factura_Chimi">
               <MappingFragment StoreEntitySet="Factura_Chimi">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="comenatrio" ColumnName="comenatrio" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factura_Chimi_T">
+            <EntityTypeMapping TypeName="FacturacionModel.Factura_Chimi_T">
+              <MappingFragment StoreEntitySet="Factura_Chimi_T">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Producto" ColumnName="Producto" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
