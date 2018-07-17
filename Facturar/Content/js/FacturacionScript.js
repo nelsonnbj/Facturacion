@@ -56,6 +56,19 @@ $("#Hambuerger_pierna").click(function () {
 //})
 
 //Add Multiple Order.
+
+
+///////////////Validar area//////////////
+
+$("#areaBurritos").click(function () {
+    document.getElementById("AreaBurrito").innerHTML = "areaBurritos";
+
+});
+
+$("#areaChimi").click(function () {
+    document.getElementById("AreaBurrito").innerHTML = "";
+
+});
 $("#addToList").click(function (e) {
     e.preventDefault();
 
@@ -77,8 +90,40 @@ $("#addToList").click(function (e) {
  
 
     var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>'+ comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
-    detailsTableBody.append(productItem);
-        clearItem();
+        detailsTableBody.append(productItem);
+
+        area = document.getElementById("AreaBurrito").innerHTML;
+
+        if (area != "areaBurritos") {
+
+            var total = (parseFloat(cantidad) * parseInt(monto));
+            var montoTotal = document.getElementById("Chimi").innerHTML;
+            document.getElementById("Chimi").value = "";
+            if (montoTotal != "") {
+                document.getElementById("Chimi").innerHTML = (parseInt(montoTotal) + parseInt(total));
+
+            }
+            else {
+                document.getElementById("Chimi").innerHTML = total;
+            }
+            clearItem();
+        }
+        else {
+
+            var total = (parseFloat(cantidad) * parseInt(monto));
+            var montoTotal = document.getElementById("Burritos").innerHTML;
+            document.getElementById("Burritos").value = "";
+            if (montoTotal != "") {
+                document.getElementById("Burritos").innerHTML = (parseInt(montoTotal) + parseInt(total));
+
+            }
+            else {
+                document.getElementById("Burritos").innerHTML = total;
+            }
+            clearItem();
+
+            
+        }
     });
 });
 
@@ -244,3 +289,24 @@ function actualizarChbox() {
     document.getElementById("Comentario").value = "";
 
 }
+
+////////////Validar Cantidad////////////////
+
+$("#cantidad").change(function () {
+
+    var cantidad = $('#cantidad').val();
+    if (cantidad <= 0) {
+        alertify.error("La Cantidad debe ser mayor a 0");
+        return false;
+    }
+
+    if (cantidad % 1 != 0) {
+        alertify.error("La Cantidad Debe Ser Entero");
+        return false;
+    }
+
+    else {
+        return true;
+
+    }
+});

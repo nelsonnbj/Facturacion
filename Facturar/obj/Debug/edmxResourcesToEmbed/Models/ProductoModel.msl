@@ -61,7 +61,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Invetario">
+    <EntitySetMapping Name="Invetarios">
       <EntityTypeMapping TypeName="FacturacionModel.Invetario">
         <MappingFragment StoreEntitySet="Invetario">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -72,8 +72,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="FacturacionModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Gastos">
-      <EntityTypeMapping TypeName="FacturacionModel.Gastos">
+      <EntityTypeMapping TypeName="FacturacionModel.Gasto">
         <MappingFragment StoreEntitySet="Gastos">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
@@ -83,7 +94,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NombreCliente">
+    <EntitySetMapping Name="NombreClientes">
       <EntityTypeMapping TypeName="FacturacionModel.NombreCliente">
         <MappingFragment StoreEntitySet="NombreCliente">
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -92,7 +103,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ProductoChimi">
+    <EntitySetMapping Name="ProductoChimis">
       <EntityTypeMapping TypeName="FacturacionModel.ProductoChimi">
         <MappingFragment StoreEntitySet="ProductoChimi">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -101,7 +112,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Telefono">
+    <EntitySetMapping Name="Telefonoes">
       <EntityTypeMapping TypeName="FacturacionModel.Telefono">
         <MappingFragment StoreEntitySet="Telefono">
           <ScalarProperty Name="id" ColumnName="id" />

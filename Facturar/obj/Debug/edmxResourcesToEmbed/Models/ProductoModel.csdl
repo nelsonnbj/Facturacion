@@ -66,7 +66,17 @@
     <Property Name="Cantidad" Type="Int32" />
     <Property Name="Fecha" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="Gastos">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Gasto">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -104,14 +114,14 @@
     <EntitySet Name="Factura_Burrito_T" EntityType="Self.Factura_Burrito_T" />
     <EntitySet Name="Factura_Chimi" EntityType="Self.Factura_Chimi" />
     <EntitySet Name="Factura_Chimi_T" EntityType="Self.Factura_Chimi_T" />
-    <EntitySet Name="Invetario" EntityType="Self.Invetario" />
-    <EntitySet Name="Gastos" EntityType="Self.Gastos" />
-    <EntitySet Name="NombreCliente" EntityType="Self.NombreCliente" />
-    <EntitySet Name="ProductoChimi" EntityType="Self.ProductoChimi" />
-    <EntitySet Name="Telefono" EntityType="Self.Telefono" />
+    <EntitySet Name="Invetarios" EntityType="Self.Invetario" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Gastos" EntityType="Self.Gasto" />
+    <EntitySet Name="NombreClientes" EntityType="Self.NombreCliente" />
+    <EntitySet Name="ProductoChimis" EntityType="Self.ProductoChimi" />
+    <EntitySet Name="Telefonoes" EntityType="Self.Telefono" />
     <FunctionImport Name="SP_Generar_Turno" ReturnType="Collection(String)">
       <Parameter Name="servicio" Mode="In" Type="String" />
-      <Parameter Name="turno1" Mode="InOut" Type="String" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

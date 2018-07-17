@@ -207,7 +207,7 @@
     <Compile Include="Models\Factura_Chimi_T.cs">
       <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Gastos.cs">
+    <Compile Include="Models\Gasto.cs">
       <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -235,6 +235,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Telefono.cs">
       <DependentUpon>ProductoModel.tt</DependentUpon>
@@ -307,6 +310,7 @@
     <Content Include="AdminBSB\favicon.ico" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\alertify.min.css" />
     <Content Include="Content\images\animation-bg.jpg" />
     <Content Include="Content\images\image-gallery\1.jpg" />
     <Content Include="Content\images\image-gallery\10.jpg" />
@@ -362,6 +366,7 @@
     <Content Include="Content\js\admin.js" />
     <Content Include="Content\js\demo.js" />
     <Content Include="Content\js\helpers.js" />
+    <Content Include="Content\js\alertify.min.js" />
     <Content Include="Content\js\pages\cards\basic.js" />
     <Content Include="Content\js\pages\cards\colored.js" />
     <Content Include="Content\js\pages\charts\chartjs.js" />
@@ -4013,7 +4018,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

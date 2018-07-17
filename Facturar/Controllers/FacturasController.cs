@@ -34,20 +34,20 @@ namespace Facturar.Controllers
                 //    model.Address = address;
                 //    model.OrderDate = DateTime.Now;
                 //    db.Customes.Add(model);
+                var vs = "Burrito";
+                var turno = db.SP_Generar_Turno(vs).ToList();
 
-                //var turno = db.SP_Generar_Turno("Chimi").ToString();
-                
                 foreach (var item in order)
                 {
-
                     Factura_Chimi_T Orden = new Factura_Chimi_T();
                     Orden.Cantidad= item.Cantidad;
                     Orden.nombre = name;
                     Orden.comenatrio = item.comenatrio;
                     Orden.Precio = item.Precio;
                     Orden.Producto = item.Producto;
-                    //Orden.Ticket = turno.ToString();
+                    Orden.Ticket = turno[0];
                     Orden.fecha = DateTime.Now;
+
                     db.Factura_Chimi_T.Add(Orden);
                 }
 
@@ -61,7 +61,7 @@ namespace Facturar.Controllers
         public JsonResult TiposActivos(string productos)
         {
             db.Configuration.ProxyCreationEnabled = false;
-           var Tipos = db.ProductoChimi.Where(x => x.Nombre_producto == productos).Select(x=>x.Precio).ToList();
+           var Tipos = db.ProductoChimis.Where(x => x.Nombre_producto == productos).Select(x=>x.Precio).ToList();
             return Json(Tipos, JsonRequestBehavior.AllowGet);
         }
 

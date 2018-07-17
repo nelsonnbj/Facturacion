@@ -31,13 +31,14 @@ namespace Facturar.Models
         public virtual DbSet<Factura_Burrito_T> Factura_Burrito_T { get; set; }
         public virtual DbSet<Factura_Chimi> Factura_Chimi { get; set; }
         public virtual DbSet<Factura_Chimi_T> Factura_Chimi_T { get; set; }
-        public virtual DbSet<Invetario> Invetario { get; set; }
-        public virtual DbSet<Gastos> Gastos { get; set; }
-        public virtual DbSet<NombreCliente> NombreCliente { get; set; }
-        public virtual DbSet<ProductoChimi> ProductoChimi { get; set; }
-        public virtual DbSet<Telefono> Telefono { get; set; }
+        public virtual DbSet<Invetario> Invetarios { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Gasto> Gastos { get; set; }
+        public virtual DbSet<NombreCliente> NombreClientes { get; set; }
+        public virtual DbSet<ProductoChimi> ProductoChimis { get; set; }
+        public virtual DbSet<Telefono> Telefonoes { get; set; }
     
-        public virtual ObjectResult<string> SP_Generar_Turno(string servicio )
+        public virtual ObjectResult<string> SP_Generar_Turno(string servicio)
         {
             var servicioParameter = servicio != null ?
                 new ObjectParameter("servicio", servicio) :
