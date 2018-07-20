@@ -364,6 +364,7 @@
     <Content Include="Content\images\user.png" />
     <Content Include="AdminBSB\index.html" />
     <Content Include="Content\js\admin.js" />
+    <Content Include="Content\js\BurritoScript.js" />
     <Content Include="Content\js\demo.js" />
     <Content Include="Content\js\helpers.js" />
     <Content Include="Content\js\alertify.min.js" />

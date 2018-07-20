@@ -73,7 +73,7 @@ $("#addToList").click(function (e) {
     e.preventDefault();
 
 
-    if ($.trim(document.getElementById("producto").value) == "" || $.trim(document.getElementById("cantidad").value) == "" || $.trim(document.getElementById("cliente").value) == "") return;
+    if ($.trim(document.getElementById("producto").value) === "" || $.trim(document.getElementById("cantidad").value) === "" || $.trim(document.getElementById("cliente").value) === "") return;
    
     var producto = document.getElementById("producto").value,
         cantidad = document.getElementById("cantidad").value,
@@ -83,7 +83,9 @@ $("#addToList").click(function (e) {
         detailsTableBody = $("#detailsTable tbody");
 
     var url = $('#agregar').data('request-url');
-    $.get(url, { productos: document.getElementById("producto").value }, function (data) {
+    area = document.getElementById("AreaBurrito").innerHTML;
+    if (area != "areaBurritos") {
+    $.get(url, { producto: document.getElementById("producto").value }, function (data) {
         $("#precio").empty();
 
        monto = data;
@@ -92,9 +94,9 @@ $("#addToList").click(function (e) {
     var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>'+ comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
         detailsTableBody.append(productItem);
 
-        area = document.getElementById("AreaBurrito").innerHTML;
-
-        if (area != "areaBurritos") {
+      
+        ////////////////////////////Calcula el Total de Chimi///////////
+       
 
             var total = (parseFloat(cantidad) * parseInt(monto));
             var montoTotal = document.getElementById("Chimi").innerHTML;
@@ -107,24 +109,22 @@ $("#addToList").click(function (e) {
                 document.getElementById("Chimi").innerHTML = total;
             }
             clearItem();
-        }
-        else {
 
-            var total = (parseFloat(cantidad) * parseInt(monto));
-            var montoTotal = document.getElementById("Burritos").innerHTML;
-            document.getElementById("Burritos").value = "";
-            if (montoTotal != "") {
-                document.getElementById("Burritos").innerHTML = (parseInt(montoTotal) + parseInt(total));
 
+
+
+            //////////////////////Calcula el Total de Todas las Cuentas//////////////////
+            burritoTotal = document.getElementById("Burritos").innerHTML;
+            chimiTotal = document.getElementById("Chimi").innerHTML;
+            if (burritoTotal == "") {
+                document.getElementById("Total").innerHTML = chimiTotal;
             }
+
             else {
-                document.getElementById("Burritos").innerHTML = total;
+                document.getElementById("Total").innerHTML = (parseInt(burritoTotal) + parseInt(chimiTotal))
             }
-            clearItem();
-
-            
-        }
     });
+    }
 });
 
 
@@ -155,19 +155,20 @@ function saveOrder(data) {
         type: 'POST',
         url: "/Facturas/SaveOrder",
         data: data,
-        success: function (result) {
-            alert(result);
-            location.reload();
-        },
-        error: function () {
-            alert("Error!")
-        }
+        //success: function (result) {
+        //    alert(result);
+        //    location.reload();
+        //},
+        //error: function () {
+        //    alert("Error!")
+        //}
     });
+    
 }
  //Collect Multiple Order List For Pass To Controller
         $("#saveOrder").click(function (e) {
             e.preventDefault();
-
+          
             var orderArr = [];
             orderArr.length = 0;
 
@@ -192,7 +193,11 @@ function saveOrder(data) {
                 console.log(response);
             }).fail(function (err) {
                 console.log(err);
-            });
+                });
+            alertify.success("Agregado");
+            $('#detailsTable tbody').children().remove();
+
+            
         });
 /////////////////////////Agregar Comentario////////////////
 
@@ -271,9 +276,11 @@ $("#mostaza").click(function () {
 
 ///////////////////////FUNCION UTILIZADA PARA AGREGAR EL COMENTARIO A LA LISTA ///////////
 function agregarComentario() {
-
-    var comentario = document.getElementById("Comentario").value;
-    document.getElementById("ComentarioAgregado").value = comentario;
+    var restorepage = document.body.innerHTML;
+    $('#ocultar1').attr('hidden', true);
+    $('#ocultar2').attr('hidden', true);
+    window.print();
+    document.body.innerHTML = restorepage;
 }
 
 ////////////////////////FUNCION QUE LIMPIA LOS CHECHKBOX///////////////
@@ -300,7 +307,7 @@ $("#cantidad").change(function () {
         return false;
     }
 
-    if (cantidad % 1 != 0) {
+    if (cantidad % 1 !== 0) {
         alertify.error("La Cantidad Debe Ser Entero");
         return false;
     }

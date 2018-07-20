@@ -21,7 +21,7 @@ namespace Facturar.Controllers
         {
             return View();
         }
-        public JsonResult SaveOrder(string name, string comentario, Factura_Chimi_T[] order, string data)
+        public JsonResult SaveOrder(string name, Factura_Chimi_T[] orders, Factura_Chimi_T[] order, string data)
         {
             string result = "Error! Orden No Completada!";
             if (name != null && order != null)
@@ -34,7 +34,7 @@ namespace Facturar.Controllers
                 //    model.Address = address;
                 //    model.OrderDate = DateTime.Now;
                 //    db.Customes.Add(model);
-                var vs = "Burrito";
+                var vs = "Chimi";
                 var turno = db.SP_Generar_Turno(vs).ToList();
 
                 foreach (var item in order)
@@ -58,10 +58,46 @@ namespace Facturar.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult TiposActivos(string productos)
+        public JsonResult SaveBurritos(string name, Factura_Burrito_T[] orders,  string data)
+        {
+            string result = "Error! Orden No Completada!";
+            if (name != null && orders != null)
+            {
+                //    var cutomerId = Guid.NewGuid();
+                //    Factura_Chimi_T model = new Factura_Chimi_T();
+
+                //    model. = order;
+                //    model.Name = name;
+                //    model.Address = address;
+                //    model.OrderDate = DateTime.Now;
+                //    db.Customes.Add(model);
+                var vs = "Burrito";
+                var turno = db.SP_Generar_Turno(vs).ToList();
+
+                foreach (var item in orders)
+                {
+                    Factura_Burrito_T Orden = new Factura_Burrito_T();
+                    Orden.Cantidad = item.Cantidad;
+                    Orden.Idnombre = name;
+                    Orden.comenatrio = item.comenatrio;
+                    Orden.Precio = item.Precio;
+                    Orden.IdProducto = item.IdProducto;
+                    Orden.Ticket = turno[0];
+                    Orden.fecha = DateTime.Now;
+
+                    db.Factura_Burrito_T.Add(Orden);
+                }
+
+
+                db.SaveChanges();
+                result = "Success! Order Is Complete!";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult TiposActivos(string producto)
         {
             db.Configuration.ProxyCreationEnabled = false;
-           var Tipos = db.ProductoChimis.Where(x => x.Nombre_producto == productos).Select(x=>x.Precio).ToList();
+           var Tipos = db.ProductoChimis.Where(x => x.Nombre_producto == producto).Select(x=>x.Precio).ToList();
             return Json(Tipos, JsonRequestBehavior.AllowGet);
         }
 
