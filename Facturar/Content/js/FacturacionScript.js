@@ -195,10 +195,20 @@ function saveOrder(data) {
                 console.log(err);
                 });
             alertify.success("Agregado");
-            $('#detailsTable tbody').children().remove();
-
+       
+            limpiar();
             
-        });
+});
+
+////////Metodo que actualiza la Tabla y los Montos////////////
+function limpiar() {
+    $('#detailsTable tbody').children().remove();
+
+    menos = document.getElementById("Chimi").innerHTML;
+    totales = document.getElementById("Total").innerHTML;
+    document.getElementById("Chimi").innerHTML = "";
+    document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
+}
 /////////////////////////Agregar Comentario////////////////
 
 $("#cebolla").click(function () {
@@ -276,11 +286,15 @@ $("#mostaza").click(function () {
 
 ///////////////////////FUNCION UTILIZADA PARA AGREGAR EL COMENTARIO A LA LISTA ///////////
 function agregarComentario() {
-    var restorepage = document.body.innerHTML;
-    $('#ocultar1').attr('hidden', true);
-    $('#ocultar2').attr('hidden', true);
-    window.print();
-    document.body.innerHTML = restorepage;
+    var comentario = document.getElementById("Comentario").value;
+    document.getElementById("ComentarioAgregado").value = comentario;
+
+    actualizarChbox();
+    //var restorepage = document.body.innerHTML;
+    //$('#ocultar1').attr('hidden', true);
+    //$('#ocultar2').attr('hidden', true);
+    //window.print();
+    //document.body.innerHTML = restorepage;
 }
 
 ////////////////////////FUNCION QUE LIMPIA LOS CHECHKBOX///////////////

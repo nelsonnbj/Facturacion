@@ -107,7 +107,17 @@ $("#SaveBurritos").click(function (e) {
         console.log(err);
         });
     alertify.success("Agregado");
-    $('#detailsTable tbody').children().remove();
+    limpiar();
     //window.print();
 
 });
+
+////////Metodo que actualiza la Tabla y los Montos////////////
+function limpiar() {
+    $('#detailsTable tbody').children().remove();
+
+    menos = document.getElementById("Burritos").innerHTML;
+    totales = document.getElementById("Total").innerHTML;
+    document.getElementById("Burritos").innerHTML = "";
+    document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
+}

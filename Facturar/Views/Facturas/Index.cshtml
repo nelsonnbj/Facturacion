@@ -36,7 +36,7 @@
                 </div>
                 <div class="content">
                     <div class="text"><h4>Chimi</h4></div>
-                    <h4><label value="5" id="Chimi" typeof="Int"></label></h4>
+                    <h4><label value="5" id="Chimi" typeof="Int">0</label></h4>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="content">
                     <div class="text"><h4>Burritos</h4></div>
-                    <h4><label value="5" id="Burritos" typeof="Int"></label></h4>
+                    <h4><label value="5" id="Burritos" typeof="Int">0</label></h4>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="content">
                     <div class="text"><h4>Total</h4></div>
-                    <h4><label value="5" id="Total" typeof="Int"></label></h4>
+                    <h4><label value="5" id="Total" typeof="Int"></label>0</h4>
 
                 </div>
             </div>
@@ -215,8 +215,8 @@
                                         </table>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <button type="reset" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button id="saveOrder" type="submit" class="btn btn-danger">Save Order</button>
+                                                <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>
+                                                <button id="saveOrder" type="submit" class="btn btn-danger">Facturar</button>
                                             </div>
                                         </div>
 
@@ -317,8 +317,8 @@
                                         </table>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <button type="reset" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button id="SaveBurritos" type="submit" class="btn btn-danger">Save Order</button>
+                                                <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>
+                                                <button id="SaveBurritos" type="submit" class="btn btn-danger">Facturar</button>
                                             </div>
                                         </div>
 
@@ -381,7 +381,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                             <div class="form-group form-float">
                                 <div class="form-line" id="agregar" data-request-url="@Url.Action("TiposActivos", "Facturas")">
-                                    <input type="text" class="form-control" id="ComentarioAgregado" placeholder="Comentario" value="" />
+                                    <input type="text" class="form-control" id="ComentarioAgregado" placeholder="Ingredientes/Comentario" value="" />
                                 </div>
                             </div>
                         </div>
