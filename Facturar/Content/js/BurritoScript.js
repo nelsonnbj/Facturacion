@@ -17,10 +17,12 @@
     $.get(url, { producto: document.getElementById("producto").value }, function (data) {
         $("#precio").empty();
 
-        monto = data;
+        monto = data.Monto;
+        tipo = data.Tipos;
 
 
-        var productItem = '<tr><td>' + IdProducto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+
+        var productItem = '<tr><td>' + IdProducto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td>' + tipo +  '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
         BurritoTableBody.append(productItem);
 
  
@@ -45,6 +47,7 @@
             chimiTotal = document.getElementById("Chimi").innerHTML;
 
             if (chimiTotal == "") {
+
                 document.getElementById("Total").innerHTML = burritoTotal;
             }
 
@@ -57,12 +60,12 @@
 
 
 //After Click Save Button Pass All Data View To Controller For Save Database
-function SaveBurritos(data) {
+function SaveOrder(data) {
     return $.ajax({
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         type: 'POST',
-        url: "/Facturas/SaveBurritos",
+        url: "/Facturas/SaveOrder",
         data: data,
 
       
@@ -86,27 +89,28 @@ $("#SaveBurritos").click(function (e) {
 
     $.each($("#BurritoTable tbody tr"), function () {
         orderArr.push({
-            IdProducto: $(this).find('td:eq(0)').html(),
+            producto: $(this).find('td:eq(0)').html(),
             cantidad: $(this).find('td:eq(1)').html(),
             comenatrio: $(this).find('td:eq(2)').html(),
             nombre: $(this).find('td:eq(3)').html(),
-            precio: $(this).find('td:eq(4)').html()
+            precio: $(this).find('td:eq(4)').html(),
+            tipoproducto: $(this).find('td:eq(5)').html()
         });
     });
 
 
     var data = JSON.stringify({
-        name: $("#cliente").val(),
+        name: "Burrito",
         address: $("#producto").val(),
-        orders: orderArr
+        order: orderArr
     });
 
-    $.when(SaveBurritos(data)).then(function (response) {
+    $.when(SaveOrder(data)).then(function (response) {
         console.log(response);
     }).fail(function (err) {
         console.log(err);
         });
-    alertify.success("Agregado");
+    alertify.success("Pedido Facturado");
     limpiar();
     //window.print();
 
@@ -114,10 +118,10 @@ $("#SaveBurritos").click(function (e) {
 
 ////////Metodo que actualiza la Tabla y los Montos////////////
 function limpiar() {
-    $('#detailsTable tbody').children().remove();
+    $('#BurritoTable tbody').children().remove();
 
     menos = document.getElementById("Burritos").innerHTML;
     totales = document.getElementById("Total").innerHTML;
-    document.getElementById("Burritos").innerHTML = "";
+    document.getElementById("Burritos").innerHTML = 0;
     document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
 }

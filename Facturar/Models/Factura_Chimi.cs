@@ -15,13 +15,14 @@ namespace Facturar.Models
     public partial class Factura_Chimi
     {
         public int id { get; set; }
-        public string Producto { get; set; }
+        public string IdProducto { get; set; }
         public Nullable<int> Cantidad { get; set; }
         public Nullable<int> Precio { get; set; }
         public string comenatrio { get; set; }
         public string Ticket { get; set; }
-        public string nombre { get; set; }
+        public string Idnombre { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        public string telefono { get; set; }
+        public string Idtelefono { get; set; }
+        public string Estado { get; set; }
     }
 }

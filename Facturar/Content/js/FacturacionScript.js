@@ -1,7 +1,7 @@
 ﻿
 
 $("#chimi").click(function () {
-        document.getElementById("producto").value = "Chimi";
+    document.getElementById("producto").value = "Chimi";
 });
 
 $("#pierna").click(function () {
@@ -74,29 +74,31 @@ $("#addToList").click(function (e) {
 
 
     if ($.trim(document.getElementById("producto").value) === "" || $.trim(document.getElementById("cantidad").value) === "" || $.trim(document.getElementById("cliente").value) === "") return;
-   
+
     var producto = document.getElementById("producto").value,
         cantidad = document.getElementById("cantidad").value,
         cliente = document.getElementById("cliente").value,
         comentario = document.getElementById("ComentarioAgregado").value,
-       monto = 0,
+        monto = 0,
         detailsTableBody = $("#detailsTable tbody");
 
     var url = $('#agregar').data('request-url');
     area = document.getElementById("AreaBurrito").innerHTML;
-    if (area != "areaBurritos") {
-    $.get(url, { producto: document.getElementById("producto").value }, function (data) {
-        $("#precio").empty();
+    if (area !== "areaBurritos") {
+        $.get(url, { producto: document.getElementById("producto").value }, function (data) {
+            $("#precio").empty();
 
-       monto = data;
- 
+            var monto = data.Monto;
+            var tipo = data.Tipos;
 
-    var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>'+ comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
-        detailsTableBody.append(productItem);
 
-      
-        ////////////////////////////Calcula el Total de Chimi///////////
-       
+
+            var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td>' + tipo + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+            detailsTableBody.append(productItem);
+
+
+            ////////////////////////////Calcula el Total de Chimi///////////
+
 
             var total = (parseFloat(cantidad) * parseInt(monto));
             var montoTotal = document.getElementById("Chimi").innerHTML;
@@ -117,20 +119,21 @@ $("#addToList").click(function (e) {
             burritoTotal = document.getElementById("Burritos").innerHTML;
             chimiTotal = document.getElementById("Chimi").innerHTML;
             if (burritoTotal == "") {
+
                 document.getElementById("Total").innerHTML = chimiTotal;
             }
 
             else {
                 document.getElementById("Total").innerHTML = (parseInt(burritoTotal) + parseInt(chimiTotal))
             }
-    });
+        });
     }
 });
 
 
 //After Add A New Order In The List, Clear Clean The Form For Add More Order.
 function clearItem() {
-    producto = document.getElementById("producto").value="";
+    producto = document.getElementById("producto").value = "";
     document.getElementById("cantidad").value = "";
     document.getElementById("ComentarioAgregado").value = "";
 
@@ -163,62 +166,70 @@ function saveOrder(data) {
         //    alert("Error!")
         //}
     });
-    
+
 }
- //Collect Multiple Order List For Pass To Controller
-        $("#saveOrder").click(function (e) {
-            e.preventDefault();
-          
-            var orderArr = [];
-            orderArr.length = 0;
+//Collect Multiple Order List For Pass To Controller
+$("#saveOrder").click(function (e) {
+    e.preventDefault();
 
-            $.each($("#detailsTable tbody tr"), function () {
-                orderArr.push({
-                    producto: $(this).find('td:eq(0)').html(),
-                    cantidad: $(this).find('td:eq(1)').html(),
-                    comenatrio: $(this).find('td:eq(2)').html(),
-                    nombre: $(this).find('td:eq(3)').html(),
-                    precio: $(this).find('td:eq(4)').html()
-                });
-            });
+    var orderArr = [];
+    orderArr.length = 0;
+
+    $.each($("#detailsTable tbody tr"), function () {
+        orderArr.push({
+            producto: $(this).find('td:eq(0)').html(),
+            cantidad: $(this).find('td:eq(1)').html(),
+            comenatrio: $(this).find('td:eq(2)').html(),
+            nombre: $(this).find('td:eq(3)').html(),
+            precio: $(this).find('td:eq(4)').html(),
+            tipoproducto: $(this).find('td:eq(5)').html()
+        });
+    });
 
 
-            var data = JSON.stringify({
-                name: $("#cliente").val(),
-                address: $("#producto").val(),
-                order: orderArr
-            });
+    var data = JSON.stringify({
+        name: "Chimi",
+        address: $("#producto").val(),
+        order: orderArr
+    });
 
-            $.when(saveOrder(data)).then(function (response) {
-                console.log(response);
-            }).fail(function (err) {
-                console.log(err);
-                });
-            alertify.success("Agregado");
-       
-            limpiar();
-            
-});
+    $.when(saveOrder(data)).then(function (response) {
+        console.log(response);
+    }).fail(function (err) {
+        console.log(err);
+        });
+  
+    alertify.success("Pedido Facturado");
 
-////////Metodo que actualiza la Tabla y los Montos////////////
-function limpiar() {
+    ////////Metodo que actualiza la Tabla y los Montos////////////
     $('#detailsTable tbody').children().remove();
+
 
     menos = document.getElementById("Chimi").innerHTML;
     totales = document.getElementById("Total").innerHTML;
-    document.getElementById("Chimi").innerHTML = "";
+    document.getElementById("Chimi").innerHTML = 0;
+    document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
+});
+
+
+function limpiar() {
+   
+
+    menos = document.getElementById("Chimi").innerHTML;
+    totales = document.getElementById("Total").innerHTML;
+    document.getElementById("Chimi").innerHTML = 0;
     document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
 }
 /////////////////////////Agregar Comentario////////////////
 
 $("#cebolla").click(function () {
     var texto = document.getElementById("Comentario").value;
-   
+
     if (this.checked) {
-     
+
     }
     else {
-        document.getElementById("Comentario").value = texto + "Sin Cebolla" + " / " ;
+        document.getElementById("Comentario").value = texto + "Sin Cebolla" + " / ";
     }
 });
 
@@ -229,7 +240,7 @@ $("#tomaste").click(function () {
 
     }
     else {
-        document.getElementById("Comentario").value = texto + "Sin Cebolla" + " / " ;
+        document.getElementById("Comentario").value = texto + "Sin Cebolla" + " / ";
     }
 });
 
@@ -303,7 +314,7 @@ function actualizarChbox() {
     document.getElementById("cebolla").checked = true;
     document.getElementById("tomaste").checked = true;
     document.getElementById("repollo").checked = true;
-    document.getElementById("catchut").checked = true; 
+    document.getElementById("catchut").checked = true;
     document.getElementById("mayonesa").checked = true;
     document.getElementById("picante").checked = true;
     document.getElementById("mostaza").checked = true;
@@ -331,3 +342,36 @@ $("#cantidad").change(function () {
 
     }
 });
+
+$("#checkbo").click(function () {
+    if (document.getElementById("checkbo").checked) {
+        var url = $('#agregar').data('request-url');
+        $.post(url, { Codigo: "cancelado" });
+    }
+
+    else {
+        var url = $('#agregar').data('request-url');
+        $.post(url, { Codigo: "activado" });
+    }
+});
+
+/////////////////////////Identificar el area de maestro detalle//////////
+
+//$("#areaBurritos").click(function () {
+//    document.getElementById("AreaBurrito").innerHTML = "Burrito";
+//    let a = document.getElementById("AreaBurrito").value;
+
+//})
+
+//$("#areaChimi").click(function () {
+//    document.getElementById("AreaBurrito").innerHTML = "Chimi";
+
+//})
+
+//function buscar() {
+
+//    var url = $('#buscar').data('request-url');
+//    area = document.getElementById("AreaBurrito").value;
+
+//    $.get(url, { Area: area });
+//};

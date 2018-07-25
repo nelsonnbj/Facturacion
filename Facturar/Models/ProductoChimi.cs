@@ -17,5 +17,6 @@ namespace Facturar.Models
         public int id { get; set; }
         public string Nombre_producto { get; set; }
         public Nullable<int> Precio { get; set; }
+        public string TipoProducto { get; set; }
     }
 }

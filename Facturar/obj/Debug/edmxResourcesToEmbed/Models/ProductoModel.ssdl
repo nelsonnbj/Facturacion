@@ -13,6 +13,7 @@
     <Property Name="Idnombre" Type="nvarchar" MaxLength="20" />
     <Property Name="fecha" Type="datetime" />
     <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityType Name="Factura_Burrito_T">
     <Key>
@@ -27,20 +28,22 @@
     <Property Name="Idnombre" Type="nvarchar" MaxLength="20" />
     <Property Name="fecha" Type="datetime" />
     <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Factura_Chimi">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdProducto" Type="nvarchar" MaxLength="50" />
     <Property Name="Cantidad" Type="int" />
     <Property Name="Precio" Type="int" />
     <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
     <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
-    <Property Name="nombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="Idnombre" Type="nvarchar" MaxLength="20" />
     <Property Name="fecha" Type="datetime" />
-    <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="Idtelefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Factura_Chimi_T">
     <Key>
@@ -55,6 +58,8 @@
     <Property Name="nombre" Type="nvarchar" MaxLength="20" />
     <Property Name="fecha" Type="datetime" />
     <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" />
+    <Property Name="TipoProducto" Type="char" MaxLength="10" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Facturacion.dbo.Gastos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -97,6 +102,7 @@ warning 6002: The table/view 'Facturacion.dbo.ProductoChimi' does not have a pri
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre_producto" Type="nvarchar" MaxLength="20" />
     <Property Name="Precio" Type="int" />
+    <Property Name="TipoProducto" Type="char" MaxLength="10" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -147,7 +153,8 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
       <DefiningQuery>SELECT 
     [ProductoChimi].[id] AS [id], 
     [ProductoChimi].[Nombre_producto] AS [Nombre_producto], 
-    [ProductoChimi].[Precio] AS [Precio]
+    [ProductoChimi].[Precio] AS [Precio], 
+    [ProductoChimi].[TipoProducto] AS [TipoProducto]
     FROM [dbo].[ProductoChimi] AS [ProductoChimi]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="Telefono" EntityType="Self.Telefono" store:Type="Tables" store:Schema="dbo">

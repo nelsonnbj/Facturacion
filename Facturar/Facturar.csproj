@@ -188,6 +188,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DetallesController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -195,6 +196,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Detalles.cs" />
     <Compile Include="Models\Factura_Burrito.cs">
       <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
@@ -365,6 +367,7 @@
     <Content Include="AdminBSB\index.html" />
     <Content Include="Content\js\admin.js" />
     <Content Include="Content\js\BurritoScript.js" />
+    <Content Include="Content\js\DataTable.js" />
     <Content Include="Content\js\demo.js" />
     <Content Include="Content\js\helpers.js" />
     <Content Include="Content\js\alertify.min.js" />
@@ -4057,6 +4060,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Facturas\Index.cshtml" />
     <Content Include="Views\Facturas\MenuPrincipal.cshtml" />
+    <Content Include="Views\Detalles\Detalles.cshtml" />
+    <Content Include="Views\Detalles\Busquedad.cshtml" />
+    <Content Include="Views\Detalles\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

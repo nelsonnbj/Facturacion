@@ -59,7 +59,7 @@
                 </div>
                 <div class="content">
                     <div class="text"><h4>Total</h4></div>
-                    <h4><label value="5" id="Total" typeof="Int"></label>0</h4>
+                    <h4><label value="5" id="Total" typeof="Int"></label></h4>
 
                 </div>
             </div>
@@ -72,7 +72,7 @@
     <div class="row clearfix">
 
         @*////////Label Para Identificar el area/////////////*@
-        <label value="" id="AreaBurrito" hidden> </label>
+        <label  value="" id="AreaBurrito" hidden> </label>
 
 
         <!-- Task Info -->
@@ -196,8 +196,8 @@
                           
                                 <div class="row">
                                     <div class="form-group">
-                                
-
+                       
+                                      
                                         <table id="detailsTable" class="table col-md-4">
                                             <thead>
 
@@ -208,6 +208,7 @@
                                                     <th style="width:30%">Comenatrio</th>
                                                     <th style="width:15%">nombre</th>
                                                     <th style="width:25%">Precio</th>
+                                                    <th style="width:25%">TipoProducto</th>
                                                     <th style="width:10%"></th>
                                                 </tr>
                                             </thead>
@@ -305,11 +306,12 @@
                                         <table id="BurritoTable" class="table col-md-4">
                                             <thead>
                                                 <tr>
-                                                    <th style="width:30%">IdProducto</th>
+                                                    <th style="width:30%">Producto</th>
                                                     <th style="width:20%">Cantidad</th>
                                                     <th style="width:30%">Comenatrio</th>
                                                     <th style="width:15%">nombre</th>
                                                     <th style="width:25%">Precio</th>
+                                                    <th style="width:25%">TipoProducto</th>
                                                     <th style="width:10%"></th>
                                                 </tr>
                                             </thead>
@@ -439,54 +441,7 @@
                     </div><br />
                     <div class="form-group">
 
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-success" onclick="agregarComentario()" data-dismiss="modal">Agregar</button>
-
-                        </div>
-                    </div><br />
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    @*///////////////////////////////////////////Modal de Facturas//////////////////////////////////////////////   *@
-
-
-
-    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <div class="form-group">
-                        <h2 class="card-inside-title">Ingredientes</h2><br />
-                        <div class="demo-checkbox">
-                            <input type="checkbox" id="cebolla" class="chk-col-red" checked />
-                            <label for="cebolla">Cebolla</label>
-                            <input type="checkbox" id="tomaste" class="chk-col-pink" checked />
-                            <label for="tomaste">Tomaste</label>
-                            <input type="checkbox" id="repollo" class="chk-col-purple" checked />
-                            <label for="repollo">Repollo</label>
-                            <input type="checkbox" id="catchut" class="chk-col-deep-purple" checked />
-                            <label for="catchut">Catchut</label>
-                            <input type="checkbox" id="mayonesa" class="chk-col-green" checked />
-                            <label for="mayonesa">Mayonesa</label>
-                            <input type="checkbox" id="picante" class="chk-col-blue" checked />
-                            <label for="picante">Picante</label>
-                            <input type="checkbox" id="mostaza" class="chk-col-light-blue" checked />
-                            <label for="mostaza">Mostaza</label>
-                        </div>
-
-                        <div class="form-line">
-
-                            <input type="text" class="form-control" placeholder="Comentario" id="Comentario" value="" />
-                        </div>
-                    </div><br />
-                    <div class="form-group">
-
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-success" onclick="agregarComentario()" data-dismiss="modal">Agregar</button>
 

@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Facturar.Models.Factura_Chimi_T>
+
+
+
+@*///////////////////////////////////////////////////////////////vista/////////////////////*@
+<div class="row clearfix">
+
+    @*////////Label Para Identificar el area/////////////*@
+
+    <!-- Task Info -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+
+                <h2>Menu</h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <!-- Nav tabs -->
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
+                        <b>Chimis</b>
+
+                        <div class="body">
+
+                            @using (Html.BeginForm("Detalles", "Detalles", FormMethod.Get))
+                            {
+                                <div class="form-inline ">
+
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" name="Codigo" placeholder="Empleado">
+                                        @*@Html.DropDownList("empresa", ViewBag.Empresa as SelectList, "--Seleccionar Empresa", new { @class = "form-control", id = "empresa" })*@
+
+                                        <button id="buscarempleado" class="btn btn-primary" type="submit">Buscar</button>
+                                        <hr />
+                                    </div>
+                                </div>
+                                <table id="myDatatable" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Producto)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Cantidad)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Precio)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.comenatrio)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Ticket)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.nombre)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.telefono)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Estado)
+                                        </th>
+                                        <th>Cambiar Estado</th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Producto)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Cantidad)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Precio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.comenatrio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Ticket)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.nombre)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.telefono)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estado)
+                                            </td>
+                                            <td>
+
+                                                @if (item.Estado == "Cancelado")
+                                                {
+                                                    <div class="col-sm-3">
+
+                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+
+                                                            <label><input type="checkbox" id="checkbo" checked><span class="lever switch-col-red"></span></label>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                else
+                                                {
+                                                    <div class="col-sm-3">
+
+                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+
+                                                            <label><input type="checkbox" id="checkbo"><span class="lever switch-col-red"></span></label>
+                                                        </div>
+                                                    </div>
+
+                                                }
+
+                                            </td>
+                                            <td>
+
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.id })
+
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <!-- #END# Task Info -->
+
+</div>

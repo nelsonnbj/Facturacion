@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Facturar.Models.Factura_Chimi_T>
+
+
+@*@Html.HiddenFor(modelo => modelo.permisos, new { @class = "form-control", id = "permisoEditar" })*@
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Editors | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Core Css -->
+    <link href="~/Content/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="~/Content/plugins/node-waves/waves.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link href="~/Content/plugins/animate-css/animate.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/Content/css/themes/all-themes.css" rel="stylesheet" />
+    <link href="~/Content/js/FacturacionScript.js" />
+    <link href="~/Content/js/DataTable.js" />
+</head>
+
+
+<div id="Busqueda">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-block text-xs-center">
+                    @*@Helpers.Titulo("Búsqueda de Empleado")*@
+                    <div class="card-body">
+                        <img class="icono-app" src="~/Content/img/icon.png" />
+                        <h3 class="titulo-app">Chimis</h3>
+                        <div class="form-inline">
+                            <input type="text" class="form-control" id="Codigo" placeholder="Empleado">
+                            @*@Html.DropDownList("empresa", ViewBag.Empresa as SelectList, "--Seleccionar Empresa", new { @class = "form-control", id = "empresa" })*@
+                           
+                            <button id="buscarempleado" class="btn btn-primary" onclick="BuscarEmpleado()" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

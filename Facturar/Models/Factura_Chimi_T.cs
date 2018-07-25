@@ -23,5 +23,7 @@ namespace Facturar.Models
         public string nombre { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public string telefono { get; set; }
+        public string Estado { get; set; }
+        public string TipoProducto { get; set; }
     }
 }
