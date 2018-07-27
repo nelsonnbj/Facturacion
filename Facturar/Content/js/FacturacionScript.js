@@ -208,6 +208,7 @@ $("#saveOrder").click(function (e) {
     menos = document.getElementById("Chimi").innerHTML;
     totales = document.getElementById("Total").innerHTML;
     document.getElementById("Chimi").innerHTML = 0;
+    document.getElementById("cliente").value = "";
     document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
 });
 
@@ -218,6 +219,7 @@ function limpiar() {
     menos = document.getElementById("Chimi").innerHTML;
     totales = document.getElementById("Total").innerHTML;
     document.getElementById("Chimi").innerHTML = 0;
+   
     document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
 }
 /////////////////////////Agregar Comentario////////////////
@@ -342,36 +344,115 @@ $("#cantidad").change(function () {
 
     }
 });
+//////////////////////Cambia el estatus del pedido//////////
 
-$("#checkbo").click(function () {
+$("#checkbo").click(function (event) {
     if (document.getElementById("checkbo").checked) {
         var url = $('#agregar').data('request-url');
         $.post(url, { Codigo: "cancelado" });
+        var int = self.setInterval("refresh()", 1000);
     }
 
     else {
         var url = $('#agregar').data('request-url');
         $.post(url, { Codigo: "activado" });
+        var int = self.setInterval("refresh()", 1000);
     }
 });
 
+
+
+
+
+$("despacho").change(function (event) {
+    if (document.getElementById("despacho").checked) {
+        var url = $('#despachar').data('request-url');
+        $.post(url, { Codigo: "Despachado" });
+
+        var int = self.setInterval("refresh()", 1000);
+    }
+
+    else {
+        var url = $('#despachar').data('request-url');
+        $.post(url, { Codigo: "activado" });
+    }
+});
+
+
+function refresh() {
+    location.reload(true);
+}
 /////////////////////////Identificar el area de maestro detalle//////////
 
-//$("#areaBurritos").click(function () {
-//    document.getElementById("AreaBurrito").innerHTML = "Burrito";
-//    let a = document.getElementById("AreaBurrito").value;
+var error = document.getElementById("error").innerHTML;
 
-//})
+if (error === "false" ) {
+    alert("El Tickect Intoducido Es Incorrecto");
 
-//$("#areaChimi").click(function () {
-//    document.getElementById("AreaBurrito").innerHTML = "Chimi";
+}
 
-//})
+$(".btnEditar").click(function (eve) {
+    $("#modal-content").load("/Detalles/Edit/" + $(this).data("id"));
+    
+})
 
-//function buscar() {
+function imprimir() {
+    window.print;
+};
 
-//    var url = $('#buscar').data('request-url');
-//    area = document.getElementById("AreaBurrito").value;
+/////////////////vista Editar////////////////////////
 
-//    $.get(url, { Area: area });
-//};
+//function Editar() {
+//    document.getElementById("Producto").innerHTML;
+//    document.getElementById("Cantidad").innerHTML;
+//    document.getElementById("Precio").innerHTML;
+//    document.getElementById("nombre").innerHTML;
+//    document.getElementById("Ticket").innerHTML;
+//    document.getElementById("comenatrio").innerHTML;
+//    document.getElementById("id").innerHTML;
+    
+//    var url = $('#editar').data('request-url');
+//    $.post(url, {
+//        id: document.getElementById("id").innerHTML,
+//        Producto: document.getElementById("Producto").innerHTML,
+//        Cantidad: document.getElementById("Cantidad").innerHTML,
+//        Precio:document.getElementById("Precio").innerHTML,
+//        nombre:document.getElementById("nombre").innerHTML,
+//        Ticket: document.getElementById("Ticket").innerHTML,
+//        comenatrio: document.getElementById("comenatrio").innerHTML
+
+//    }, function (data) { });
+
+  
+//}
+//var editado = $("#editado").val();
+//document.getElementById("codigo").value = editado;
+
+//if (editado != "") {
+//    if (editado != "") {
+//        Back()
+//        //$("#buscarempleado").click();
+//    }
+
+//    function Back() {
+
+//        javascript: history.back(1);
+
+//    }
+//}
+
+//var editado = document.getElementById("editados").value;
+//document.getElementById("codigo").value = editado;
+
+//if (editado != "") {
+//    if (editado != "") {
+      
+//        //$("#buscarempleado").click();
+//    }
+
+//    function Back() {
+
+//        javascript: history.back(1);
+
+//    }
+//}

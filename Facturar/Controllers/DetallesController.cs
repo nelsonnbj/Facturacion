@@ -17,6 +17,14 @@ namespace Facturar.Controllers
         {
            
                 List<Factura_Chimi_T> chimi = db.Factura_Chimi_T.Where(x => x.Ticket == Codigo).ToList();
+            var total = chimi.Count();
+            if (total ==0 && Codigo != "")
+            {
+
+                ViewBag.Error = "false";
+             
+            }
+
                 return View(chimi);
             
 
@@ -43,7 +51,7 @@ namespace Facturar.Controllers
             db.Entry(chimi).State = EntityState.Modified;
             db.SaveChanges();
 
-            return Json(new { data = chimi }, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Detalles");
         }
 
        
@@ -82,7 +90,7 @@ namespace Facturar.Controllers
             var chimi = db.Factura_Chimi_T.Where(x => x.id == id).FirstOrDefault();
             Factura_Chimi_T producto = new Factura_Chimi_T();
 
-           producto.Producto = chimi.Producto;
+            producto.Producto = chimi.Producto;
             producto.Precio = chimi.Precio;
             producto.comenatrio = chimi.comenatrio;
             producto.Cantidad = chimi.Cantidad;
@@ -95,17 +103,30 @@ namespace Facturar.Controllers
 
         // POST: Detalles/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id,string Producto, string Cantidad, string Precio, string nombre, string Ticket, string comenatrio, Factura_Chimi_T Factura)
         {
+              var modelo = db.Factura_Chimi_T.Where(x => x.id == Factura.id).FirstOrDefault();
+
+
             try
             {
-                // TODO: Add update logic here
+                modelo.Producto = Factura.Producto;
+                modelo.Precio = Factura.Precio;
+                modelo.comenatrio =Factura.comenatrio;
+                modelo.Cantidad = Factura.Cantidad;
+                modelo.nombre = Factura.nombre;
+                modelo.Ticket = Factura.Ticket;
 
-                return RedirectToAction("Index");
+                // TODO: Add update logic here
+                db.Entry(modelo).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ViewBag.Editado = Factura.Ticket;
+                return RedirectToAction("Detalles","Detalles", modelo);
             }
             catch
             {
-                return View();
+                return View("Detalles");
             }
         }
     

@@ -123,5 +123,57 @@ function limpiar() {
     menos = document.getElementById("Burritos").innerHTML;
     totales = document.getElementById("Total").innerHTML;
     document.getElementById("Burritos").innerHTML = 0;
+    document.getElementById("cliente").value = "";
     document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
 }
+
+
+$("#Mofongo_de_Res").click(function () {
+    document.getElementById("producto").value = "Mofongo de Res";
+});
+
+$("#Mofongo_de_Cerdo").click(function () {
+    document.getElementById("producto").value = "Mofongo de Cerdo";
+});
+
+$("#Mofongo_de_Longaniza").click(function () {
+    document.getElementById("producto").value = "Mofongo de Longaniza";
+});
+
+$("#Mofongo_Grande").click(function () {
+    document.getElementById("producto").value = "Mofongo Grande";
+});
+
+$("#Tacos_de_Pollo").click(function () {
+    document.getElementById("producto").value = "Tacos de Pollo";
+});
+
+$("#Tacos_de_Res").click(function () {
+    document.getElementById("producto").value = "Tacos de Res";
+});
+
+$("#Burrito_de_Pollo").click(function () {
+    document.getElementById("producto").value = "Burrito de Pollo";
+});
+
+$("#Burrito_de_Res").click(function () {
+    document.getElementById("producto").value = "Burrito de Res";
+});
+
+$("#Burrito_de_Grande").click(function () {
+    document.getElementById("producto").value = "Burrito de Grande";
+});
+
+$("#Burrito_de_Mixto").click(function () {
+    document.getElementById("producto").value = "Burrito de Mixto";
+});
+$("#Quezadilla_de_Pollo").click(function () {
+    document.getElementById("producto").value = "Quezadilla de Pollo";
+});
+$("#Quezadilla_de_Res").click(function () {
+    document.getElementById("producto").value = "Quezadilla de Res";
+});
+$("#Ensalada_de_Pello").click(function () {
+    document.getElementById("producto").value = "Ensalada de Pello";
+});
+
