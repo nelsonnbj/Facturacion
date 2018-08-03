@@ -4003,6 +4003,7 @@
       <DependentUpon>ProductoModel.edmx</DependentUpon>
       <LastGenOutput>ProductoModel.cs</LastGenOutput>
     </Content>
+    <Content Include="ScriptDetalles\Detalles.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ProductoModel.edmx">

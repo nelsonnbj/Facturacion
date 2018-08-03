@@ -103,11 +103,10 @@ namespace Facturar.Controllers
 
         // POST: Detalles/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id,string Producto, string Cantidad, string Precio, string nombre, string Ticket, string comenatrio, Factura_Chimi_T Factura)
+        public ActionResult Edit(Factura_Chimi_T Factura)
         {
               var modelo = db.Factura_Chimi_T.Where(x => x.id == Factura.id).FirstOrDefault();
-
-
+            
             try
             {
                 modelo.Producto = Factura.Producto;
@@ -121,12 +120,12 @@ namespace Facturar.Controllers
                 db.Entry(modelo).State = EntityState.Modified;
                 db.SaveChanges();
 
-                ViewBag.Editado = Factura.Ticket;
-                return RedirectToAction("Detalles","Detalles", modelo);
+              
+                return RedirectToAction("Detalles",new { Codigo= Factura.Ticket});
             }
             catch
             {
-                return View("Detalles");
+                return RedirectToAction("Detalles", new { Codigo = Factura.Ticket });
             }
         }
     

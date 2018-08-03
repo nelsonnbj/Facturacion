@@ -93,7 +93,7 @@ $("#addToList").click(function (e) {
 
 
 
-            var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td>' + tipo + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+            var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
             detailsTableBody.append(productItem);
 
 
@@ -174,6 +174,10 @@ $("#saveOrder").click(function (e) {
 
     var orderArr = [];
     orderArr.length = 0;
+    var tipoServicio = "Comer Aqui"
+    if (document.getElementById("tipoServicio").checked) {
+        tipoServicio = "Empacar"
+    }
 
     $.each($("#detailsTable tbody tr"), function () {
         orderArr.push({
@@ -189,6 +193,7 @@ $("#saveOrder").click(function (e) {
 
     var data = JSON.stringify({
         name: "Chimi",
+        servicio: tipoServicio,
         address: $("#producto").val(),
         order: orderArr
     });
@@ -346,7 +351,7 @@ $("#cantidad").change(function () {
 });
 //////////////////////Cambia el estatus del pedido//////////
 
-$("#checkbo").click(function (event) {
+$(':checkbox[type=checkbox]').on("click", function () {
     if (document.getElementById("checkbo").checked) {
         var url = $('#agregar').data('request-url');
         $.post(url, { Codigo: "cancelado" });
@@ -361,10 +366,7 @@ $("#checkbo").click(function (event) {
 });
 
 
-
-
-
-$("despacho").change(function (event) {
+$("#despacho").change(function (event) {
     if (document.getElementById("despacho").checked) {
         var url = $('#despachar').data('request-url');
         $.post(url, { Codigo: "Despachado" });
@@ -375,6 +377,7 @@ $("despacho").change(function (event) {
     else {
         var url = $('#despachar').data('request-url');
         $.post(url, { Codigo: "activado" });
+        var int = self.setInterval("refresh()", 1000);
     }
 });
 
@@ -386,14 +389,14 @@ function refresh() {
 
 var error = document.getElementById("error").innerHTML;
 
-if (error === "false" ) {
+if (error === "false") {
     alert("El Tickect Intoducido Es Incorrecto");
 
 }
 
 $(".btnEditar").click(function (eve) {
     $("#modal-content").load("/Detalles/Edit/" + $(this).data("id"));
-    
+
 })
 
 function imprimir() {

@@ -7,13 +7,37 @@
 
 @*///////////////////////////////////////////////////////////////vista/////////////////////*@
 
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Editors | Bootstrap Based Admin Template - Material Design</title>
+    <!-- Favicon-->
+    <link rel="icon" href="~/Content/favicon.ico" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Core Css -->
+    <link href="~/Content/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
 
+    <!-- Waves Effect Css -->
+    <link href="~/Content/plugins/node-waves/waves.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link href="~/Content/plugins/animate-css/animate.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/Content/css/themes/all-themes.css" rel="stylesheet" />
+    @*<script src="~/ScriptDetalles/Detalles.js" rel="stylesheet"></script>*@
+
+
+
+</head>
 <div class="row clearfix">
 
     @*////////Label Para Identificar el area/////////////*@
 
     <!-- Task Info -->
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
         <div class="card">
             <div class="header">
 
@@ -52,8 +76,10 @@
                                     </div>
                                 </div>
                                 <label id="error" val="" hidden>@error</label>
+                                
                                 <table id="myDatatable" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <tr>
+                                    
                                         <th>
                                             @Html.DisplayNameFor(model => model.Producto)
                                         </th>
@@ -78,78 +104,80 @@
                                         <th>Cambiar Estado</th>
                                         <th></th>
                                     </tr>
-
+                                    
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Producto)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Cantidad)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Precio)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.comenatrio)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Ticket)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.nombre)
-                                            </td>                                            
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Estado)
-                                            </td>
-                                            <td>
+                                    <tr>
+                                      
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Producto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cantidad)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Precio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.comenatrio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Ticket)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Estado)
+                                        </td>
 
+                                        <td>
 
-                                                @if (item.Estado == "Despachado")
-                                                {
-                                                    <div class="col-sm-3">
+                                            @if (item.Estado == "Despachado")
+                                            {
+                                                <div class="col-sm-3">
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+                                                    <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
 
-                                                            <label><input type="checkbox" id="checkbo" checked disabled><span class="lever switch-col-green"></span></label>
-                                                        </div>
+                                                        <label><input type="checkbox" id="checkbo" checked disabled><span class="lever switch-col-green"></span></label>
                                                     </div>
-                                                }
-                                                @if (item.Estado == "Cancelado")
-                                                {
-                                                    <div class="col-sm-3">
+                                                </div>
+                                            }
+                                            @if (item.Estado == "Cancelado")
+                                            {
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+                                                <div class="col-sm-3">
 
-                                                            <label><input type="checkbox" data-id="@item.id" id="checkbo" checked><span class="lever switch-col-red"></span></label>
-                                                        </div>
+                                                    <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+
+                                                        <label><input type="checkbox" data-id="@item.id" id="checkbo" checked><span class="lever switch-col-red"></span></label>
                                                     </div>
-                                                }
-                                                @if (item.Estado == "Facturado")
-                                                {
-                                                    <div class="col-sm-3">
+                                                </div>
+                                            }
+                                            @if (item.Estado == "Facturado")
+                                            {
+                                                <div class="col-sm-3">
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+                                                    <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
 
-                                                            <label><input type="checkbox" data-id="@item.id" id="checkbo"><span class="lever switch-col-red"></span></label>
-                                                        </div>
+                                                        <label><input type="checkbox" data-id="@item.id" id="checkbo"><span class="lever switch-col-red"></span></label>
                                                     </div>
-                                                }
+                                                </div>
+                                            }
 
-                                            </td>
-                                            <td>
-                                                @if (item.Estado == "Despachado")
-                                                {
+                                        </td>
+                                        <td>
+                                            @if (item.Estado == "Despachado")
+                                            {
                                                 <i class="glyphicon glyphicon-pencil"></i>
-                                                }
-                                                else
-                                                {
-                                                    <a href="#myModal" class="btnEditar btn-link btn-info" data-toggle="modal" data-id="@item.id"><i class="glyphicon glyphicon-pencil"></i></a>
-                                                   
-                                                }
-                                            </td>
-                                        </tr>
+                                            }
+                                            else
+                                            {
+                                                <a href="#myModal" class="btnEditar btn-link btn-info" data-toggle="modal" data-id="@item.id"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                                            }
+                                        </td>
+                                    </tr>
                                     }
 
                                 </table>

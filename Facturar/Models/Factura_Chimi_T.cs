@@ -11,11 +11,9 @@ namespace Facturar.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Factura_Chimi_T
     {
-        [Key]
         public int id { get; set; }
         public string Producto { get; set; }
         public Nullable<int> Cantidad { get; set; }
@@ -27,5 +25,6 @@ namespace Facturar.Models
         public string telefono { get; set; }
         public string Estado { get; set; }
         public string TipoProducto { get; set; }
+        public string TipoServicio { get; set; }
     }
 }

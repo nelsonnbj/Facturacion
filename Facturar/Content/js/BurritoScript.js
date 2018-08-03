@@ -22,7 +22,7 @@
 
 
 
-        var productItem = '<tr><td>' + IdProducto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td>' + tipo +  '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+        var productItem = '<tr><td>' + IdProducto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + cliente + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo +  '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
         BurritoTableBody.append(productItem);
 
  
@@ -86,7 +86,10 @@ $("#SaveBurritos").click(function (e) {
 
     var orderArr = [];
     orderArr.length = 0;
-
+    var tipoServicio = "Comer Aqui"
+    if (document.getElementById("tipoServicioB").checked) {
+        tipoServicio="Empacar"
+    }
     $.each($("#BurritoTable tbody tr"), function () {
         orderArr.push({
             producto: $(this).find('td:eq(0)').html(),
@@ -95,12 +98,14 @@ $("#SaveBurritos").click(function (e) {
             nombre: $(this).find('td:eq(3)').html(),
             precio: $(this).find('td:eq(4)').html(),
             tipoproducto: $(this).find('td:eq(5)').html()
+         
         });
     });
 
 
     var data = JSON.stringify({
         name: "Burrito",
+        servicio: tipoServicio,
         address: $("#producto").val(),
         order: orderArr
     });

@@ -60,6 +60,7 @@
     <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
     <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="TipoProducto" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="TipoServicio" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Invetario">
     <Key>

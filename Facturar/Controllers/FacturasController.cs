@@ -21,7 +21,7 @@ namespace Facturar.Controllers
         {
             return View();
         }
-        public JsonResult SaveOrder(string name, Factura_Chimi_T[] order, string data)
+        public JsonResult SaveOrder(string name, Factura_Chimi_T[] order, string servicio)
         {
             string result = "Error! Orden No Completada!";
             if (name != null && order != null)
@@ -49,7 +49,9 @@ namespace Facturar.Controllers
                     Orden.fecha = DateTime.Now;
                     Orden.Estado = "Facturado";
                     Orden.TipoProducto = item.TipoProducto;
+                    Orden.TipoServicio = servicio;
                     db.Factura_Chimi_T.Add(Orden);
+                   
                 }
 
               

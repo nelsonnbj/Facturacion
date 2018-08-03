@@ -60,6 +60,7 @@
     <Property Name="telefono" Type="nvarchar" MaxLength="12" />
     <Property Name="Estado" Type="nvarchar" MaxLength="20" />
     <Property Name="TipoProducto" Type="char" MaxLength="10" />
+    <Property Name="TipoServicio" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Facturacion.dbo.Gastos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

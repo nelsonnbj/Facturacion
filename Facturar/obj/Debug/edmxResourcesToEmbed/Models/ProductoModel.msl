@@ -52,6 +52,7 @@
     <EntitySetMapping Name="Factura_Chimi_T">
       <EntityTypeMapping TypeName="FacturacionModel.Factura_Chimi_T">
         <MappingFragment StoreEntitySet="Factura_Chimi_T">
+          <ScalarProperty Name="TipoServicio" ColumnName="TipoServicio" />
           <ScalarProperty Name="TipoProducto" ColumnName="TipoProducto" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Producto" ColumnName="Producto" />

@@ -65,6 +65,7 @@
           <Property Name="telefono" Type="nvarchar" MaxLength="12" />
           <Property Name="Estado" Type="nvarchar" MaxLength="20" />
           <Property Name="TipoProducto" Type="char" MaxLength="10" />
+          <Property Name="TipoServicio" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Facturacion.dbo.Gastos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -233,6 +234,7 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
           <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="TipoProducto" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="TipoServicio" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Invetario">
           <Key>
@@ -360,6 +362,7 @@ warning 6002: The table/view 'Facturacion.dbo.Telefono' does not have a primary 
           <EntitySetMapping Name="Factura_Chimi_T">
             <EntityTypeMapping TypeName="FacturacionModel.Factura_Chimi_T">
               <MappingFragment StoreEntitySet="Factura_Chimi_T">
+                <ScalarProperty Name="TipoServicio" ColumnName="TipoServicio" />
                 <ScalarProperty Name="TipoProducto" ColumnName="TipoProducto" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Producto" ColumnName="Producto" />

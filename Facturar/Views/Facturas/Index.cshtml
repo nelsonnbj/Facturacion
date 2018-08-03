@@ -191,40 +191,50 @@
 
                                         </div>
                                     </div>
+                                    <hr />
 
                                 </div>
+    
+                                    <div class="row">
 
-                                <div class="row">
-                                    <div class="form-group">
+                                        <div class="form-group">
 
+                                            <div class="col-md-12">
+                                                <hr />
+                                                <table id="detailsTable" class="table col-md-4">
+                                                    <thead>
 
-                                        <table id="detailsTable" class="table col-md-4">
-                                            <thead>
+                                                        <tr>
 
-                                                <tr>
+                                                            <th style="width:30%">Producto</th>
+                                                            <th style="width:20%">Cantidad</th>
+                                                            <th style="width:30%">Comenatrio</th>
+                                                            <th style="width:15%">nombre</th>
+                                                            <th style="width:25%">Precio</th>
+                                                            <th style="width:25%" hidden>TipoProducto</th>
+                                                            <th style="width:10%"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
 
-                                                    <th style="width:30%">Producto</th>
-                                                    <th style="width:20%">Cantidad</th>
-                                                    <th style="width:30%">Comenatrio</th>
-                                                    <th style="width:15%">nombre</th>
-                                                    <th style="width:25%">Precio</th>
-                                                    <th style="width:25%">TipoProducto</th>
-                                                    <th style="width:10%"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody></tbody>
-                                        </table>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>
-                                                <button id="saveOrder" type="submit" class="btn btn-danger">Facturar</button>
                                             </div>
-                                        </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>
+                                                    <button id="saveOrder" type="submit" class="btn btn-danger">Facturar</button>
 
+                                                </div>
+                                                <div class="switch right">
+                                                    <label>Aqui<input type="checkbox" id="tipoServicio"><span class="lever switch-col-red"></span>Para Llevar</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
                             <b>Burritos</b>
                             <div class="body">
@@ -324,16 +334,21 @@
                                                     <th style="width:30%">Comenatrio</th>
                                                     <th style="width:15%">nombre</th>
                                                     <th style="width:25%">Precio</th>
-                                                    <th style="width:25%">TipoProducto</th>
+                                                    <th style="width:25%" hidden>TipoProducto</th>
                                                     <th style="width:10%"></th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
                                         </table>
+                                       
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>
                                                 <button id="SaveBurritos" type="submit" class="btn btn-danger">Facturar</button>
+
+                                            </div>
+                                            <div class="switch right">
+                                                <label>Aqui<input type="checkbox" id="tipoServicioB"><span class="lever switch-col-red"></span>Para Llevar</label>
                                             </div>
                                         </div>
 

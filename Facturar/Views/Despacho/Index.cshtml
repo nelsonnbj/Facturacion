@@ -42,10 +42,7 @@
                                         </th>
                                         <th>
                                             @Html.DisplayNameFor(model => model.Cantidad)
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.Precio)
-                                        </th>
+                                        </th>                                      
                                         <th>
                                             @Html.DisplayNameFor(model => model.comenatrio)
                                         </th>
@@ -54,9 +51,12 @@
                                         </th>
                                         <th>
                                             @Html.DisplayNameFor(model => model.nombre)
-                                        </th>                                 
+                                        </th>
                                         <th>
                                             @Html.DisplayNameFor(model => model.Estado)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.TipoServicio)
                                         </th>
                                         <th>Cambiar Estado</th>
                                         <th></th>
@@ -64,64 +64,73 @@
 
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Producto)
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Producto)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Cantidad)
+                                        </td>                                        
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.comenatrio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Ticket)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.nombre)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Estado)
+                                        </td>
+                                        @if (item.TipoServicio == "Empacar")
+                                        {
+                                            <td style="color:red">
+                                                @Html.DisplayFor(modelItem => item.TipoServicio)
                                             </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Cantidad)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Precio)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.comenatrio)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Ticket)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.nombre)
-                                            </td>                                           
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Estado)
-                                            </td>
-                                            <td>
+                                        }
+                                        else
+                                        {
+                                        <td >
+                                            @Html.DisplayFor(modelItem => item.TipoServicio)
+                                        </td>
+                                        }
+                                        <td>
 
 
-                                                @*@if (item.Estado == "Despachado")
-                                                {
-                                                    <div class="col-sm-3">
+                                            @*@if (item.Estado == "Despachado")
+            {
+                <div class="col-sm-3">
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+                    <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
 
-                                                            <label><input type="checkbox" id="despachoCHB" checked disabled><span class="lever switch-col-green"></span></label>
-                                                        </div>
-                                                    </div>
-                                                }
-                                                @if (item.Estado == "Cancelado")
-                                                {
-                                                    <div class="col-sm-3">
+                        <label><input type="checkbox" id="despachoCHB" checked disabled><span class="lever switch-col-green"></span></label>
+                    </div>
+                </div>
+            }
+            @if (item.Estado == "Cancelado")
+            {
+                <div class="col-sm-3">
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+                    <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
 
-                                                            <label><input type="checkbox" data-id="@item.id" id="despachoCHB" checked><span class="lever switch-col-red"></span></label>
-                                                        </div>
-                                                    </div>
-                                                }*@
-                                            
-                                                    <div class="col-sm-3">
+                        <label><input type="checkbox" data-id="@item.id" id="despachoCHB" checked><span class="lever switch-col-red"></span></label>
+                    </div>
+                </div>
+            }*@
 
-                                                        <div class="switch" id="despachar" data-request-url="@Url.Action("Cambio", "Despacho", new { id = item.id })">
+                                            <div class="col-sm-3">
 
-                                                            <label><input type="checkbox" data-id="@item.id" id="despacho"><span class="lever switch-col-green"></span></label>
-                                                        </div>
-                                                    </div>
-                                            
+                                                <div class="switch" id="despachar" data-request-url="@Url.Action("Cambio", "Despacho", new { id = item.id })">
 
-                                            </td>
-                                           
-                                        </tr>
+                                                    <label><input type="checkbox" data-id="@item.id" id="despacho"><span class="lever switch-col-green"></span></label>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+
+                                    </tr>
                                     }
 
                                 </table>
