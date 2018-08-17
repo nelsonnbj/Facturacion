@@ -36,7 +36,19 @@ $(function () {
 
 //These codes takes from http://t4t5.github.io/sweetalert/
 function showBasicMessage() {
-    swal("Here's a message!");
+    var l = document.getElementById("Total").innerHTML;
+    console.log(l);
+    swal({
+        title: l,
+    
+        type: "input",
+     
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ok",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    });
 }
 
 function showWithTitleMessage() {
@@ -48,8 +60,10 @@ function showSuccessMessage() {
 }
 
 function showConfirmMessage() {
+   
     swal({
-        title: "Are you sure?",
+
+        title:"sf",
         text: "You will not be able to recover this imaginary file!",
         type: "warning",
         showCancelButton: true,

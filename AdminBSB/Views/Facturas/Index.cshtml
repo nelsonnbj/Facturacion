@@ -200,10 +200,12 @@
 
                                         </div>
 
-                                        <div class="row">
+                                        <div class="row clearfix js-sweetalert">
                                             <div class="col-md-4">
-                                                <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>
-                                                <button id="saveOrder" type="submit" class="btn btn-danger">Facturar</button>
+                                                <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>                                          
+                                                  
+                                                    <button type="submit" class="btn btn-primary waves-effect" data-type="basic">Facturar</button>
+                                                 @*<button id="saveOrder" type="submit" class="btn btn-danger">Facturar</button>*@
 
                                             </div>
                                             <div class="switch right">
@@ -411,6 +413,49 @@
     </div>
 </div>
 
+       </div>
+<div class="body">
+    <div class="row clearfix js-sweetalert">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>A basic message</p>
+            <button class="btn btn-primary waves-effect" data-type="basic">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>A title with a text under</p>
+            <button class="btn btn-primary waves-effect" data-type="with-title">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>A success message!</p>
+            <button class="btn btn-primary waves-effect" data-type="success">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>A warning message, with a function attached to the <b>Confirm</b> button...</p>
+            <button class="btn btn-primary waves-effect" data-type="confirm">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>... and by passing a parameter, you can execute something else for <b>Cancel</b>.</p>
+            <button class="btn btn-primary waves-effect" data-type="cancel">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>A message with a custom icon</p>
+            <button class="btn btn-primary waves-effect" data-type="with-custom-icon">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>An HTML message</p>
+            <button class="btn btn-primary waves-effect" data-type="html-message">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>A message with auto close timer</p>
+            <button class="btn btn-primary waves-effect" data-type="autoclose-timer">CLICK ME</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <p>A replacement for the <b>prompt</b> function</p>
+            <button class="btn btn-primary waves-effect" data-type="prompt">CLICK ME</button>
+        </div>
+     
+    </div>
+</div>
+
 @*////////////////////////Modal/////////////////////*@
 
 <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
@@ -452,7 +497,28 @@
 </div>
 
 @section scripts{
-   
+
     <script src="~/CodeTamplate/FacturacionScript.js"></script>
     <script src="~/CodeTamplate/BurritoScript.js"></script>
+
+
+    <!-- Jquery Core Js -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.js"></script>
+    <!-- Select Plugin Js -->
+    <script src="~/Content/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/Content/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- Bootstrap Notify Plugin Js -->
+    <script src="~/Content/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/Content/plugins/node-waves/waves.js"></script>
+    <!-- SweetAlert Plugin Js -->
+    <script src="~/Content/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- Custom Js -->
+    <script src="~/Content/js/admin.js"></script>
+    <script src="~/Content/js/pages/ui/dialogs.js"></script>
+    <!-- Demo Js -->
+    <script src="~/Content/js/demo.js"></script>
 }
