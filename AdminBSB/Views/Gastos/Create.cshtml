@@ -1,0 +1,103 @@
+﻿@model AdminBSB.Models.Gastos
+
+@using (Html.BeginForm("Create", "Gastos", FormMethod.Post))
+{
+    <section>
+
+        <!-- #END# Masked Input -->
+        <!-- Input Group -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Registrar Gastos
+                        </h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+
+                        <div class="row clearfix">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">person</i>
+                                    </span>
+                                    <div class="form-line">
+                                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", placeholder = "Nombre" })
+                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">send</i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="input-group-addon">$</span>
+                                    </span>
+                                    <div class="form-line">
+                                        @*<input type="text" class="form-control date" placeholder="Recipient's username">*@
+                                        @Html.TextBoxFor(model => model.Precio, new { @class = "form-control", placeholder = "Monto" })
+                                        @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="input-group-addon">
+                                        <span class="input-group-addon">.00</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">date_range</i>
+                                    </span>
+                                    <div class="form-line">
+                                        @*<input type="text" class="form-control date" placeholder="Recipient's username">*@
+                                        @Html.TextBoxFor(model => model.Fecha, new { @class = "datepicker form-control", placeholder = "Fecha" })
+                                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="input-group-addon">
+                                        <i class="material-icons">send</i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <div class="form-line">
+                                        @*<input type="text" class="form-control date" placeholder="Message">*@
+                                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control", placeholder = "Descripcion", type = "text" })
+                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-offset-2 col-md-6 row">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+}
+

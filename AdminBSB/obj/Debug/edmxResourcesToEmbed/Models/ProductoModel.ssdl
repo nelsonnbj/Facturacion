@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FacturacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Detalle_Factura">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdProducto" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+    <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Detalle_Factura_T">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdProducto" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Precio" Type="int" Nullable="false" />
+    <Property Name="comenatrio" Type="nvarchar" MaxLength="100" />
+    <Property Name="Ticket" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="20" />
+    <Property Name="fecha" Type="datetime" />
+    <Property Name="telefono" Type="nvarchar" MaxLength="12" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="20" />
+    <Property Name="TipoProducto" Type="char" MaxLength="10" />
+    <Property Name="TipoServicio" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Gastos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Gastos_Diario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Invetario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="20" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_producto" Type="nvarchar" MaxLength="20" />
+    <Property Name="Precio" Type="int" />
+    <Property Name="TipoProducto" Type="char" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_Factura_Chimi_ProductoChimi">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="Detalle_Factura" Type="Self.Detalle_Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Detalle_Factura">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SP_Generar_Turno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="servicio" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="FacturacionModelStoreContainer">
+    <EntitySet Name="Detalle_Factura" EntityType="Self.Detalle_Factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detalle_Factura_T" EntityType="Self.Detalle_Factura_T" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gastos" EntityType="Self.Gastos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gastos_Diario" EntityType="Self.Gastos_Diario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invetario" EntityType="Self.Invetario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Factura_Chimi_ProductoChimi" Association="Self.FK_Factura_Chimi_ProductoChimi">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Detalle_Factura" EntitySet="Detalle_Factura" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

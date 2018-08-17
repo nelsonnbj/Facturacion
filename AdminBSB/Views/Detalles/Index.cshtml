@@ -1,0 +1,180 @@
+﻿@model List<AdminBSB.ViewModels.DetalleVM>
+
+@{
+    var error = ViewBag.Error;
+    var editado = ViewBag.Editado;
+}
+
+@*///////////////////////////////////////////////////////////////vista/////////////////////*@
+
+
+
+<div class="row clearfix">
+
+    @*////////Label Para Identificar el area/////////////*@
+
+    <!-- Task Info -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+
+                <h2>Detalle de Facturas</h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="body">
+                <!-- Nav tabs -->
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
+
+                        <div class="body">
+                            @using (Html.BeginForm("Index", "Detalles", FormMethod.Get))
+                            {
+                                <div class="form-inline ">
+
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" name="Codigo" placeholder="Tickect" id="codigo">
+                                        @*@Html.DropDownList("empresa", ViewBag.Empresa as SelectList, "--Seleccionar Empresa", new { @class = "form-control", id = "empresa" })*@
+
+                                        <button id="buscarempleado" class="btn btn-primary" type="submit">Buscar</button>
+                                        <hr />
+                                    </div>
+                                </div>
+                                <label id="error" val="" hidden>@error</label>
+
+                                <table id="myDatatable" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <tr>
+
+                                        <th>
+                                            Producto
+                                        </th>
+                                        <th>
+                                            Cantidad
+                                        </th>
+                                        <th>
+                                            Precio
+                                        </th>
+                                        <th>
+                                            comenatrio
+                                        </th>
+                                        <th>
+                                            Ticket
+                                        </th>
+
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>Cambiar Estado</th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var a in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                @a.Nombre_producto
+                                            </td>
+                                            <td>
+                                                @a.Cantidad
+                                            </td>
+                                            <td>
+                                                @a.Precio
+                                            </td>
+                                            <td>
+                                                @a.Comentario
+                                            </td>
+                                            <td>
+                                                @a.Ticket
+                                            </td>
+                                            <td>
+                                                @a.Estado
+                                            </td>
+
+                                            <td>
+
+                                                @if (a.Estado == "Despachado")
+                                                {
+                                                    <div class="col-sm-3">
+
+                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = a.id })">
+
+                                                            <label><input type="checkbox" id="checkbo" checked disabled><span class="lever switch-col-green"></span></label>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (a.Estado == "Cancelado")
+                                                {
+
+                                                    <div class="col-sm-3">
+
+                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = a.id })">
+
+                                                            <label><input type="checkbox" data-id="@a.id" id="checkbo" checked><span class="lever switch-col-red"></span></label>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                @if (a.Estado == "Facturado")
+                                                {
+                                                    <div class="col-sm-3">
+
+                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = a.id })">
+
+                                                            <label><input type="checkbox" data-id="@a.id" id="checkbo"><span class="lever switch-col-red"></span></label>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                @if (a.Estado == "Despachado")
+                                                {
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#myModal" class="btnEditar btn-link btn-info" data-toggle="modal" data-id="@a.id"><i class="glyphicon glyphicon-pencil"></i></a>
+
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title" id="myModalLabel">Editar Pedido</h4>
+            </div>
+            <div class="modal-body">
+                <div id="modal-content">
+                    cargando.....
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

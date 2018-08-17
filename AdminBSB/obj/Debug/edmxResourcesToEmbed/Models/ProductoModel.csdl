@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FacturacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Detalle_Factura">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProducto" Type="Int32" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Precio" Type="Int32" />
+    <Property Name="comenatrio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Factura_Chimi_ProductoChimi" FromRole="Detalle_Factura" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Detalle_Factura_T">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Int32" Nullable="false" />
+    <Property Name="comenatrio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TipoProducto" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="TipoServicio" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Gastos">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Gastos_Diario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Invetario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_producto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Int32" />
+    <Property Name="TipoProducto" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Detalle_Factura" Relationship="Self.FK_Factura_Chimi_ProductoChimi" FromRole="Producto" ToRole="Detalle_Factura" />
+  </EntityType>
+  <Association Name="FK_Factura_Chimi_ProductoChimi">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+    <End Role="Detalle_Factura" Type="Self.Detalle_Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Detalle_Factura">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FacturacionEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Detalle_Factura" EntityType="Self.Detalle_Factura" />
+    <EntitySet Name="Detalle_Factura_T" EntityType="Self.Detalle_Factura_T" />
+    <EntitySet Name="Gastos" EntityType="Self.Gastos" />
+    <EntitySet Name="Gastos_Diario" EntityType="Self.Gastos_Diario" />
+    <EntitySet Name="Invetario" EntityType="Self.Invetario" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <AssociationSet Name="FK_Factura_Chimi_ProductoChimi" Association="Self.FK_Factura_Chimi_ProductoChimi">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Detalle_Factura" EntitySet="Detalle_Factura" />
+    </AssociationSet>
+    <FunctionImport Name="SP_Generar_Turno" ReturnType="Collection(String)">
+      <Parameter Name="servicio" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

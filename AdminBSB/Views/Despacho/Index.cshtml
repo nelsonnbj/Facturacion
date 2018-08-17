@@ -1,0 +1,146 @@
+﻿@model List<AdminBSB.ViewModels.DetalleVM>
+
+<div class="row clearfix">
+
+    @*////////Label Para Identificar el area/////////////*@
+
+    <!-- Task Info -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header">
+
+                <h2>Despacho de Pedidos</h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="body">
+                <!-- Nav tabs -->
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
+
+                        <div class="body">
+                            @using (Html.BeginForm("Detalles", "Detalles", FormMethod.Get))
+                            {
+
+
+                                <table id="myDatatable" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                    <tr>
+                                        <th>
+                                            Producto
+                                        </th>
+                                        <th>
+                                            Cantidad
+                                        </th>
+                                        <th>
+                                            Comentario
+                                        </th>
+                                        <th>
+                                            Ticket
+                                        </th>
+
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            TipoServicio
+                                        </th>
+                                        <th>Cambiar Estado</th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Nombre_producto
+                                            </td>
+                                            <td>
+                                                @item.Cantidad
+                                            </td>
+                                            <td>
+                                                @item.Comentario
+                                            </td>
+                                            <td>
+                                                @item.Ticket
+                                            </td>
+                                            <td>
+                                                @item.Estado
+                                            </td>
+                                            @if (item.TipoServicio == "Empacar")
+                                            {
+                                                <td style="color:red">
+                                                    @item.TipoServicio
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @item.TipoServicio
+                                                </td>
+                                            }
+                                            <td>
+
+
+                                                @*@if (item.Estado == "Despachado")
+                                                    {
+                                                        <div class="col-sm-3">
+
+                                                            <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+
+                                                                <label><input type="checkbox" id="despachoCHB" checked disabled><span class="lever switch-col-green"></span></label>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    @if (item.Estado == "Cancelado")
+                                                    {
+                                                        <div class="col-sm-3">
+
+                                                            <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
+
+                                                                <label><input type="checkbox" data-id="@item.id" id="despachoCHB" checked><span class="lever switch-col-red"></span></label>
+                                                            </div>
+                                                        </div>
+                                                    }*@
+
+                                                <div class="col-sm-3">
+
+                                                    <div class="switch" id="despachar" value="@item.id" data-request-url="@Url.Action("Cambio", "Despacho", new { id = item.id })">
+
+                                                        <label><input type="checkbox" data-id="@item.id" id="despacho"><span class="lever switch-col-green"></span></label>
+                                                    </div>
+                                                </div>
+
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script src=@Url.Content("~/CodeTamplate/DespachoScript.js")></script>
+}

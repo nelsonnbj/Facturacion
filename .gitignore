@@ -1,2 +1,12 @@
 
 debug\.log
+
+\.vs/Facturar/v15/Server/sqlite3/storage\.ide
+
+\.vs/Facturar/v15/Server/sqlite3/storage\.ide-shm
+
+\.vs/Facturar/v15/Server/sqlite3/storage\.ide-wal
+
+Facturar/obj/Debug/Facturar\.csproj\.CoreCompileInputs\.cache
+
+Facturar/obj/Debug/DesignTimeResolveAssemblyReferencesInput\.cache
