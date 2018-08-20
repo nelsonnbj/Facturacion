@@ -116,9 +116,9 @@
 
                                                 <div class="col-sm-3">
 
-                                                    <div class="switch" id="despachar" value="@item.id" data-request-url="@Url.Action("Cambio", "Despacho", new { id = item.id })">
-
-                                                        <label><input type="checkbox" data-id="@item.id" id="despacho"><span class="lever switch-col-green"></span></label>
+                                                    <div class="switch">
+                                                        <a id="btnAgregarMeta" class="btn btn-danger popup" href="@Url.Action("Cambio", "Despacho",new {id=item.id, codigo=item.Estado})">Despachar</a>
+                                                       @* <label><input  id="despachar" type="checkbox" data-request-url="@Url.Action("Cambio", "Despacho",new {id= @item.id})"><span class="lever switch-col-green"></span></label>*@
                                                     </div>
                                                 </div>
 

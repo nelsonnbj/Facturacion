@@ -41,16 +41,12 @@ namespace AdminBSB.Controllers
 
             var chimi = db.Detalle_Factura_T.Where(x => x.id == id).FirstOrDefault();
 
-            if (Codigo == "Despachado")
+            if (Codigo == "Facturado")
             {
                 chimi.Estado = "Despachado";
 
             }
-
-            else
-            {
-                chimi.Estado = "Facturado";
-            }
+         
 
             db.Entry(chimi).State = EntityState.Modified;
             db.SaveChanges();

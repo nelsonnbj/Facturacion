@@ -10,3 +10,5 @@ debug\.log
 Facturar/obj/Debug/Facturar\.csproj\.CoreCompileInputs\.cache
 
 Facturar/obj/Debug/DesignTimeResolveAssemblyReferencesInput\.cache
+
+*.cache
