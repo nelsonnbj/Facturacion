@@ -6,45 +6,56 @@
 
 
 <div id="ocultar1">
-    <h2>Facturacion</h2>
-    <div class="row clearfix">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div class="info-box bg-cyan hover-expand-effect">
-                <div class="icon">
-                    <i class="material-icons">shopping_cart</i>
-                </div>
-                <div class="content">
-                    <div class="text"><h4>Chimi</h4></div>
-                    <h4><label value="5" id="Chimi" typeof="Int">0</label></h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-cyan hover-expand-effect">
-                <div class="icon">
-                    <i class="material-icons">shopping_cart</i>
-                </div>
-                <div class="content">
-                    <div class="text"><h4>Burritos</h4></div>
-                    <h4><label value="5" id="Burritos" typeof="Int">0</label></h4>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <div class="info-box bg-pink hover-expand-effect">
-                <div class="icon">
-                    <i class="material-icons">monetization_on</i>
-                </div>
-                <div class="content">
-                    <div class="text"><h4>Total</h4></div>
-                    <h4><label value="5" id="Total" typeof="Int"></label></h4>
-
-                </div>
-            </div>
+    <div class="card">
+        <div class="header">
+            <h2>Facturacion</h2><hr />
         </div>
+        <div class="clearfix">
+            <a class="" data-toggle="modal" data-target="#ModalCalculo" onclick="calculo1()">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">shopping_cart</i>
+                        </div>
+                        <div class="content">
+                            <div class="text"><h4>Chimi</h4></div>
+                            <h4><label value="5" id="Chimi" typeof="Int">0</label></h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="" data-toggle="modal" data-target="#ModalCalculo" onclick="calculo2()">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">shopping_cart</i>
+                        </div>
+                        <div class="content">
+                            <div class="text"><h4>Burritos</h4></div>
+                            <h4><label value="5" id="Burritos" typeof="Int">0</label></h4>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="" data-toggle="modal" data-target="#ModalCalculo" onclick="calculo3()">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">monetization_on</i>
+                        </div>
+                        <div class="content">
+                            <div class="text"><h4>Total</h4></div>
+                            <h4><label value="5" id="Total" typeof="Int"></label></h4>
 
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
     </div>
+
 
 
     @*///////////////////////////////////////////////////////////////vista/////////////////////*@
@@ -171,45 +182,37 @@
                                         </div>
                                     </div>
                                     <hr />
-
                                 </div>
 
-                                <div class="row">
-
+                                <div class="row" id="tablaPricipal" hidden>
                                     <div class="form-group">
+                                        <table id="detailsTable" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:30%">Producto</th>
+                                                    <th style="width:20%">Cantidad</th>
+                                                    <th style="width:30%">Comenatrio</th>
+                                                    <th style="width:25%">Precio</th>
+                                                    <th style="width:25%" hidden>TipoProducto</th>
+                                                    <th style="width:10%" hidden>IdProducto</th>
+                                                    <th style="width:10%"></th>
 
-                                        <div class="col-md-12">
-                                            <hr />
-                                            <table id="detailsTable" class="table col-md-4">
-                                                <thead>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
 
-                                                    <tr>
 
-                                                        <th style="width:30%">Producto</th>
-                                                        <th style="width:20%">Cantidad</th>
-                                                        <th style="width:30%">Comenatrio</th>
-                                                        <th style="width:25%">Precio</th>
-                                                        <th style="width:25%" hidden>TipoProducto</th>
-                                                        <th style="width:10%" hidden>IdProducto</th>
-                                                        <th style="width:10%"></th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
 
-                                        </div>
-
-                                        <div class="row clearfix js-sweetalert">
+                                        <div class="row">
                                             <div class="col-md-4">
-                                                <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpiar()">Cancelar</button>                                          
-                                                  
-                                                    <button type="submit" class="btn btn-primary waves-effect" data-type="basic">Facturar</button>
-                                                 @*<button id="saveOrder" type="submit" class="btn btn-danger">Facturar</button>*@
+                                                <button type="reset" class="btn btn-default" data-dismiss="modal" onclick="limpia()">Cancelar</button>
+                                                <button id="SaveBurritos" type="submit" class="btn btn-danger">Facturar</button>
 
                                             </div>
                                             <div class="switch right">
-                                                <label>Aqui<input type="checkbox" id="tipoServicio"><span class="lever switch-col-red"></span>Para Llevar</label>
+                                                <label>Aqui<input type="checkbox" id="tipoServicioB"><span class="lever switch-col-red"></span>Para Llevar</label>
                                             </div>
                                         </div>
 
@@ -306,9 +309,9 @@
 
                                 </div>
 
-                                <div class="row">
+                                <div class="row" id="tablaSegundaria" hidden>
                                     <div class="form-group">
-                                        <table id="BurritoTable" class="table col-md-4">
+                                        <table id="BurritoTable" class="table table-bordered table-striped table-hover dataTable js-exportable">
                                             <thead>
                                                 <tr>
                                                     <th style="width:30%">Producto</th>
@@ -412,51 +415,7 @@
         </div>
     </div>
 </div>
-
-       </div>
-<div class="body">
-    <div class="row clearfix js-sweetalert">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>A basic message</p>
-            <button class="btn btn-primary waves-effect" data-type="basic">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>A title with a text under</p>
-            <button class="btn btn-primary waves-effect" data-type="with-title">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>A success message!</p>
-            <button class="btn btn-primary waves-effect" data-type="success">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>A warning message, with a function attached to the <b>Confirm</b> button...</p>
-            <button class="btn btn-primary waves-effect" data-type="confirm">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>... and by passing a parameter, you can execute something else for <b>Cancel</b>.</p>
-            <button class="btn btn-primary waves-effect" data-type="cancel">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>A message with a custom icon</p>
-            <button class="btn btn-primary waves-effect" data-type="with-custom-icon">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>An HTML message</p>
-            <button class="btn btn-primary waves-effect" data-type="html-message">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>A message with auto close timer</p>
-            <button class="btn btn-primary waves-effect" data-type="autoclose-timer">CLICK ME</button>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <p>A replacement for the <b>prompt</b> function</p>
-            <button class="btn btn-primary waves-effect" data-type="prompt">CLICK ME</button>
-        </div>
-     
-    </div>
-</div>
-
-@*////////////////////////Modal/////////////////////*@
+@*////////////////////////Modal de Ingrediente/////////////////////*@
 
 <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -496,7 +455,45 @@
     </div>
 </div>
 
+@*////////////////////////Modal de Calculo/////////////////////*@
+
+<div class="modal fade" id="ModalCalculo" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-line center">
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-offset-4">
+                            <h2><label color="red">Total a Pagar:</label> </h2><h2 class="card-inside-title center" id="cantida" color="red"></h2><br />
+                        </div>
+                    </div>
+
+
+
+                    <h2><label>Efectivo:</label> </h2>  <input type="text" class="form-control" placeholder="Comentario" id="Comentari" value="" />
+
+                    <h2><label color="red">Total a Devolver:</label> </h2><h2 class="card-inside-title center" id="cambio" color="red"></h2><br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-block btn-lg bg-red waves-effect" data-dismiss="modal" onclick="clearCalculo()">Cerrar</button>
+                        </div>
+                    </div><br />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@section style{
+
+    <link href="~/Content/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+}*@
 @section scripts{
+
+
 
     <script src="~/CodeTamplate/FacturacionScript.js"></script>
     <script src="~/CodeTamplate/BurritoScript.js"></script>

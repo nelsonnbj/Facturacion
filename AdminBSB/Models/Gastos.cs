@@ -11,13 +11,18 @@ namespace AdminBSB.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Gastos
     {
         public int id { get; set; }
+       [Required(ErrorMessage ="Favor Completar el Campo de {0}")]
         public string Descripcion { get; set; }
+        [Required(ErrorMessage = "Favor Colocar el {0}")]
         public Nullable<int> Precio { get; set; }
+        [Required(ErrorMessage = "Favor Colocar la  {0}")]
         public Nullable<System.DateTime> Fecha { get; set; }
+        [Required(ErrorMessage = "Favor Completar  Campo  {0}")]
         public string Nombre { get; set; }
     }
 }

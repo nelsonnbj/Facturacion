@@ -22,7 +22,8 @@
             var IdProducto = data.id;
             var productItem = '<tr><td>' + IdProducto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo + '</td><td hidden>' + IdProducto + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
             BurritoTableBody.append(productItem);
-
+            ///////////////////////Muestra la tabla de pedidos//////////
+            document.getElementById("tablaSegundaria").hidden = false;
 
             ////////////////////////////Calcula el Total de Burrito///////////
 
@@ -120,6 +121,7 @@ $("#SaveBurritos").click(function (e) {
 
 ////////Metodo que actualiza la Tabla y los Montos////////////
 function limpiar() {
+    document.getElementById("tablaSegundaria").hidden = true;
     $('#BurritoTable tbody').children().remove();
 
     menos = document.getElementById("Burritos").innerHTML;

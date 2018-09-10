@@ -54,7 +54,7 @@
                                 </div>
                                 <label id="error" val="" hidden>@error</label>
 
-                                <table id="myDatatable" class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                <table id="myDatatable" class="table table-bordered table-striped table-hover dataTable js-exportable">
                                     <tr>
 
                                         <th>
@@ -107,11 +107,11 @@
 
                                                 @if (a.Estado == "Despachado")
                                                 {
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-3" dissable>
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = a.id })">
-
-                                                            <label><input type="checkbox" id="checkbo" checked disabled><span class="lever switch-col-green"></span></label>
+                                                        <div class="switch" style="width:75%;">
+                                                            <a id="btnAgregarMeta" class="btn btn-success">Despachado</a>
+                                                           @* <label><input type="checkbox" id="checkbo" checked disabled><span class="lever switch-col-green"></span></label>*@
                                                         </div>
                                                     </div>
                                                 }
@@ -120,9 +120,9 @@
 
                                                     <div class="col-sm-3">
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = a.id })">
-
-                                                            <label><input type="checkbox" data-id="@a.id" id="checkbo" checked><span class="lever switch-col-red"></span></label>
+                                                        <div class="switch">
+                                                            <a id="btnAgregarMeta" class="btn btn-danger popup" href="@Url.Action("Detalle", "Detalles", new {id=a.id, estatus=a.Estado,codigo=a.Ticket})">Reativar</a>
+                                                            @*<label><input type="checkbox" data-id="@a.id" id="checkbo" checked><span class="lever switch-col-red"></span></label>*@
                                                         </div>
                                                     </div>
                                                 }
@@ -130,9 +130,9 @@
                                                 {
                                                     <div class="col-sm-3">
 
-                                                        <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = a.id })">
-
-                                                            <label><input type="checkbox" data-id="@a.id" id="checkbo"><span class="lever switch-col-red"></span></label>
+                                                        <div class="switch" id="agregar" >
+                                                            <a id="btnAgregarMeta" class="btn btn-primary active popup" href="@Url.Action("Detalle", "Detalles", new {id=a.id, estatus=a.Estado, codigo=a.Ticket})">Cancelar</a>
+                                                           @* <label><input type="checkbox" data-id="@a.id" id="checkbo"><span class="lever switch-col-red"></span></label>*@
                                                         </div>
                                                     </div>
                                                 }

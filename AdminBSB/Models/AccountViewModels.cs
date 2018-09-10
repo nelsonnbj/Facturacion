@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdminBSB.Models
 {
+
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

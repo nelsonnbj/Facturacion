@@ -35,13 +35,13 @@ namespace AdminBSB.Controllers
         {
             try
             {
-                Gastos modelo = new Gastos();
+                Gastos_Diario modelo = new Gastos_Diario();
 
                 modelo.Nombre = gastos.Nombre;
                 modelo.Precio = gastos.Precio;
                 modelo.Descripcion = gastos.Descripcion;
                 modelo.Fecha = gastos.Fecha;
-                db.Gastos.Add(modelo);
+                db.Gastos_Diario.Add(modelo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

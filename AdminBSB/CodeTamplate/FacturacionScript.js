@@ -62,16 +62,16 @@ $("#Hambuerger_pierna").click(function () {
 
 $("#areaBurritos").click(function () {
     document.getElementById("AreaBurrito").innerHTML = "areaBurritos";
-
+    document.getElementById("producto").value = "";
 });
 
 $("#areaChimi").click(function () {
     document.getElementById("AreaBurrito").innerHTML = "";
-
+    document.getElementById("producto").value = "";
 });
+
 $("#addToList").click(function (e) {
     e.preventDefault();
-
 
     if ($.trim(document.getElementById("producto").value) === "" || $.trim(document.getElementById("cantidad").value) === "") return;
 
@@ -93,6 +93,8 @@ $("#addToList").click(function (e) {
 
             var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo + '</td><td hidden>' + IdProducto + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
             detailsTableBody.append(productItem);
+            ///////////////////////Muestra la tabla de pedidos//////////
+            document.getElementById("tablaPricipal").hidden=false;
 
 
             ////////////////////////////Calcula el Total de Chimi///////////
@@ -164,8 +166,8 @@ function saveOrder(data) {
         //    alert("Error!")
         //}
     });
-
 }
+
 //Collect Multiple Order List For Pass To Controller
 $("#saveOrder").click(function (e) {
     e.preventDefault();
@@ -203,9 +205,8 @@ $("#saveOrder").click(function (e) {
     });
 
     alertify.success("Pedido Facturado");
-
-    ////////Metodo que actualiza la Tabla y los Montos////////////
-    $('#detailsTable tbody').children().remove();
+    limpia()
+   
 
 
     menos = document.getElementById("Chimi").innerHTML;
@@ -215,9 +216,10 @@ $("#saveOrder").click(function (e) {
 });
 
 
-function limpiar() {
-
-
+    ////////Metodo que actualiza la Tabla y los Montos////////////
+function limpia() {
+    document.getElementById("tablaPricipal").hidden = true;
+    $('#detailsTable tbody').children().remove();
     menos = document.getElementById("Chimi").innerHTML;
     totales = document.getElementById("Total").innerHTML;
     document.getElementById("Chimi").innerHTML = 0;
@@ -348,23 +350,23 @@ $("#cantidad").change(function () {
 });
 //////////////////////Cambia el estatus del pedido//////////
 //$(':checkbox[type=checkbox]').on("click", function ()
-$(':checkbox[type=checkbox]').on("click", function () {
-    if (document.getElementById("checkbo").checked) {
-        var url = $('#agregar').data('request-url');
-        $.post(url, { Codigo: "cancelado" });
-        var int = self.setInterval("refresh()", 1000);
-    }
+//$(':checkbox[type=checkbox]').on("click", function () {
+//    if (document.getElementById("checkbo").checked) {
+//        var url = $('#agregar').data('request-url');
+//        $.post(url, { Codigo: "cancelado" });
+//        var int = self.setInterval("refresh()", 1000);
+//    }
 
-    else {
-        var url = $('#agregar').data('request-url');
-        $.post(url, { Codigo: "activado" });
-        var int = self.setInterval("refresh()", 1000);
-    }
-});
+//    else {
+//        var url = $('#agregar').data('request-url');
+//        $.post(url, { Codigo: "activado" });
+//        var int = self.setInterval("refresh()", 1000);
+//    }
+//});
 
-function refresh() {
-    location.reload(true);
-}
+//function refresh() {
+//    location.reload(true);
+//}
 /////////////////////////Identificar el area de maestro detalle//////////
 var detalle = $("#detalles").val();
 if (detalle == "") {
@@ -383,71 +385,32 @@ $(".btnEditar").click(function (eve) {
 function imprimir() {
     window.print;
 };
-//$(function () {
-//    //Textare auto growth
-//    autosize($('textarea.auto-growth'));
-
-//    //Datetimepicker plugin
-//    $(".datetimepicker").bootstrapMaterialDatePicker({
-//        format: 'dddd DD MMMM YYYY - HH:mm',
-//        clearButton: true,
-//        weekStart: 1
-//    });
-//});
-
-/////////////////vista Editar////////////////////////
-
-//function Editar() {
-//    document.getElementById("Producto").innerHTML;
-//    document.getElementById("Cantidad").innerHTML;
-//    document.getElementById("Precio").innerHTML;
-//    document.getElementById("nombre").innerHTML;
-//    document.getElementById("Ticket").innerHTML;
-//    document.getElementById("comenatrio").innerHTML;
-//    document.getElementById("id").innerHTML;
-
-//    var url = $('#editar').data('request-url');
-//    $.post(url, {
-//        id: document.getElementById("id").innerHTML,
-//        Producto: document.getElementById("Producto").innerHTML,
-//        Cantidad: document.getElementById("Cantidad").innerHTML,
-//        Precio:document.getElementById("Precio").innerHTML,
-//        nombre:document.getElementById("nombre").innerHTML,
-//        Ticket: document.getElementById("Ticket").innerHTML,
-//        comenatrio: document.getElementById("comenatrio").innerHTML
-
-//    }, function (data) { });
 
 
-//}
-//var editado = $("#editado").val();
-//document.getElementById("codigo").value = editado;
+////////////Metodo que calcula el cambio a devolver/////////////
+function calculo1() {
+    var monto= document.getElementById("Chimi").innerHTML;
+    document.getElementById("cantida").innerHTML = monto;
+}
 
-//if (editado != "") {
-//    if (editado != "") {
-//        Back()
-//        //$("#buscarempleado").click();
-//    }
+function calculo2() {
+    var monto = document.getElementById("Burritos").innerHTML;
+    document.getElementById("cantida").innerHTML = monto;
+}
+function calculo3() {
+    var monto = document.getElementById("Total").innerHTML;
+    document.getElementById("cantida").innerHTML = monto;
+}
 
-//    function Back() {
+$("#Comentari").change(function () {
 
-//        javascript: history.back(1);
+    var pago = document.getElementById("cantida").innerHTML;
+    var montos = document.getElementById("Comentari").value;
+    var total = parseInt(montos) - parseInt(pago)
+    document.getElementById("cambio").innerHTML = total;
+});
 
-//    }
-//}
-
-//var editado = document.getElementById("editados").value;
-//document.getElementById("codigo").value = editado;
-
-//if (editado != "") {
-//    if (editado != "") {
-
-//        //$("#buscarempleado").click();
-//    }
-
-//    function Back() {
-
-//        javascript: history.back(1);
-
-//    }
-//}
+function clearCalculo() {
+    document.getElementById("cambio").innerHTML = "";
+    document.getElementById("Comentari").value = "";
+}

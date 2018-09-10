@@ -73,27 +73,27 @@ namespace AdminBSB.Controllers
 
         }
 
-        [HttpPost]
+   
         // Post: Detalles
-        public ActionResult Detalle(int id, string Codigo = "")
+        public ActionResult Detalle(int id, string estatus = "", string codigo="")
         {
             var chimi = db.Detalle_Factura_T.Where(x => x.id == id).FirstOrDefault();
 
-            if (Codigo == "cancelado")
+            if (estatus == "Cancelado")
             {
-                chimi.Estado = "Cancelado";
+                chimi.Estado = "Facturado";
 
             }
 
             else
             {
-                chimi.Estado = "Facturado";
+                chimi.Estado = "Cancelado";
             }
 
             db.Entry(chimi).State = EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("Detalles");
+            return RedirectToAction("Index", new { Codigo=codigo});
         }
 
         // GET: Detalles/Details/5
