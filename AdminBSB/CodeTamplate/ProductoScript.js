@@ -62,10 +62,11 @@ $(document).ready(function () {
                     var estado = row['Estado'];
                  
                     if (estado === true) {
-                        return '<a class="btn btn-success " href = "/Producto/edit/'+ row['id'] + '" > <i class="material-icons">border_color</i>   Editar</a >  | <a type="button" onclick="inactivar(' + row['id'] + ')" class="btn btn-danger " id="eliminar" ><i class="material-icons" > delete_sweep</i > Inactivar</a >'
+                        
+                        return '<a class="btn btn-success " onclick=edite(' + row['id'] + ') href= "#productoModal"  data-toggle="modal" > <i class="material-icons">border_color</i>   Editar</a >  | <a type="button" onclick="inactivar(' + row['id'] + ')" class="btn btn-danger " id="eliminar" ><i class="material-icons" > delete_sweep</i > Inactivar</a >'
                     }
                     else {
-                        return '<a class="btn btn-success " href = "/Producto/Edit/' + row['id'] + '" > <i class="material-icons">border_color</i>   Editar</a >  | <a type="button" onclick="inactivar(' + row['id'] + ')" class="btn btn-primary col-md-offset-4 col-lg-offset-0" id="eliminar" ><i class="material-icons" > done</i > Activar</a >'
+                        return '<a class="btn btn-success " onclick=edite(' + row['id'] + ') href= "#productoModal"  data-toggle="modal" > <i class="material-icons">border_color</i>   Editar</a >  | <a type="button" onclick="inactivar(' + row['id'] + ')" class="btn btn-primary col-md-offset-4 col-lg-offset-0" id="eliminar" ><i class="material-icons" > done</i > Activar</a >'
                     }
 
 
@@ -76,13 +77,13 @@ $(document).ready(function () {
 });
 
 function edite(vas) {
-    $(".modal-body").load("/Detalles/Edit/" + vas);
+    $(".modal-body").load("/Producto/Edit/" + vas);
 
 };
 
 
 function EditarModal() {
-    var oTable = $('#myDatatable').DataTable()
+    var oTable = $('#myDatatables').DataTable()
     var url = $('#EditModal')[0].action;
 
     $.ajax({

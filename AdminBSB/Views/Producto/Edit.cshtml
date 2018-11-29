@@ -1,93 +1,95 @@
 ﻿@model AdminBSB.Models.Producto
 
 @{
+    Layout = null;
     ViewBag.Title = "Edit";
 }
 
 
-@using (Html.BeginForm("Edit", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Producto", FormMethod.Post, new { enctype = "multipart/form-data", id= "EditModal" }))
 {
     @Html.AntiForgeryToken()
-    <div class="row clearfix">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-                <div class="header">
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.id)
+                @*<h2>
+                        INPUT
+
+                    </h2>*@
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <div class="form-horizontal">
+                    <h4>Producto</h4>
+                    <hr />
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.id)
-                    @*<h2>
-                            INPUT
 
-                        </h2>*@
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);">Action</a></li>
-                                <li><a href="javascript:void(0);">Another action</a></li>
-                                <li><a href="javascript:void(0);">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="body">
-                    <div class="form-horizontal">
-                        <h4>Producto</h4>
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        @Html.HiddenFor(model => model.id)
-
-                        <div class="col-md-4">
-                            <div class="form-inline">
-                                @Html.LabelFor(model => model.Nombre_producto, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Nombre_producto, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Nombre_producto, "", new { @class = "text-danger" })
-                                </div>
+                    <div class="col-md-6">
+                        <div class="form-inline">
+                            @Html.LabelFor(model => model.Nombre_producto, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Nombre_producto, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nombre_producto, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-4">
-                            <div class="form-inline">
-                                @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
-                                </div>
+                    <div class="col-md-6">
+                        <div class="form-inline">
+                            @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-4">
-                            <div class="form-inline">
-                                @Html.LabelFor(model => model.TipoProducto, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.TipoProducto, ViewBag.Tipo as SelectList,  new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.TipoProducto, "", new { @class = "text-danger" })
-                                </div>
+                    <div class="col-md-6">
+                        <div class="form-inline">
+                            @Html.LabelFor(model => model.TipoProducto, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.TipoProducto, ViewBag.Tipo as SelectList, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TipoProducto, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-4" })
-                                <div class="col-md-10">
-
-                                    @Html.HiddenFor(model => model.UrlImage, new { @class = "form-control" })
-                                    @Html.TextBoxFor(model => model.ImageFile, new { type = "file" })
-
-                                    @Html.ValidationMessageFor(model => model.UrlImage, "", new { @class = "text-danger" })
-
-                                </div>
-
-                                @*<img class="imagenProduct" width="100" height="100" src="@Url.Content(Model.UrlImage)" alt="Image">*@
-                            </div>
-                        </div>
-
-
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <div class="col-md-offset-0 col-md-10">
-                                <input type="submit" value="Guardar" class="btn btn-primary" /> |
-                                @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-danger" })
+                            @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+
+                                @Html.HiddenFor(model => model.UrlImage, new { @class = "form-control" })
+                                @Html.TextBoxFor(model => model.ImageFile, new { type = "file" })
+
+                                @Html.ValidationMessageFor(model => model.UrlImage, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            @*<img class="imagenProduct" width="100" height="100" src="@Url.Content(Model.UrlImage)" alt="Image">*@
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-0 col-md-10">
+                            <div class="col-md-12" id="editar" data-request-url="@Url.Action("Edit", "Detalles")">
+                                <button type="submit" onclick="EditarModal()" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                                <button class="btn btn-primary" data-dismiss="modal"> Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -95,6 +97,7 @@
             </div>
         </div>
     </div>
+</div>
 }
 
 

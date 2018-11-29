@@ -146,6 +146,7 @@ namespace AdminBSB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit( Producto producto)
         {
+            var resp = "false";
             if (ModelState.IsValid)
             {
                 if (producto.ImageFile != null)
@@ -163,9 +164,10 @@ namespace AdminBSB.Controllers
                 }
                 db.Entry(producto).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                resp = "true";
+                return Json(resp);
             }
-            return View(producto);
+            return Json(resp);
         }
 
         // GET: Producto/Delete/5
