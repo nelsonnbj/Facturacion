@@ -1,6 +1,7 @@
-﻿@model AdminBSB.Models.Detalle_Factura_T
+﻿@model AdminBSB.ViewModels.ProductoVM
 
 @{
+
     Layout = null;
 
     var editado = ViewBag.Editado;
@@ -8,146 +9,28 @@
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Editors | Bootstrap Based Admin Template - Material Design</title>
-    <!-- Favicon-->
-    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-    <!-- Bootstrap Core Css -->
-    <link href="~/Content/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Waves Effect Css -->
-    <link href="~/Content/plugins/node-waves/waves.css" rel="stylesheet" />
-    <!-- Animation Css -->
-    <link href="~/Content/plugins/animate-css/animate.css" rel="stylesheet" />
-    <!-- Custom Css -->
-    <link href="~/Content/css/style.css" rel="stylesheet">
-    <link href="~/Content/js/">
-    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="~/Content/css/themes/all-themes.css" rel="stylesheet" />
-    <script src="~/Content/js/FacturacionScript.js"></script>
-    <script src="~/Content/js/EditScript.js" rel="stylesheet"></script>
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/css/select2-responsive.css" rel="stylesheet" />
+    <link href="~/Content/css/Facturas.css" rel="stylesheet" />
 </head>
-@*<div class="card">
-        @using (Html.BeginForm("Detalles", "Edit", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Factura_Chimi_T</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.id)
-
-            <div class="card-block">
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Producto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Producto, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Producto, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.comenatrio, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Ticket, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
-                    </div>
-                </div>
-            </div>
-        </div>
-            }
-
-            <div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>
 
 
-
-    </div>*@
 
 @*////////////////////////Modal/////////////////////*@
 
-
-
-
-
-
 <label id="editados" val="s">@editado</label>
 
-@using (Html.BeginForm("Edit", "Detalles", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Detalles", FormMethod.Post, new { id = "EditModal" }))
 {
+    @Html.AntiForgeryToken()
 
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.id)
 
-                    @*<h2>
-                            INPUT
-
-                        </h2>*@
                     <ul class="header-dropdown m-r--5">
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -162,17 +45,13 @@
                     </ul>
                 </div>
                 <div class="body">
-                    @*  *@
-
-
-                    @*<h2 class="card-inside-title">Different Widths</h2>*@
                     <div class="row clearfix">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Producto, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="form-group" id="agregar" data-request-url="@Url.Action("TiposProducto", "Facturas")">
+                                @Html.LabelFor(model => model.Productos, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="form-line">
-                                    @Html.EditorFor(model => model.Producto, new { htmlAttributes = new { @class = "form-control", id = "Producto" } })
-                                    @Html.ValidationMessageFor(model => model.Producto, "", new { @class = "text-danger" })
+                                    @Html.DropDownListFor(model => model.Productos, ViewBag.tipoProducto as SelectList, Model.Productos, new { @class = "form-control select2", id = "Product" })
+                                    @Html.ValidationMessageFor(model => model.Productos, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -187,41 +66,43 @@
                         </div>
                     </div>
                     <div class="row clearfix">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="form-line">
-                                    @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", id = "Precio" } })
+                                    @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", id = "Precio", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="form-line">
-                                    @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", id = "nombre" } })
-                                    @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Ticket, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="form-line">
-                                    @Html.EditorFor(model => model.Ticket, new { htmlAttributes = new { @class = "form-control", id = "Ticket" } })
+                                <div class="form-line ">
+                                    @Html.EditorFor(model => model.Ticket, new { htmlAttributes = new { @class = "form-control ", id = "Ticket", disabled = "disabled", style = "background-color:lightgray" } })
                                     @Html.ValidationMessageFor(model => model.Ticket, "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row clearfix">
-                        <div class="col-sm-3">
+                        <div class="col-sm-6">
+                            <div class="form-group" id="diferencias" hidden>
+                                <label class="col-md-2">Diferencia</label>
+                                <div class="form-line ">
+                                    <h2><input class="form-control" type="text" value="" id="diferencia" readonly="readonly" /></h2>
+                                    <div hidden>
+                                        @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", id = "precioActual", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.comenatrio, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="form-line">
-                                    @Html.TextAreaFor(model => model.comenatrio, new { htmlAttributes = new { @class = "form-control", id = "comenatrio" } })
-                                    @Html.ValidationMessageFor(model => model.comenatrio, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.Comentario)
+                                <div class="form-line coment">
+                                    @Html.TextAreaFor(model => model.Comentario, new { htmlAttributes = new { @rows = "10", @class = "form-control coment", id = "comenatrio"} })
+                                    @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
                                 </div>
                                 <div>
                                     @Html.HiddenFor(model => model.id, new { id = "id" })
@@ -230,12 +111,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-
                         <div class="col-md-6" id="editar" data-request-url="@Url.Action("Edit", "Detalles")">
-                            <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal">Cancelar</button>
-
-                            <button type="submit" value="Save" class="btn btn-success" onclick="imprimir()"> Guardar</button>
-
+                            <button type="submit" onclick="EditarModal()" class="btn btn-success" data-dismiss="modal"> Guardar</button>
+                            <button id="editarDetalles" data-dismiss="modal" class="btn btn-primary">Cancelar</button>
                         </div>
                     </div><br />
                 </div>
@@ -243,7 +121,59 @@
         </div>
     </div>
 
+
 }
+
+
+    <script type="text/javascript">
+        $("#Product").change(function () {
+            CambioProducto();
+        });
+
+        $("#Cantidad").change(function () {
+            CambioProducto();
+        });
+
+        function CambioProducto() {
+            var url = $('#agregar').data('request-url');
+            var producto = $("#Product option:selected").text();
+            var actual = $("#precioActual").val();
+           
+            console.log("hola");
+            var cantidad = document.getElementById("Cantidad").value;
+            $.get(url, { producto: producto }, function (data) {
+                $("#Precio").empty();
+
+                var monto = data.Monto;
+                var total = (parseFloat(cantidad) * parseInt(monto));
+                $("#Precio").val(total);
+                var diferencia = parseInt(total) - parseInt(actual);
+                console.log(diferencia);
+                if (diferencia < 0) {
+                    document.getElementById("diferencia").style.color = "red"
+                }
+                else {
+                    document.getElementById("diferencia").style.color = "black"
+                }
+                document.getElementById("diferencia").value = diferencia;
+                document.getElementById("diferencias").style.display = "block";
+            });
+        }
+
+    </script>
+
+    <script src="~/Scripts/select2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".select2").select2({              
+                width: '100%',
+                allowClear: true
+            });
+
+        });
+    </script>
+
+    
 
 
 

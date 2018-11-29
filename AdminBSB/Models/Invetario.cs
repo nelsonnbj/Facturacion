@@ -11,13 +11,18 @@ namespace AdminBSB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Invetario
     {
         public int id { get; set; }
-        public string Producto { get; set; }
+        [Required(ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public string Producto { get; set; }       
         public string Descripcion { get; set; }
-        public Nullable<int> Cantidad { get; set; }
+        [Required(ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public Nullable<int> Cantidad { get; set; }    
         public Nullable<System.DateTime> Fecha { get; set; }
+        [Required(ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public Nullable<int> Precio { get; set; }
     }
 }

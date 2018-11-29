@@ -1,0 +1,144 @@
+﻿@model PagedList.IPagedList<AdminBSB.Models.Producto>
+
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Productos";
+}
+<head>
+    <link href="~/Content/Print.css" rel="stylesheet" />
+</head>
+<div class="clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <div class="header ocultarImprimir">
+                <h3>Productos</h3>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another action</a></li>
+                            <li><a href="javascript:void(0);">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <div class="input-group">
+                    <p>
+                        <a class="btn btn-primary" href="@Url.Action("Create", "Producto")"><i class="material-icons">add_circle</i>  Agregar</a>
+
+
+                    </p>
+                </div>
+
+                <table id="myDatatables" style="width:100%" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <tr>
+                           
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Nombre_producto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Precio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().TipoProducto)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().ImageFile)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstOrDefault().Estado)
+                            </th>
+                            <th>
+
+                            </th>
+
+                        </tr>
+
+
+
+
+                    </thead>
+                    @*@foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre_producto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Precio)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TipoProducto)
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(item.UrlImage))
+                                    {
+                                        <img class="imagenProduct" src="@Url.Content(item.UrlImage)" alt="Image" width="70" height="70">
+                                    }
+                                </td>
+
+
+                                @if (item.Estado == true)
+                                {
+                                    <td>
+                                        <strong>Activo</strong>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <strong style="color:red">Inactivo</strong>
+                                    </td>
+                                }
+
+
+                                <td id="Acciones" ids="@item.id" data-url="@Url.Action("Delete")">
+                                    <a class="btn btn-success " href="@Url.Action( "Edit","Producto", new { id = item.id })">
+                                        <i class="material-icons">border_color</i>   Editar
+                                    </a>  |
+                                    @if (item.Estado == true)
+                                    {
+                                        <button type="button" value="@item.id" class="btn btn-danger " id="eliminar" name="elimina">
+                                            <i class="material-icons">delete_sweep</i>   Inactivar
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" value="@item.id" class="btn btn-primary col-md-offset-4 col-lg-offset-0" id="eliminar" name="elimina">
+                                            <i class="material-icons">delete_sweep</i>   Activar
+                                        </button>
+                                    }
+
+
+                                </td>
+                            </tr>
+                        }*@
+                </table>
+                @*Página : @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber), de :@Model.PageCount
+                         @Html.PagedListPager(Model,page=>Url.Action("Index", new
+                    {
+                        page,
+                        sortOrder=
+                        ViewBag.CurrentSort,
+                        currentFilter=ViewBag.CurrentFilter
+
+                    }))*@
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="~/Content/js/admin.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="~/CodeTamplate/ProductoScript.js"></script>
+
+}

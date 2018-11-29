@@ -1,0 +1,141 @@
+﻿@model  AdminBSB.ViewModels.ReporteVM
+
+
+<head>
+    <script src="~/Scripts/alertify.min.js"></script>
+    <link href="~/Content/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/css/select2-responsive.css" rel="stylesheet" />
+</head>
+
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12">
+
+        <div class="card">
+            @*@Helpers.Titulo("Reportes de activos")*@
+
+
+            <div class="body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active" id="areaVentas">
+                        <a href="#Reporte_Producto" data-toggle="tab">
+                            <i class="material-icons">insert_chart</i> Ventas
+                        </a>
+                    </li>
+                    <li role="presentation" id="areaGastos">
+                        <a href="#Reporte_Gastos" data-toggle="tab">
+                            <i class="material-icons">monetization_on</i> Gastos
+                        </a>
+                    </li>
+                </ul>
+                <div class=" tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="Reporte_Producto">
+                        @using (Html.BeginForm("CreateReport", "Reportes", FormMethod.Post))
+                        {
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label titulo">Desde</label>
+                                    @Html.TextBoxFor(model => model.fechaInicial, new { @class = "form-control datepicker", value = "", placeholder = "Fecha Inicial" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label titulo">Hasta</label>
+                                    @Html.TextBoxFor(model => model.fechaFin, new { @class = "form-control datepicker", value = "", placeholder = "Fecha Fin" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label titulo">Tipo Producto</label>
+                                    @Html.DropDownListFor(model => model.TipoProducto, (IEnumerable<SelectListItem>)ViewBag.Tipo, "Selecionar Tipo Producto", new { @class = "form-control select2", id = "Tipo" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group" id="productos" data-request-url="@Url.Action("ObtenerProducto","Producto")">
+                                        <label class="control-label titulo">Tipo de Activo</label>
+                                        @Html.DropDownListFor(model => model.Nombre_producto, new SelectList(""), "Selecione un Producto", new { @class = "form-control select2", id = "producto" })
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label titulo">Área</label>
+                                            @Html.DropDownListFor(model => model.area, (IEnumerable<SelectListItem>)ViewBag.Direcciones, "Selecionar Area", new { @class = "form-control select2" })
+                                        </div>
+                                    </div>*@
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-md-12">
+                                        <button type="submit" class="btn btn-primary" onclick="return validarDatos()"><i class="material-icons">move_to_inbox</i>  Generar Reporte</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade in" id="Reporte_Gastos">
+                        @using (Html.BeginForm("CreateReportGastos", "Reportes", FormMethod.Post))
+                        {
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label titulo">Desde</label>
+                                    @Html.TextBoxFor(model => model.fechaInicial, new { @class = "form-control datepicker ", value = "", @autocomplete = "off", placeholder = "Fecha Inicial" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label titulo">Hasta</label>
+                                    @Html.TextBoxFor(model => model.fechaFin, new { @class = "form-control datepicker ", value = "", @autocomplete = "off", placeholder = "Fecha Fin" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label titulo">Producto</label>
+                                        @Html.TextBoxFor(model => model.Nombre_producto, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label titulo">Área</label>
+                                            @Html.DropDownListFor(model => model.area, (IEnumerable<SelectListItem>)ViewBag.Direcciones, "Selecionar Area", new { @class = "form-control select2" })
+                                        </div>
+                                    </div>*@
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12 col-md-12">
+                                        <button type="submit" class="btn btn-primary" onclick="return validarDatos()"><i class="icon-download4"></i>  Generar Reporte</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <!-- Jquery Core Js -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Content/js/pages/forms/basic-form-elements.js"></script>
+    <script src="~/Content/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="~/Content/js/admin.js"></script>
+ 
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/CodeTamplate/Reporte.js"></script>
+}

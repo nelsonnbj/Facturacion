@@ -1,0 +1,104 @@
+﻿@model IEnumerable<AdminBSB.ViewModels.Usuario>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="card">
+        <div class="header ocultarImprimir">
+            <h2>Administrar Usuarios</h2>
+            <ul class="header-dropdown m-r--5">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:void(0);">Action</a></li>
+                        <li><a href="javascript:void(0);">Another action</a></li>
+                        <li><a href="javascript:void(0);">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoleName)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoleName)
+                    </td>
+
+                    <td id="Usuarios" ids="@item.Id" data-url="@Url.Action("Delete")">
+                        <button type="button" class="btn btn-success  ModalEditar" data-toggle="modal" data-id="@item.Id" data-target="#ModalEditar">
+                            <i class="material-icons">border_color</i> Editar
+                        </button> |
+
+                        <button type="button" value="@item.Id" class="btn btn-danger " id="eliminar" name="eliminarUser">
+                            <i class="material-icons">delete_sweep</i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @*<h4 class="modal-title" id="myModalLabel">Modal title</h4>*@
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src=@Url.Content("~/CodeTamplate/UsuarioScript.js")></script>
+    <script src="~/Content/plugins/sweetalert/sweetalert.min.js"></script>
+
+}
+
+

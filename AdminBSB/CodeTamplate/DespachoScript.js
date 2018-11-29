@@ -1,25 +1,32 @@
 ﻿
-
-//var id = $("#despachar option:selected").value;
-//console.log(id);
-//$(':checkbox[type=checkbox]').change(function (event) {
-//    //var l = $("#despachar").val();
-//    if (document.getElementById("despachar").checked) {
-//        var url = $('#despachar').data('request-url');
-//        $.post(url, { Codigo: "Despachado" });
-
-//        var int = self.setInterval("refresh()", 1000);
-//    }
-
-//    else {
-//        var url = $('#despachar').data('request-url');
-//        $.post(url, { Codigo: "activado" });
-//        var int = self.setInterval("refresh()", 1000);
-//    }
-//});
-
 //function refresh() {
 //    location.reload(true);
 //}
+
+$("a[name='despacharPedidod']").click(function () {
+    var url = $(this).data('url');
+    swal({
+        title: "Estas Sguro de Despacharlo?",
+        text: "Despachar Pedido",
+        type: "info",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+    },
+
+
+        function (isConfirm) {
+            if (isConfirm) {
+              
+                $.post(url)
+                    .fail(function (req) {
+                        swal("Error!", "Se Produjo Un Error Al Momento De Despachar.", "error");
+                    }).done(function () {
+                        location.reload(true);
+
+                    });
+            }
+        });
+});
 
 

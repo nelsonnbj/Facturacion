@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FacturacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FacturacionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Detalle_Factura">
           <Key>
             <PropertyRef Name="id" />
@@ -32,7 +32,7 @@
           <Property Name="fecha" Type="datetime" />
           <Property Name="telefono" Type="nvarchar" MaxLength="12" />
           <Property Name="Estado" Type="nvarchar" MaxLength="20" />
-          <Property Name="TipoProducto" Type="char" MaxLength="10" />
+          <Property Name="TipoProducto" Type="int" />
           <Property Name="TipoServicio" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Gastos">
@@ -64,6 +64,7 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="20" />
           <Property Name="Cantidad" Type="int" />
           <Property Name="Fecha" Type="datetime" />
+          <Property Name="Precio" Type="int" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -72,9 +73,18 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre_producto" Type="nvarchar" MaxLength="20" />
           <Property Name="Precio" Type="int" />
-          <Property Name="TipoProducto" Type="char" MaxLength="10" />
+          <Property Name="TipoProducto" Type="int" Nullable="false" />
+          <Property Name="UrlImage" Type="nvarchar(max)" />
+          <Property Name="Estado" Type="bit" />
         </EntityType>
-        <Association Name="FK_Factura_Chimi_ProductoChimi">
+        <EntityType Name="TipoProducto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Detalle_Factura_Producto">
           <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
           <End Role="Detalle_Factura" Type="Self.Detalle_Factura" Multiplicity="*" />
           <ReferentialConstraint>
@@ -86,9 +96,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Detalle_Factura_T_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Detalle_Factura_T" Type="Self.Detalle_Factura_T" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_T">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Factura_T_TipoProducto">
+          <End Role="TipoProducto" Type="Self.TipoProducto" Multiplicity="0..1" />
+          <End Role="Detalle_Factura_T" Type="Self.Detalle_Factura_T" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_T">
+              <PropertyRef Name="TipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_TipoProducto">
+          <End Role="TipoProducto" Type="Self.TipoProducto" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="TipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_Cuadre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Generar_Turno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="servicio" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_LimpiarTabla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="FacturacionModelStoreContainer">
           <EntitySet Name="Detalle_Factura" EntityType="Self.Detalle_Factura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalle_Factura_T" EntityType="Self.Detalle_Factura_T" Schema="dbo" store:Type="Tables" />
@@ -96,16 +144,58 @@
           <EntitySet Name="Gastos_Diario" EntityType="Self.Gastos_Diario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invetario" EntityType="Self.Invetario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Factura_Chimi_ProductoChimi" Association="Self.FK_Factura_Chimi_ProductoChimi">
+          <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Detalle_Factura_Producto" Association="Self.FK_Detalle_Factura_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Detalle_Factura" EntitySet="Detalle_Factura" />
           </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_T_Producto" Association="Self.FK_Detalle_Factura_T_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Detalle_Factura_T" EntitySet="Detalle_Factura_T" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_T_TipoProducto" Association="Self.FK_Detalle_Factura_T_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="Detalle_Factura_T" EntitySet="Detalle_Factura_T" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_TipoProducto" Association="Self.FK_Producto_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FacturacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FacturacionEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SP_Generar_Turno" ReturnType="Collection(String)">
+          <Parameter Name="servicio" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Detalle_Factura" EntityType="FacturacionModel.Detalle_Factura" />
+          <EntitySet Name="Detalle_Factura_T" EntityType="FacturacionModel.Detalle_Factura_T" />
+          <EntitySet Name="Gastos" EntityType="FacturacionModel.Gastos" />
+          <EntitySet Name="Gastos_Diario" EntityType="FacturacionModel.Gastos_Diario" />
+          <EntitySet Name="Invetario" EntityType="FacturacionModel.Invetario" />
+          <EntitySet Name="Producto" EntityType="FacturacionModel.Producto" />
+          <EntitySet Name="TipoProducto" EntityType="FacturacionModel.TipoProducto" />
+          <AssociationSet Name="FK_Detalle_Factura_Producto" Association="FacturacionModel.FK_Detalle_Factura_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Detalle_Factura" EntitySet="Detalle_Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_T_Producto" Association="FacturacionModel.FK_Detalle_Factura_T_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Detalle_Factura_T" EntitySet="Detalle_Factura_T" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detalle_Factura_T_TipoProducto" Association="FacturacionModel.FK_Detalle_Factura_T_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="Detalle_Factura_T" EntitySet="Detalle_Factura_T" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_TipoProducto" Association="FacturacionModel.FK_Producto_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <FunctionImport Name="SP_Cuadre" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="SP_LimpiarTabla" />
+        </EntityContainer>
         <EntityType Name="Detalle_Factura">
           <Key>
             <PropertyRef Name="id" />
@@ -118,7 +208,7 @@
           <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK_Factura_Chimi_ProductoChimi" FromRole="Detalle_Factura" ToRole="Producto" />
+          <NavigationProperty Name="Producto" Relationship="FacturacionModel.FK_Detalle_Factura_Producto" FromRole="Detalle_Factura" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Detalle_Factura_T">
           <Key>
@@ -129,13 +219,15 @@
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Precio" Type="Int32" Nullable="false" />
           <Property Name="comenatrio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ticket" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="TipoProducto" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="TipoProducto" Type="Int32" />
           <Property Name="TipoServicio" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Producto" Relationship="FacturacionModel.FK_Detalle_Factura_T_Producto" FromRole="Detalle_Factura_T" ToRole="Producto" />
+          <NavigationProperty Name="TipoProducto1" Relationship="FacturacionModel.FK_Detalle_Factura_T_TipoProducto" FromRole="Detalle_Factura_T" ToRole="TipoProducto" />
         </EntityType>
         <EntityType Name="Gastos">
           <Key>
@@ -166,6 +258,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Cantidad" Type="Int32" />
           <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Precio" Type="Int32" />
         </EntityType>
         <EntityType Name="Producto">
           <Key>
@@ -174,12 +267,25 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre_producto" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Precio" Type="Int32" />
-          <Property Name="TipoProducto" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Detalle_Factura" Relationship="Self.FK_Factura_Chimi_ProductoChimi" FromRole="Producto" ToRole="Detalle_Factura" />
+          <Property Name="TipoProducto" Type="Int32" Nullable="false" />
+          <Property Name="UrlImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Detalle_Factura" Relationship="FacturacionModel.FK_Detalle_Factura_Producto" FromRole="Producto" ToRole="Detalle_Factura" />
+          <NavigationProperty Name="Detalle_Factura_T" Relationship="FacturacionModel.FK_Detalle_Factura_T_Producto" FromRole="Producto" ToRole="Detalle_Factura_T" />
+          <NavigationProperty Name="TipoProducto1" Relationship="FacturacionModel.FK_Producto_TipoProducto" FromRole="Producto" ToRole="TipoProducto" />
+          <Property Name="Estado" Type="Boolean" />
         </EntityType>
-        <Association Name="FK_Factura_Chimi_ProductoChimi">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
-          <End Role="Detalle_Factura" Type="Self.Detalle_Factura" Multiplicity="*" />
+        <EntityType Name="TipoProducto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Detalle_Factura_T" Relationship="FacturacionModel.FK_Detalle_Factura_T_TipoProducto" FromRole="TipoProducto" ToRole="Detalle_Factura_T" />
+          <NavigationProperty Name="Producto" Relationship="FacturacionModel.FK_Producto_TipoProducto" FromRole="TipoProducto" ToRole="Producto" />
+        </EntityType>
+        <Association Name="FK_Detalle_Factura_Producto">
+          <End Type="FacturacionModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="FacturacionModel.Detalle_Factura" Role="Detalle_Factura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="id" />
@@ -189,103 +295,137 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FacturacionEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Detalle_Factura" EntityType="Self.Detalle_Factura" />
-          <EntitySet Name="Detalle_Factura_T" EntityType="Self.Detalle_Factura_T" />
-          <EntitySet Name="Gastos" EntityType="Self.Gastos" />
-          <EntitySet Name="Gastos_Diario" EntityType="Self.Gastos_Diario" />
-          <EntitySet Name="Invetario" EntityType="Self.Invetario" />
-          <EntitySet Name="Producto" EntityType="Self.Producto" />
-          <AssociationSet Name="FK_Factura_Chimi_ProductoChimi" Association="Self.FK_Factura_Chimi_ProductoChimi">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="Detalle_Factura" EntitySet="Detalle_Factura" />
-          </AssociationSet>
-          <FunctionImport Name="SP_Generar_Turno" ReturnType="Collection(String)">
-            <Parameter Name="servicio" Mode="In" Type="String" />
-          </FunctionImport>
-        </EntityContainer>
+        <Association Name="FK_Detalle_Factura_T_Producto">
+          <End Type="FacturacionModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="FacturacionModel.Detalle_Factura_T" Role="Detalle_Factura_T" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_T">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detalle_Factura_T_TipoProducto">
+          <End Type="FacturacionModel.TipoProducto" Role="TipoProducto" Multiplicity="0..1" />
+          <End Type="FacturacionModel.Detalle_Factura_T" Role="Detalle_Factura_T" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detalle_Factura_T">
+              <PropertyRef Name="TipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_TipoProducto">
+          <End Type="FacturacionModel.TipoProducto" Role="TipoProducto" Multiplicity="1" />
+          <End Type="FacturacionModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="TipoProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FacturacionModelStoreContainer" CdmEntityContainer="FacturacionEntities">
+          <FunctionImportMapping FunctionImportName="SP_Generar_Turno" FunctionName="FacturacionModel.Store.SP_Generar_Turno" />
           <EntitySetMapping Name="Detalle_Factura">
             <EntityTypeMapping TypeName="FacturacionModel.Detalle_Factura">
               <MappingFragment StoreEntitySet="Detalle_Factura">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="comenatrio" ColumnName="comenatrio" />
-                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+                <ScalarProperty Name="comenatrio" ColumnName="comenatrio" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Detalle_Factura_T">
             <EntityTypeMapping TypeName="FacturacionModel.Detalle_Factura_T">
               <MappingFragment StoreEntitySet="Detalle_Factura_T">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="comenatrio" ColumnName="comenatrio" />
-                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="TipoProducto" ColumnName="TipoProducto" />
                 <ScalarProperty Name="TipoServicio" ColumnName="TipoServicio" />
+                <ScalarProperty Name="TipoProducto" ColumnName="TipoProducto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+                <ScalarProperty Name="comenatrio" ColumnName="comenatrio" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Gastos">
             <EntityTypeMapping TypeName="FacturacionModel.Gastos">
               <MappingFragment StoreEntitySet="Gastos">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Gastos_Diario">
             <EntityTypeMapping TypeName="FacturacionModel.Gastos_Diario">
               <MappingFragment StoreEntitySet="Gastos_Diario">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Invetario">
             <EntityTypeMapping TypeName="FacturacionModel.Invetario">
               <MappingFragment StoreEntitySet="Invetario">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Producto" ColumnName="Producto" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Producto">
             <EntityTypeMapping TypeName="FacturacionModel.Producto">
               <MappingFragment StoreEntitySet="Producto">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Nombre_producto" ColumnName="Nombre_producto" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UrlImage" ColumnName="UrlImage" />
                 <ScalarProperty Name="TipoProducto" ColumnName="TipoProducto" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Nombre_producto" ColumnName="Nombre_producto" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_Generar_Turno" FunctionName="FacturacionModel.Store.SP_Generar_Turno" />
+          <EntitySetMapping Name="TipoProducto">
+            <EntityTypeMapping TypeName="FacturacionModel.TipoProducto">
+              <MappingFragment StoreEntitySet="TipoProducto">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Cuadre" FunctionName="FacturacionModel.Store.SP_Cuadre" />
+          <FunctionImportMapping FunctionImportName="SP_LimpiarTabla" FunctionName="FacturacionModel.Store.SP_LimpiarTabla" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

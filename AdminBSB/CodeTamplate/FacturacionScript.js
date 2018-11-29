@@ -1,67 +1,21 @@
-﻿
+﻿//var logo = document.getElementById("logo");
+//logo.width = 200;
+//logo.height = 200;
+//document.images.logo.width = 200;
+//document.images.logo.height = 200;
 
-$("#chimi").click(function () {
-    document.getElementById("producto").value = "Chimi";
+$(".em-img-lazy").click(function () {
+    var $instance = $(this);
+    var nuevoProducto = $instance.attr("data-estado") || 0;
+    document.getElementById("producto").value = nuevoProducto;
 });
-
-$("#pierna").click(function () {
-    document.getElementById("producto").value = "Chimi Pierna";
-});
-
-$("#baconcheese").click(function () {
-    document.getElementById("producto").value = "Bacon Cheese";
-});
-
-$("#pablo").click(function () {
-    document.getElementById("producto").value = "Chimi Pablo";
-});
-
-$("#locotron").click(function () {
-    document.getElementById("producto").value = "Rubio Burger";
-});
-
-$("#Chimi_pechuga").click(function () {
-    document.getElementById("producto").value = "Chimi Pechuga";
-});
-
-$("#Chimi_DobleCarne").click(function () {
-    document.getElementById("producto").value = "Chimi Doble Carne";
-});
-
-$("#Pechuga_Empanizada").click(function () {
-    document.getElementById("producto").value = "Pechuga Empanizada";
-});
-
-$("#Hamburger_Res").click(function () {
-    document.getElementById("producto").value = "Hamburger De Res";
-});
-
-$("#Hambuerger_pechuga").click(function () {
-    document.getElementById("producto").value = "Hamburger Pechuga";
-});
-$("#Hambuerger_pierna").click(function () {
-    document.getElementById("producto").value = "Hamburger Pierna";
-});
-
-
-//$("#producto").change(function () {
-//    var url = $('#agregar').data('request-url');
-//    $.get(url, { productos: $("#producto").val() }, function (data) {
-//        $("#precio").empty();
-//        $.each(data, function (index, row) {
-//            $("#precio").append("<option value='" + row.precio + "'>" + row.precio + "</option>")
-//        });
-
-//    });
-//})
 
 //Add Multiple Order.
-
-
 ///////////////Validar area//////////////
 
 $("#areaBurritos").click(function () {
     document.getElementById("AreaBurrito").innerHTML = "areaBurritos";
+    var l = document.getElementById("AreaBurrito").innerHTML;
     document.getElementById("producto").value = "";
 });
 
@@ -83,7 +37,7 @@ $("#addToList").click(function (e) {
         detailsTableBody = $("#detailsTable tbody");
 
     var url = $('#agregar').data('request-url');
-    area = document.getElementById("AreaBurrito").innerHTML;
+    var area = document.getElementById("AreaBurrito").innerHTML;
     if (area !== "areaBurritos") {
         $.get(url, { producto: document.getElementById("producto").value }, function (data) {
             $("#precio").empty();
@@ -91,45 +45,16 @@ $("#addToList").click(function (e) {
             var monto = data.Monto;
             var tipo = data.Tipos;
 
-            var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo + '</td><td hidden>' + IdProducto + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+            var productItem = '<tr><td>' + producto + '</td><td>' + cantidad + '</td><td class="ocultarComentario">' + comentario + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo + '</td><td hidden>' + IdProducto + '</td><td class="ocultarComentario"><a data-itemid="0" href="#" class="deleteItem" style="color:red">Eliminar</a></td></tr>';
             detailsTableBody.append(productItem);
+            CalculoTotal();
             ///////////////////////Muestra la tabla de pedidos//////////
-            document.getElementById("tablaPricipal").hidden=false;
+            document.getElementById("tablaPricipal").hidden = false;
 
-
-            ////////////////////////////Calcula el Total de Chimi///////////
-
-
-            var total = (parseFloat(cantidad) * parseInt(monto));
-            var montoTotal = document.getElementById("Chimi").innerHTML;
-            document.getElementById("Chimi").value = "";
-            if (montoTotal != "") {
-                document.getElementById("Chimi").innerHTML = (parseInt(montoTotal) + parseInt(total));
-
-            }
-            else {
-                document.getElementById("Chimi").innerHTML = total;
-            }
             clearItem();
-
-
-
-
-            //////////////////////Calcula el Total de Todas las Cuentas//////////////////
-            burritoTotal = document.getElementById("Burritos").innerHTML;
-            chimiTotal = document.getElementById("Chimi").innerHTML;
-            if (burritoTotal == "") {
-
-                document.getElementById("Total").innerHTML = chimiTotal;
-            }
-
-            else {
-                document.getElementById("Total").innerHTML = (parseInt(burritoTotal) + parseInt(chimiTotal))
-            }
         });
     }
 });
-
 
 //After Add A New Order In The List, Clear Clean The Form For Add More Order.
 function clearItem() {
@@ -143,12 +68,68 @@ function clearItem() {
 $(document).on('click', 'a.deleteItem', function (e) {
     e.preventDefault();
     var $self = $(this);
-    if ($(this).attr('data-itemId') == "0") {
+    if ($(this).attr('data-itemId') === "0") {
         $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
             $(this).remove();
+            CalculoTotal();
         });
     }
 });
+
+function CalculoTotal() {
+    var areas = document.getElementById("AreaBurrito").innerHTML;
+    function formatNumber(n) {
+        n = String(n).replace(/\D/g, "");
+        return n === '' ? n : Number(n).toLocaleString();
+    }
+    if (areas !== "areaBurritos") {
+        var elmtTable = document.getElementById('detailsTable');
+        var tableRows = elmtTable.getElementsByTagName('tr');
+        var rowCount = tableRows.length;
+        var fila = parseInt(rowCount) - 1
+        var totales = 0;
+
+        for (var i = 0; i < fila; i++) {
+            var filas = parseInt(fila) - i;
+            var totals = tableRows[filas].getElementsByTagName('td')[3].innerHTML;
+
+            totales = (parseInt(totales) + parseInt(totals));
+
+        }
+        burritoTotal = document.getElementById("Burritos").innerHTML;
+        var totalF = formatNumber(totales);
+        document.getElementById("Chimi").innerHTML = totalF;        
+        document.getElementById("totalFactura").innerHTML = totalF;
+        var totalTodos = (parseInt(totales) + parseInt(burritoTotal))
+        var todos = formatNumber(totalTodos)
+        document.getElementById("Total").innerHTML = parseInt(todos);
+
+    }
+  
+    else {
+
+        var elmtTable = document.getElementById('BurritoTable');
+        var tableRows = elmtTable.getElementsByTagName('tr');
+        var rowCount = tableRows.length;
+        var fila = parseInt(rowCount) - 1
+        var totales = 0;
+
+        for (var i = 0; i < fila; i++) {
+            var filas = parseInt(fila) - i;
+            var totals = tableRows[filas].getElementsByTagName('td')[3].innerHTML;
+
+            totales = (parseInt(totales) + parseInt(totals));
+
+        }
+        var totalFB = formatNumber(totales);
+        burritoTotal = document.getElementById("Chimi").innerHTML;
+        document.getElementById("Burritos").innerHTML = totalFB;
+        document.getElementById("totalFacturas").innerHTML = totalFB;
+        var todosB = formatNumber((parseInt(totales) + parseInt(burritoTotal)));
+        document.getElementById("Total").innerHTML = parseInt(todosB);
+    }
+
+}
 
 //After Click Save Button Pass All Data View To Controller For Save Database
 function saveOrder(data) {
@@ -158,14 +139,8 @@ function saveOrder(data) {
         type: 'POST',
         url: "/Facturas/SaveOrder",
         data: data,
-        //success: function (result) {
-        //    alert(result);
-        //    location.reload();
-        //},
-        //error: function () {
-        //    alert("Error!")
-        //}
     });
+
 }
 
 //Collect Multiple Order List For Pass To Controller
@@ -175,7 +150,7 @@ $("#saveOrder").click(function (e) {
     var orderArr = [];
     orderArr.length = 0;
     var tipoServicio = "Comer Aqui"
-    if (document.getElementById("tipoServicio").checked) {
+    if (document.getElementById("tipoServicio").checked == true) {
         tipoServicio = "Empacar"
     }
 
@@ -190,23 +165,25 @@ $("#saveOrder").click(function (e) {
         });
     });
 
-
     var data = JSON.stringify({
-        name: "Chimi",
+        name: "C",
         servicio: tipoServicio,
         address: $("#producto").val(),
         order: orderArr
     });
 
     $.when(saveOrder(data)).then(function (response) {
-        console.log(response);
-    }).fail(function (err) {
-        console.log(err);
-    });
 
-    alertify.success("Pedido Facturado");
-    limpia()
-   
+        var turno = response.ticket;
+        document.getElementById("turno").innerHTML = turno;
+        window.print();
+        limpia();
+        alertify.success("Pedido Facturado");
+
+
+    }).fail(function (err) {
+        alertify.error("Error En La Facturacion");
+    });
 
 
     menos = document.getElementById("Chimi").innerHTML;
@@ -216,7 +193,7 @@ $("#saveOrder").click(function (e) {
 });
 
 
-    ////////Metodo que actualiza la Tabla y los Montos////////////
+////////Metodo que actualiza la Tabla y los Montos////////////
 function limpia() {
     document.getElementById("tablaPricipal").hidden = true;
     $('#detailsTable tbody').children().remove();
@@ -307,11 +284,6 @@ function agregarComentario() {
     document.getElementById("ComentarioAgregado").value = comentario;
 
     actualizarChbox();
-    //var restorepage = document.body.innerHTML;
-    //$('#ocultar1').attr('hidden', true);
-    //$('#ocultar2').attr('hidden', true);
-    //window.print();
-    //document.body.innerHTML = restorepage;
 }
 
 ////////////////////////FUNCION QUE LIMPIA LOS CHECHKBOX///////////////
@@ -348,22 +320,8 @@ $("#cantidad").change(function () {
 
     }
 });
-//////////////////////Cambia el estatus del pedido//////////
-//$(':checkbox[type=checkbox]').on("click", function ()
-//$(':checkbox[type=checkbox]').on("click", function () {
-//    if (document.getElementById("checkbo").checked) {
-//        var url = $('#agregar').data('request-url');
-//        $.post(url, { Codigo: "cancelado" });
-//        var int = self.setInterval("refresh()", 1000);
-//    }
 
-//    else {
-//        var url = $('#agregar').data('request-url');
-//        $.post(url, { Codigo: "activado" });
-//        var int = self.setInterval("refresh()", 1000);
-//    }
-//});
-
+//var int = self.setInterval("refresh()", 1000);
 //function refresh() {
 //    location.reload(true);
 //}
@@ -383,13 +341,14 @@ $(".btnEditar").click(function (eve) {
 })
 
 function imprimir() {
-    window.print;
+    window.print();
+
 };
 
 
 ////////////Metodo que calcula el cambio a devolver/////////////
 function calculo1() {
-    var monto= document.getElementById("Chimi").innerHTML;
+    var monto = document.getElementById("Chimi").innerHTML;
     document.getElementById("cantida").innerHTML = monto;
 }
 
@@ -414,3 +373,8 @@ function clearCalculo() {
     document.getElementById("cambio").innerHTML = "";
     document.getElementById("Comentari").value = "";
 }
+
+$("#cierrePrint").click(function () {
+
+    window.print();
+});

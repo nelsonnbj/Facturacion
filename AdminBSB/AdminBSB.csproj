@@ -50,6 +50,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -201,13 +207,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Clases\FilesHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DespachoController.cs" />
     <Compile Include="Controllers\DetallesController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\GastosController.cs" />
+    <Compile Include="Controllers\GastosMensualesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +240,7 @@
       <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Permisos.cs" />
     <Compile Include="Models\Producto.cs">
       <DependentUpon>ProductoModel.tt</DependentUpon>
     </Compile>
@@ -247,16 +259,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProductoModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\TipoProducto.cs">
+      <DependentUpon>ProductoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\DetalleVM.cs" />
+    <Compile Include="ViewModels\ProductoVM.cs" />
+    <Compile Include="ViewModels\ReporteVM.cs" />
+    <Compile Include="ViewModels\Usuario.cs" />
+    <Compile Include="ViewModels\VentaVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeTamplate\BurritoScript.js" />
     <Content Include="CodeTamplate\DespachoScript.js" />
+    <Content Include="CodeTamplate\DetallesScript.js" />
     <Content Include="CodeTamplate\FacturacionScript.js" />
+    <Content Include="CodeTamplate\PaginaPrincipal.js" />
+    <Content Include="CodeTamplate\PrintScript.js" />
+    <Content Include="CodeTamplate\ProductoScript.js" />
+    <Content Include="CodeTamplate\Reporte.js" />
+    <Content Include="CodeTamplate\UsuarioScript.js" />
     <Content Include="Content\css\alertify.min.css" />
+    <Content Include="Content\css\Despacho.css" />
+    <Content Include="Content\css\Facturas.css" />
     <Content Include="Content\css\materialize.css" />
+    <Content Include="Content\css\select2-responsive.css" />
+    <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style.min.css" />
     <Content Include="Content\css\themes\all-themes.css" />
@@ -318,6 +347,7 @@
     <Content Include="Content\documentation\templates\license.html" />
     <Content Include="Content\documentation\templates\plugins.html" />
     <Content Include="Content\images\animation-bg.jpg" />
+    <Content Include="Content\images\edificio.jpg" />
     <Content Include="Content\images\image-gallery\1.jpg" />
     <Content Include="Content\images\image-gallery\10.jpg" />
     <Content Include="Content\images\image-gallery\11.jpg" />
@@ -358,6 +388,8 @@
     <Content Include="Content\images\image-gallery\thumb\thumb-7.jpg" />
     <Content Include="Content\images\image-gallery\thumb\thumb-8.jpg" />
     <Content Include="Content\images\image-gallery\thumb\thumb-9.jpg" />
+    <Content Include="Content\images\images.jpg" />
+    <Content Include="Content\images\LogingArbol.jpg" />
     <Content Include="Content\images\screenshot.png" />
     <Content Include="Content\images\thumbs-up.png" />
     <Content Include="Content\images\user-img-background.jpg" />
@@ -401,6 +433,9 @@
     <Content Include="Content\js\pages\widgets\infobox\infobox-4.js" />
     <Content Include="Content\js\pages\widgets\infobox\infobox-5.js" />
     <Content Include="Content\js\script.js" />
+    <Content Include="Content\js\Select2.js" />
+    <Content Include="Content\LoginCss.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\pages\changelogs.html" />
     <Content Include="Content\pages\charts\chartjs.html" />
     <Content Include="Content\pages\charts\flot.html" />
@@ -3627,6 +3662,7 @@
     <Content Include="Content\plugins\waitme\waitMe.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Print.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Fotos\burger.jpg" />
@@ -3875,7 +3911,10 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -3916,9 +3955,21 @@
     <Content Include="Views\Facturas\PantallaPrincipal.cshtml" />
     <Content Include="Views\Gastos\Index.cshtml" />
     <Content Include="Views\Gastos\Create.cshtml" />
+    <Content Include="Views\Producto\Create.cshtml" />
+    <Content Include="Views\Producto\Delete.cshtml" />
+    <Content Include="Views\Producto\Details.cshtml" />
+    <Content Include="Views\Producto\Edit.cshtml" />
+    <Content Include="Views\Producto\Index.cshtml" />
+    <Content Include="Views\GastosMensuales\Create.cshtml" />
+    <Content Include="Views\Gastos\Cuadre.cshtml" />
+    <Content Include="Views\Reportes\Index.cshtml" />
+    <Content Include="Views\Shared\LayoutDespacho.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

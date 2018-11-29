@@ -1,0 +1,117 @@
+﻿@model AdminBSB.ViewModels.Usuario
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("Edit", "Usuarios", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Usuarios</h4>
+    <hr />
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="body">
+        @*  *@
+
+
+        @*<h2 class="card-inside-title">Different Widths</h2>*@
+        <div class="row clearfix">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <strong>Correo</strong>
+                    <div class="form-line">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "Producto" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <strong> Telefono</strong>
+                    <div class="form-line">
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", id = "Cantidad" } })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div><br />
+        <div class="row clearfix">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <strong>Usuario</strong>
+                    <div class="form-line">
+                        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", id = "Precio" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <strong>Nombre Completo</strong>
+                    <div class="form-line ">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", id = "Ticket" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div><br />
+        <div class="row clearfix">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <strong>Tipo Usuario</strong>
+                    <div class="form-line">
+                        @Html.DropDownList("role", ViewBag.Roles as SelectList, Model.RoleName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            @Html.HiddenFor(model => model.RoleId)
+        </div>
+
+    </div><hr />
+
+    <div class="form-group">
+        <div class="col-md-offset-0 col-md-10">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            @*@Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-success" })*@
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-default" id="role" onclick="showRole()">Crear Permisos</button>
+        </div>
+    </div>
+
+    <div id="CrearRoles" hidden>
+        <hr />
+        <div class="row clearfix">
+
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <strong>Tipo Usuario</strong>
+                    <div class="form-line" id="agregar" data-request-url="@Url.Action("CrearRoles","Usuarios")">
+                        @Html.Editor("name", new { htmlAttributes = new { @class = "form-control", id = "imputRole", placeholder = "Registrar Tipo de Usuario", value = "" } })
+
+                    </div>
+                </div>
+            </div>
+
+        </div><br />
+        <button type="button" class="btn btn-success" id="roleCrear" onclick="RoleCrear()">Crear Permisos</button>
+    </div>
+
+
+</div>
+}
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

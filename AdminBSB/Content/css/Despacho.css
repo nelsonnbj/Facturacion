@@ -1,0 +1,30 @@
+﻿body {
+    background-image: url('../images/edificio.jpg');
+    background-color: black !important;
+}
+.body {
+    
+    background-image: url('../images/edificio.jpg');
+    background-color: black !important;
+}
+div.card {
+    /*background-image: url('../images/animation-bg.jpg');*/
+    /*background-color: lightblue !important;
+    background-position: right top;*/
+}
+
+table{
+
+
+background: #000;
+color: #fff;
+top: 50%;
+left: 50%;
+psoition:absolute;
+
+box-sizing: border-box:
+}
+
+div.header {
+    background-color: red !important;
+}

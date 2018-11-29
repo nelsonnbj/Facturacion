@@ -1,14 +1,14 @@
 
-debug\.log
+\.vs/AdminBSB/v15/\.suo
 
-\.vs/Facturar/v15/Server/sqlite3/storage\.ide
+\.vs/AdminBSB/v15/Server/sqlite3/storage\.ide-shm
 
-\.vs/Facturar/v15/Server/sqlite3/storage\.ide-shm
+AdminBSB/bin/AdminBSB\.dll
 
-\.vs/Facturar/v15/Server/sqlite3/storage\.ide-wal
+AdminBSB/bin/AdminBSB\.pdb
 
-Facturar/obj/Debug/Facturar\.csproj\.CoreCompileInputs\.cache
+AdminBSB/obj/Debug/AdminBSB\.csprojAssemblyReference\.cache
 
-Facturar/obj/Debug/DesignTimeResolveAssemblyReferencesInput\.cache
+AdminBSB/obj/Debug/AdminBSB\.dll
 
-*.cache
+AdminBSB/obj/Debug/AdminBSB\.pdb

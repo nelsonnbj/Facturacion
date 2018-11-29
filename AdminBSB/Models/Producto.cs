@@ -11,21 +11,41 @@ namespace AdminBSB.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class Producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Producto()
         {
             this.Detalle_Factura = new HashSet<Detalle_Factura>();
+            this.Detalle_Factura_T = new HashSet<Detalle_Factura_T>();
         }
     
         public int id { get; set; }
+        [Required(ErrorMessage = "El campo \"{0}\" es requerido.")]
+        [Display(Name = "Producto")]
         public string Nombre_producto { get; set; }
+        [Required(ErrorMessage = "El campo \"{0}\" es requerido.")]
         public Nullable<int> Precio { get; set; }
-        public string TipoProducto { get; set; }
-    
+        [Display(Name = "Tipo")]
+        [Required(ErrorMessage = "El campo \"{0}\" es requerido.")]
+        public int TipoProducto { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        public string UrlImage { get; set; }
+        [NotMapped]
+        [Display(Name = "Imagen")]
+        public HttpPostedFileBase ImageFile { get; set; }
+        public Nullable<bool> Estado { get; set; }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Factura> Detalle_Factura { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Detalle_Factura_T> Detalle_Factura_T { get; set; }
+        public virtual TipoProducto TipoProducto1 { get; set; }
     }
 }

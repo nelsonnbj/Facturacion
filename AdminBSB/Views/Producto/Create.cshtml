@@ -1,0 +1,113 @@
+﻿@model AdminBSB.Models.Producto
+
+@{
+    ViewBag.Title = "Crear Producto";
+    var creado = ViewBag.Creado;
+
+}
+
+
+@using (Html.BeginForm("Create", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input value="@creado" id="creadoTrue" hidden />
+
+    @Html.AntiForgeryToken()
+    <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="form-horizontal">
+
+                    <div class="body">
+                        <h4>Producto</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="col-md-4">
+                            <div class="form-line">
+                                @Html.LabelFor(model => model.Nombre_producto, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Nombre_producto, new { htmlAttributes = new { @class = "form-control", id = "nombre" } })
+                                    @Html.ValidationMessageFor(model => model.Nombre_producto, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-line">
+                                @Html.LabelFor(model => model.Precio, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Precio, new { htmlAttributes = new { @class = "form-control", id = "precio" } })
+                                    @Html.ValidationMessageFor(model => model.Precio, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-line">
+                                @Html.LabelFor(model => model.TipoProducto, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("tipo", ViewBag.Tipo as SelectList, "--Seleccionar Producto", new { @class = "form-control", id = "tipo" })
+                                    @Html.ValidationMessageFor(model => model.TipoProducto, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-line">
+                                <div class="col-md-4">
+                                    @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.ImageFile, new { type = "file" })
+                                        @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group left">
+                            <div class="col-md-offset-0 col-md-10">
+                                <button type="submit" value="Guardar" class="btn btn-success"> <i class="material-icons">save</i>  Guardar</button>
+                                <a class = "btn btn-primary" href="@Url.Action("Index","Producto")"><i class="material-icons">cancel</i>  Cancelar</a>
+                         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.js"></script>
+    <!-- Select Plugin Js -->
+    <script src="~/Content/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/Content/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- Bootstrap Notify Plugin Js -->
+    <script src="~/Content/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/Content/plugins/node-waves/waves.js"></script>
+    <!-- SweetAlert Plugin Js -->
+    <script src="~/Content/plugins/sweetalert/sweetalert.min.js"></script>
+    <!-- Custom Js -->
+    <script src="~/Content/js/admin.js"></script>
+    <script src="~/Content/js/pages/ui/dialogs.js"></script>
+    <!-- Demo Js -->
+    <script src="~/Content/js/demo.js"></script>
+    <script src="~/Content/js/pages/forms/basic-form-elements.js"></script>
+
+    <script type="text/javascript">
+        var creado = $("#creadoTrue").val();
+        if (creado == "true") {
+            alertify.success("Gasto Registrado");
+            document.getElementById("nombre").value = "";
+            document.getElementById("precio").value = "";
+            document.getElementById("tipo").value = "";
+        }
+        if (creado == "false") {
+            alertify.error("Gasto 'No' Registrado");
+        }
+    </script>
+}
+
+

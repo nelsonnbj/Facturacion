@@ -8,41 +8,24 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace AdminBSB.Controllers
-{
+
+{ 
+    [Authorize]
     public class DetallesController : Controller
     {
         private FacturacionEntities db = new FacturacionEntities();
         // GET: Detalles
-        public ActionResult Index(string Codigo = "", string Area = "")
+        public ActionResult Index()
         {
 
-            var modelo = new DetalleVM();
+            return View();
 
-            //var producto = (from f in db.Factura_Chimi_T
-            //                     join p in db.Producto on f.IdProducto equals p.id
+        }
 
-            //                     select new
-            //                     {
-            //                        p.Nombre_producto,
-            //                        f.Cantidad,
-            //                        f.comenatrio,
-            //                        f.Ticket,
-            //                        f.Estado,
-
-
-            //                     });
-            //var ProductoFormato = producto.Select(S => new
-            //{
-            //    Nombre = S.Nombre_producto,
-            //    Cantidad = S.Cantidad,
-            //    Comentario=S.comenatrio,
-            //    Ticket=S.Ticket,
-            //    Estado=S.Estado
-
-            //}).ToList();
+        public ActionResult Datos()
+        {
             var listaFactura = (from f in db.Detalle_Factura_T
                                 join p in db.Producto on f.IdProducto equals p.id
-                                where f.Ticket == Codigo
                                 select new DetalleVM()
                                 {
                                     id = f.id,
@@ -55,127 +38,106 @@ namespace AdminBSB.Controllers
 
                                 }).ToList();
 
-            return View(listaFactura);
+            var estado = listaFactura.Select(s => s.Estado).ToList();
+            return Json(new { data = listaFactura, estado }, JsonRequestBehavior.AllowGet);
 
+        }
 
-            //ViewBag.Detalles = "True";
-            //var total = chimi.Count();
-            //if (total ==0 && Codigo != "")
-            //{
+        // Post: Detalles
+        [HttpPost]
+        public ActionResult Detalle(int id)
+        {
+            var resp = false;
+            var chimi = db.Detalle_Factura_T.Where(x => x.id == id).FirstOrDefault();
+            try
+            {
+                if (chimi.Estado == "Cancelado")
+                {
+                    chimi.Estado = "Facturado";
 
-            //    ViewBag.Error = "false";
+                }
 
-            //}
+                else
+                {
+                    chimi.Estado = "Cancelado";
+                }
 
-            //    return View(ProductoFormato);
+                db.Entry(chimi).State = EntityState.Modified;
+                db.SaveChanges();
+                resp = true;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        
 
-
+            return Json(resp);
         }
 
    
-        // Post: Detalles
-        public ActionResult Detalle(int id, string estatus = "", string codigo="")
-        {
-            var chimi = db.Detalle_Factura_T.Where(x => x.id == id).FirstOrDefault();
-
-            if (estatus == "Cancelado")
-            {
-                chimi.Estado = "Facturado";
-
-            }
-
-            else
-            {
-                chimi.Estado = "Cancelado";
-            }
-
-            db.Entry(chimi).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return RedirectToAction("Index", new { Codigo=codigo});
-        }
-
-        // GET: Detalles/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Detalles/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Detalles/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Detalles/Edit/5
         public ActionResult Edit(int id)
         {
 
             var chimi = db.Detalle_Factura_T.Where(x => x.id == id).FirstOrDefault();
-            Detalle_Factura_T producto = new Detalle_Factura_T();
+            ProductoVM producto = new ProductoVM();
 
-            producto.IdProducto = chimi.IdProducto;
+            var product = db.Producto.Where(x => x.id == chimi.IdProducto).Select(x=>x.Nombre_producto).FirstOrDefault();
+            producto.Productos = product;
             producto.Precio = chimi.Precio;
-            producto.comenatrio = chimi.comenatrio;
+            producto.Comentario = chimi.comenatrio;
             producto.Cantidad = chimi.Cantidad;
-            producto.nombre = chimi.nombre;
+            producto.Nombre = chimi.nombre;
             producto.Ticket = chimi.Ticket;
 
+            var tipoProducto = db.Producto.ToList();
 
+            ViewBag.tipoProducto = new SelectList(tipoProducto, "id", "Nombre_producto");
             return View(producto);
         }
 
         // POST: Detalles/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Detalle_Factura_T Factura)
+        public ActionResult Edit(int id, ProductoVM Factura)
         {
-            var modelo = db.Detalle_Factura_T.Where(x => x.id == Factura.id).FirstOrDefault();
+            var resp = "false";
+            if (ModelState.IsValid)
+            {
+
+            
+            var factura = db.Detalle_Factura_T.Where(x => x.id == Factura.id).FirstOrDefault();
+            Detalle_Factura_T modelo = new Detalle_Factura_T();
+         
 
             try
             {
-                modelo.IdProducto = Factura.IdProducto;
-                modelo.Precio = Factura.Precio;
-                modelo.comenatrio = Factura.comenatrio;
-                modelo.Cantidad = Factura.Cantidad;
-                modelo.nombre = Factura.nombre;
-                modelo.Ticket = Factura.Ticket;
+                factura.IdProducto = Convert.ToInt32(Factura.Productos) == 0 ? factura.IdProducto : Convert.ToInt32(Factura.Productos);
+                factura.Precio = Factura.Precio == 0 ? factura.Precio : Factura.Precio;
+                factura.comenatrio = Factura.Comentario == null ? factura.comenatrio : factura.comenatrio;
+                factura.Cantidad = Factura.Cantidad == 0 ? factura.Cantidad : Factura.Cantidad;
+
 
                 // TODO: Add update logic here
-                db.Entry(modelo).State = EntityState.Modified;
+                db.Entry(factura).State = EntityState.Modified;
                 db.SaveChanges();
+                resp = "true";
+          
+                return Json(resp);
 
-
-                return RedirectToAction("Detalles", new { Codigo = Factura.Ticket });
             }
-            catch
+            catch (Exception)
             {
-                return RedirectToAction("Detalles", new { Codigo = Factura.Ticket });
+
+                    return Json(resp);
+                    throw;
             }
+               
+            }
+            return Json(resp);
         }
 
-
-        // GET: Detalles/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: Detalles/Delete/5
         [HttpPost]

@@ -1,4 +1,7 @@
 ﻿using AdminBSB.Models;
+using AdminBSB.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,59 +10,104 @@ using System.Web.Mvc;
 
 namespace AdminBSB.Controllers
 {
+    [Authorize]
     public class FacturasController : Controller
     {
         private FacturacionEntities db = new FacturacionEntities();
+
         // GET: Facturas
         public ActionResult Index()
         {
+            var producto = new Producto();
+
+            var ImagesChimi = db.Producto.Where(s => s.TipoProducto == 1 && s.Estado == true).ToList();
+            var ImagesBurrito = db.Producto.Where(s => s.TipoProducto == 2 && s.Estado == true).ToList();
+
+            ViewBag.ImagesChimi = ImagesChimi;
+            ViewBag.ImagesBurrito = ImagesBurrito;
             return View();
         }
 
-        public ActionResult PantallaPrincipal()
+        public ActionResult PantallaPrincipal(string layaout = "", string layaouts = "")
         {
-            return View();
+            var role = ManejoUsuario();
+
+
+            var venta = (from d in db.Detalle_Factura_T
+                         group new { d.Producto, d } by new
+                         {
+                             d.Producto.Nombre_producto
+                         } into g
+                         select new VentaVM
+                         {
+                             Nombre_producto = g.Key.Nombre_producto,
+                             Cantidad = g.Sum(p => p.d.Cantidad),
+                             Precio = g.Sum(p => p.d.Precio)
+                         }).ToList();
+
+            DetalleVM model = new DetalleVM();
+            model.VentaVMs = new List<VentaVM>();
+            model.VentaVMs = venta.ToList();
+
+            var gastos = db.Gastos.ToList();
+
+            ViewBag.Role = role;
+            ViewBag.venta = venta;
+            ViewBag.gastos = gastos;
+            if (layaouts == "")
+            {
+                ViewBag.layaout = layaout;
+            }
+
+
+
+            var ImagesChimi = db.Producto.Where(s => s.TipoProducto == 1 && s.Estado == true).ToList();
+            var ImagesBurrito = db.Producto.Where(s => s.TipoProducto == 2 && s.Estado == true).ToList();
+
+            ViewBag.ImagesChimi = ImagesChimi;
+            ViewBag.ImagesBurrito = ImagesBurrito;
+            return View(model);
         }
 
         public JsonResult SaveOrder(string name, Detalle_Factura_T[] order, string servicio)
         {
+            var ticket = "";
             string result = "Error! Orden No Completada!";
             if (name != null && order != null)
             {
-                //    var cutomerId = Guid.NewGuid();
-                //    Factura_Chimi_T model = new Factura_Chimi_T();
 
-                //    model. = order;
-                //    model.Name = name;
-                //    model.Address = address;
-                //    model.OrderDate = DateTime.Now;
-                //    db.Customes.Add(model);
-
-                var turno = db.SP_Generar_Turno(name).ToList();
-
-                foreach (var item in order)
+                try
                 {
+                    var turno = db.SP_Generar_Turno(name).ToList();
+                    ticket = turno[0];
+                    foreach (var item in order)
+                    {
 
-                   Detalle_Factura_T Orden = new Detalle_Factura_T();
-                    Orden.Cantidad = item.Cantidad;
+                        Detalle_Factura_T Orden = new Detalle_Factura_T();
+                        Orden.Cantidad = item.Cantidad;
 
-                    Orden.comenatrio = item.comenatrio;
-                    Orden.Precio = item.Precio;
-                    Orden.IdProducto = item.IdProducto;
-                    Orden.Ticket = turno[0];
-                    Orden.fecha = DateTime.Now;
-                    Orden.Estado = "Facturado";
-                    Orden.TipoProducto = item.TipoProducto;
-                    Orden.TipoServicio = servicio;
-                    db.Detalle_Factura_T.Add(Orden);
+                        Orden.comenatrio = item.comenatrio;
+                        Orden.Precio = item.Precio;
+                        Orden.IdProducto = item.IdProducto;
+                        Orden.Ticket = ticket;
+                        Orden.fecha = DateTime.Now;
+                        Orden.Estado = "Facturado";
+                        Orden.TipoProducto = item.TipoProducto;
+                        Orden.TipoServicio = servicio;
+                        db.Detalle_Factura_T.Add(Orden);
 
+                    }
+                    db.SaveChanges();
                 }
 
+                catch
+                {
 
-                db.SaveChanges();
-                result = "Success! Order Is Complete!";
+
+                    result = "Success! Order Is Complete!";
+                }
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(new { result, ticket }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult TiposProducto(string producto)
@@ -70,76 +118,68 @@ namespace AdminBSB.Controllers
             var Id = db.Producto.Where(x => x.Nombre_producto == producto).Select(x => x.id).ToList();
             return Json(new { Tipos = Tipos, Monto = Monto, id = Id }, JsonRequestBehavior.AllowGet);
         }
-        // GET: Facturas/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Facturas/Create
-        public ActionResult Create()
+        public String ManejoUsuario()
         {
-            return View();
-        }
-
-        // POST: Facturas/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            var resp = "true";
+            if (User.Identity.IsAuthenticated)
             {
-                // TODO: Add insert logic here
+                ApplicationDbContext dbs = new ApplicationDbContext();
+                var idUsuarioActual = User.Identity.GetUserId();
+                var roleManager = new RoleManager<IdentityRole>
+                    (new RoleStore<IdentityRole>(dbs));
+                var roles = dbs.Roles.ToList().Count();
+                if (roles == 0)
+                {
+                    var resultados = roleManager.Create(new IdentityRole("Administrador"));
+                }
 
-                return RedirectToAction("Index");
+                var userManager = new UserManager<ApplicationUser>(
+                  new UserStore<ApplicationUser>(dbs));
+                var usuarios = dbs.Users.ToList().Count();
+
+
+
+                var role = userManager.GetRoles(idUsuarioActual);
+                if (role.Count() == 0)
+                {
+                    if (usuarios == 1)
+                    {
+                        userManager.AddToRole(idUsuarioActual, "Administrador");
+                    }
+                    else
+                    {
+                        //Agregar Usuario a rol
+                        var resultado = userManager.AddToRole(idUsuarioActual, "Usuario");
+                    }
+                    role = userManager.GetRoles(idUsuarioActual);
+                }
+                resp = role[0].ToString();
+                if (resp == "DespachardorB")
+                {
+                    RedirectDespacho(resp);
+                }
+                if (resp == "DespachardorA")
+                {
+                    RedirectDespacho(resp);
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return resp;
         }
 
-        // GET: Facturas/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult RedirectDespacho(string roles)
         {
-            return View();
+            if (roles == "DespachardorB")
+            {
+                return RedirectToAction("Index", "Despacho", new { roles = roles });
+            }
+
+            else
+            {
+                return RedirectToAction("Index", "Despacho", new { roles = roles });
+            }
+
         }
 
-        // POST: Facturas/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Facturas/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Facturas/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

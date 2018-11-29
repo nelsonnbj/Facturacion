@@ -1,30 +1,20 @@
 ﻿@model List<AdminBSB.ViewModels.DetalleVM>
 
-<div class="row clearfix">
+@{
+    Layout = "~/Views/Shared/LayoutDespacho.cshtml";
+}
+<head>
+    <link href="~/Content/css/Despacho.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row clearfix">
 
-    @*////////Label Para Identificar el area/////////////*@
+        @*////////Label Para Identificar el area/////////////*@
 
-    <!-- Task Info -->
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-            <div class="header">
+        <!-- Task Info -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
 
-                <h2>Despacho de Pedidos</h2>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="body">
                 <!-- Nav tabs -->
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -35,7 +25,7 @@
                             {
 
 
-                                <table id="myDatatable" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <table id="myDatatable" class="table table-bordered ">
                                     <tr>
                                         <th>
                                             Producto
@@ -49,15 +39,11 @@
                                         <th>
                                             Ticket
                                         </th>
-
-                                        <th>
-                                            Estado
-                                        </th>
                                         <th>
                                             TipoServicio
                                         </th>
                                         <th>Cambiar Estado</th>
-                                        <th></th>
+
                                     </tr>
 
                                     @foreach (var item in Model)
@@ -75,9 +61,7 @@
                                             <td>
                                                 @item.Ticket
                                             </td>
-                                            <td>
-                                                @item.Estado
-                                            </td>
+
                                             @if (item.TipoServicio == "Empacar")
                                             {
                                                 <td style="color:red">
@@ -91,40 +75,12 @@
                                                 </td>
                                             }
                                             <td>
-
-
-                                                @*@if (item.Estado == "Despachado")
-                                                    {
-                                                        <div class="col-sm-3">
-
-                                                            <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
-
-                                                                <label><input type="checkbox" id="despachoCHB" checked disabled><span class="lever switch-col-green"></span></label>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    @if (item.Estado == "Cancelado")
-                                                    {
-                                                        <div class="col-sm-3">
-
-                                                            <div class="switch" id="agregar" data-request-url="@Url.Action("Detalle", "Detalles", new { id = item.id })">
-
-                                                                <label><input type="checkbox" data-id="@item.id" id="despachoCHB" checked><span class="lever switch-col-red"></span></label>
-                                                            </div>
-                                                        </div>
-                                                    }*@
-
                                                 <div class="col-sm-3">
-
                                                     <div class="switch">
-                                                        <a id="btnAgregarMeta" class="btn btn-danger popup" href="@Url.Action("Cambio", "Despacho",new {id=item.id, codigo=item.Estado})">Despachar</a>
-                                                       @* <label><input  id="despachar" type="checkbox" data-request-url="@Url.Action("Cambio", "Despacho",new {id= @item.id})"><span class="lever switch-col-green"></span></label>*@
+                                                        <a class="btnAgregarMeta btn btn-danger popup" data-url="@Url.Action("Cambio", "Despacho",new {id=item.id})" name="despacharPedidod">Despachar</a>
                                                     </div>
                                                 </div>
-
-
                                             </td>
-
                                         </tr>
                                     }
 
@@ -137,10 +93,10 @@
             </div>
         </div>
     </div>
-</div>
-
+</body>
 
 @section Scripts{
 
     <script src=@Url.Content("~/CodeTamplate/DespachoScript.js")></script>
+    <script src="~/Content/plugins/sweetalert/sweetalert.min.js"></script>
 }

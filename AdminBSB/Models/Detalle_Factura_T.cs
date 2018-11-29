@@ -24,7 +24,10 @@ namespace AdminBSB.Models
         public Nullable<System.DateTime> fecha { get; set; }
         public string telefono { get; set; }
         public string Estado { get; set; }
-        public string TipoProducto { get; set; }
+        public Nullable<int> TipoProducto { get; set; }
         public string TipoServicio { get; set; }
+    
+        public virtual Producto Producto { get; set; }
+        public virtual TipoProducto TipoProducto1 { get; set; }
     }
 }

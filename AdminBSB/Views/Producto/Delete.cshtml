@@ -1,0 +1,71 @@
+﻿@model AdminBSB.Models.Producto
+
+
+<div class="card">
+    <div class="em-wrapper-main">
+        <div class="container container-main">
+            <div class="em-inner-main">
+                
+                <h3 style="color:#272727">Estas Seguro de Que Deseas Eliminarlo?</h3>
+                <div class="body">
+                    <h4 style="color:#272727">Producto</h4>
+                    <hr />
+                    <div class="form-inline">
+                        <div class="col-md-4">
+
+                            <div class="col-md-4">
+                                <div class="form-inline">
+                                    @Html.LabelFor(model => model.Nombre_producto, htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Nombre_producto, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nombre_producto, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <dd>
+                                @Html.DisplayFor(model => model.Nombre_producto)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Precio)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.Precio)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TipoProducto)
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.TipoProducto)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.UrlImage)
+                            </dt>
+                            <dd>
+                                @if (!string.IsNullOrEmpty(Model.UrlImage))
+        {
+                        <img src="@Url.Content(Model.UrlImage)" alt="Image" style="width:100px; height:100px; max-width:100px; height:auto ">
+}
+                            </dd>
+
+
+
+                        </div>
+                        
+                    </div>
+                    
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                            @Html.ActionLink("Cancelar", "Index", new { }, new { @class = "btn btn-primary" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

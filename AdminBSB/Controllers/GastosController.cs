@@ -1,4 +1,6 @@
 ﻿using AdminBSB.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,25 +9,22 @@ using System.Web.Mvc;
 
 namespace AdminBSB.Controllers
 {
+    [Authorize]
     public class GastosController : Controller
     {
         private FacturacionEntities db = new FacturacionEntities();
         // GET: Gastos
         public ActionResult Index()
         {
-            List<Gastos> gastos = db.Gastos.ToList();
+           
+           List<Gastos> gastos = db.Gastos.ToList();
             return View(gastos);
         }
-
-        // GET: Gastos/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+        
         // GET: Gastos/Create
         public ActionResult Create()
         {
+           
             return View();
         }
 
@@ -33,22 +32,31 @@ namespace AdminBSB.Controllers
         [HttpPost]
         public ActionResult Create(Gastos gastos)
         {
-            try
+            if (ModelState.IsValid)
             {
-                Gastos_Diario modelo = new Gastos_Diario();
+                try
+                {
+                    Gastos modelo = new Gastos();
 
-                modelo.Nombre = gastos.Nombre;
-                modelo.Precio = gastos.Precio;
-                modelo.Descripcion = gastos.Descripcion;
-                modelo.Fecha = gastos.Fecha;
-                db.Gastos_Diario.Add(modelo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                    modelo.Nombre = gastos.Nombre;
+                    modelo.Precio = gastos.Precio;
+                    modelo.Descripcion = gastos.Descripcion;
+                    modelo.Fecha = gastos.Fecha;
+                    db.Gastos.Add(modelo);
+                    db.SaveChanges();
+                    ViewBag.Creado = "true";
+                    return View();
+                }
+                catch
+                {
+                    ViewBag.Creado = "false";
+                    return View();
+                }
+          
+           
+        }
+            ViewBag.Creado = "false";
+            return View();
         }
 
         // GET: Gastos/Edit/5
@@ -73,26 +81,24 @@ namespace AdminBSB.Controllers
             }
         }
 
-        // GET: Gastos/Delete/5
-        public ActionResult Delete(int id)
+       
+        public ActionResult Cuadre()
         {
+            var venta = db.Detalle_Factura_T.Select(x => x.Precio).ToList().Sum();
+            
+            var gastos = db.Gastos_Diario.Select(x => x.Precio).ToList().Sum();
+           
+        
+            ViewBag.Venta = String.Format("{0:#,0.00}", venta );
+            ViewBag.Gastos = String.Format("{0:#,0.00}",  gastos);
+            ViewBag.Cuadre = String.Format("{0:#,0.00}", venta- gastos);
             return View();
         }
 
-        // POST: Gastos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Cierre()
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            db.SP_LimpiarTabla();
+            return RedirectToAction("PaginaPrincipal","Facturas");
         }
     }
 }

@@ -33,6 +33,7 @@ namespace AdminBSB.Models
         public virtual DbSet<Gastos_Diario> Gastos_Diario { get; set; }
         public virtual DbSet<Invetario> Invetario { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<TipoProducto> TipoProducto { get; set; }
     
         public virtual ObjectResult<string> SP_Generar_Turno(string servicio)
         {
@@ -41,6 +42,16 @@ namespace AdminBSB.Models
                 new ObjectParameter("servicio", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_Generar_Turno", servicioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Cuadre()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Cuadre");
+        }
+    
+        public virtual int SP_LimpiarTabla()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_LimpiarTabla");
         }
     }
 }

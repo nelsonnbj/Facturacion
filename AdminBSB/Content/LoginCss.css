@@ -1,0 +1,12 @@
+﻿body.login-page {
+
+    background-repeat: no-repeat;
+
+    background-image: url('images/edificio.jpg');
+}
+
+body.signup-page {
+    background-repeat: no-repeat;
+
+    background-image: url('images/edificio.jpg');
+}

@@ -1,11 +1,11 @@
 ﻿$("#addToList").click(function (e) {
     e.preventDefault();
-    area = document.getElementById("AreaBurrito").innerHTML;
+    var area = document.getElementById("AreaBurrito").innerHTML;
 
 
     if ($.trim(document.getElementById("producto").value) == "" || $.trim(document.getElementById("cantidad").value) == "") return;
 
-    var IdProducto = document.getElementById("producto").value,
+    var IdProductos = document.getElementById("producto").value,
         cantidad = document.getElementById("cantidad").value,
 
         comentario = document.getElementById("ComentarioAgregado").value,
@@ -20,43 +20,18 @@
             monto = data.Monto;
             tipo = data.Tipos;
             var IdProducto = data.id;
-            var productItem = '<tr><td>' + IdProducto + '</td><td>' + cantidad + '</td><td>' + comentario + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo + '</td><td hidden>' + IdProducto + '</td><td><a data-itemid="0" href="#" class="deleteItem">Remove</a></td></tr>';
+            var productItem = '<tr><td>' + IdProductos + '</td><td>' + cantidad + '</td><td class="ocultarComentario">' + comentario + '</td><td>' + (parseFloat(cantidad) * parseInt(monto)) + '</td><td hidden>' + tipo + '</td><td hidden>' + IdProducto + '</td><td  class="ocultarComentario"><a data-itemid="0" href="#" class="deleteItem"style="color:red">Eliminar</a></td></tr>';
             BurritoTableBody.append(productItem);
+            CalculoTotal();
             ///////////////////////Muestra la tabla de pedidos//////////
             document.getElementById("tablaSegundaria").hidden = false;
 
-            ////////////////////////////Calcula el Total de Burrito///////////
-
-
-            var total = (parseFloat(cantidad) * parseInt(monto));
-            var montoTotal = document.getElementById("Burritos").innerHTML;
-            document.getElementById("Burritos").value = "";
-
-            if (montoTotal != "") {
-                document.getElementById("Burritos").innerHTML = (parseInt(montoTotal) + parseInt(total));
-
-            }
-            else {
-                document.getElementById("Burritos").innerHTML = total;
-            }
             clearItem();
 
-            //////////////////////Calcula el Total de Todas las Cuentas//////////////////
-            burritoTotal = document.getElementById("Burritos").innerHTML;
-            chimiTotal = document.getElementById("Chimi").innerHTML;
 
-            if (chimiTotal == "") {
-
-                document.getElementById("Total").innerHTML = burritoTotal;
-            }
-
-            else {
-                document.getElementById("Total").innerHTML = (parseInt(burritoTotal) + parseInt(chimiTotal))
-            }
         });
     }
 });
-
 
 //After Click Save Button Pass All Data View To Controller For Save Database
 function SaveOrder(data) {
@@ -66,15 +41,6 @@ function SaveOrder(data) {
         type: 'POST',
         url: "/Facturas/SaveOrder",
         data: data,
-
-
-        //success: function (result) {
-        //    alert(result);
-        //    location.reload();
-        //},
-        //error: function () {
-        //    alert("Error!")
-        //}
     });
 
 }
@@ -102,20 +68,22 @@ $("#SaveBurritos").click(function (e) {
 
 
     var data = JSON.stringify({
-        name: "Burrito",
+        name: "B",
         servicio: tipoServicio,
         address: $("#producto").val(),
         order: orderArr
     });
 
     $.when(SaveOrder(data)).then(function (response) {
-        console.log(response);
+        var turno = response.ticket;
+        document.getElementById("turnoburrito").innerHTML = turno;
+        window.print();
+        limpiar();
+        alertify.success("Pedido Facturado");
+
     }).fail(function (err) {
         console.log(err);
     });
-    alertify.success("Pedido Facturado");
-    limpiar();
-    //window.print();
 
 });
 
@@ -128,55 +96,13 @@ function limpiar() {
     totales = document.getElementById("Total").innerHTML;
     document.getElementById("Burritos").innerHTML = 0;
     document.getElementById("Total").innerHTML = (parseInt(totales) - parseInt(menos));
+
 }
 
+/////////Metodo que agrega el producto al menu de pedidos/////////
 
-$("#Mofongo_de_Res").click(function () {
-    document.getElementById("producto").value = "Mofongo de Res";
+$(".em-img-lazy").click(function () {
+    var $instance = $(this);
+    var nuevoProducto = $instance.attr("data-estado") || 0;
+    document.getElementById("producto").value = nuevoProducto;
 });
-
-$("#Mofongo_de_Cerdo").click(function () {
-    document.getElementById("producto").value = "Mofongo de Cerdo";
-});
-
-$("#Mofongo_de_Longaniza").click(function () {
-    document.getElementById("producto").value = "Mofongo de Longaniza";
-});
-
-$("#Mofongo_Grande").click(function () {
-    document.getElementById("producto").value = "Mofongo Grande";
-});
-
-$("#Tacos_de_Pollo").click(function () {
-    document.getElementById("producto").value = "Tacos de Pollo";
-});
-
-$("#Tacos_de_Res").click(function () {
-    document.getElementById("producto").value = "Tacos de Res";
-});
-
-$("#Burrito_de_Pollo").click(function () {
-    document.getElementById("producto").value = "Burrito de Pollo";
-});
-
-$("#Burrito_de_Res").click(function () {
-    document.getElementById("producto").value = "Burrito de Res";
-});
-
-$("#Burrito_de_Grande").click(function () {
-    document.getElementById("producto").value = "Burrito de Grande";
-});
-
-$("#Burrito_de_Mixto").click(function () {
-    document.getElementById("producto").value = "Burrito de Mixto";
-});
-$("#Quezadilla_de_Pollo").click(function () {
-    document.getElementById("producto").value = "Quezadilla de Pollo";
-});
-$("#Quezadilla_de_Res").click(function () {
-    document.getElementById("producto").value = "Quezadilla de Res";
-});
-$("#Ensalada_de_Pello").click(function () {
-    document.getElementById("producto").value = "Ensalada de Pello";
-});
-

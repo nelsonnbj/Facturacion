@@ -6,8 +6,11 @@
 }
 
 @*///////////////////////////////////////////////////////////////vista/////////////////////*@
-
-
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/css/select2-responsive.css" rel="stylesheet" />
+</head>
 
 <div class="row clearfix">
 
@@ -40,21 +43,10 @@
                     <div role="tabpanel" class="tab-pane fade in active" id="home_with_icon_title">
 
                         <div class="body">
-                            @using (Html.BeginForm("Index", "Detalles", FormMethod.Get))
-                            {
-                                <div class="form-inline ">
+                            <label id="error" val="" hidden>@error</label>
 
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control" name="Codigo" placeholder="Tickect" id="codigo">
-                                        @*@Html.DropDownList("empresa", ViewBag.Empresa as SelectList, "--Seleccionar Empresa", new { @class = "form-control", id = "empresa" })*@
-
-                                        <button id="buscarempleado" class="btn btn-primary" type="submit">Buscar</button>
-                                        <hr />
-                                    </div>
-                                </div>
-                                <label id="error" val="" hidden>@error</label>
-
-                                <table id="myDatatable" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                            <table id="myDatatable" style="width:100%" class="table table-bordered table-striped table-hover dataTable js-exportable">
+                                <thead>
                                     <tr>
 
                                         <th>
@@ -72,88 +64,87 @@
                                         <th>
                                             Ticket
                                         </th>
-
+                                        <th>
+                                            Cambiar Estado
+                                        </th>
                                         <th>
                                             Estado
                                         </th>
-                                        <th>Cambiar Estado</th>
+
                                         <th></th>
-                                    </tr>
+                                        @*</tr>
 
-                                    @foreach (var a in Model)
-                                    {
-                                        <tr>
+                                            @foreach (var a in Model)
+                                            {
+                                                <tr>
 
-                                            <td>
-                                                @a.Nombre_producto
-                                            </td>
-                                            <td>
-                                                @a.Cantidad
-                                            </td>
-                                            <td>
-                                                @a.Precio
-                                            </td>
-                                            <td>
-                                                @a.Comentario
-                                            </td>
-                                            <td>
-                                                @a.Ticket
-                                            </td>
-                                            <td>
-                                                @a.Estado
-                                            </td>
+                                                    <td>
+                                                        @a.Nombre_producto
+                                                    </td>
+                                                    <td>
+                                                        @a.Cantidad
+                                                    </td>
+                                                    <td>
+                                                        @a.Precio
+                                                    </td>
+                                                    <td>
+                                                        @a.Comentario
+                                                    </td>
+                                                    <td>
+                                                        @a.Ticket
+                                                    </td>
+                                                    <td>
+                                                        @a.Estado
+                                                    </td>
 
-                                            <td>
+                                                    <td>
 
-                                                @if (a.Estado == "Despachado")
-                                                {
-                                                    <div class="col-sm-3" dissable>
+                                                        @if (a.Estado == "Despachado")
+                                                        {
+                                                            <div class="col-sm-3" dissable>
 
-                                                        <div class="switch" style="width:75%;">
-                                                            <a id="btnAgregarMeta" class="btn btn-success">Despachado</a>
-                                                           @* <label><input type="checkbox" id="checkbo" checked disabled><span class="lever switch-col-green"></span></label>*@
-                                                        </div>
-                                                    </div>
-                                                }
-                                                @if (a.Estado == "Cancelado")
-                                                {
+                                                                <div class="switch" style="width:75%;">
+                                                                    <a id="btnAgregarMeta" class="btn btn-success">Despachado</a>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        @if (a.Estado == "Cancelado")
+                                                        {
 
-                                                    <div class="col-sm-3">
+                                                            <div class="col-sm-3">
 
-                                                        <div class="switch">
-                                                            <a id="btnAgregarMeta" class="btn btn-danger popup" href="@Url.Action("Detalle", "Detalles", new {id=a.id, estatus=a.Estado,codigo=a.Ticket})">Reativar</a>
-                                                            @*<label><input type="checkbox" data-id="@a.id" id="checkbo" checked><span class="lever switch-col-red"></span></label>*@
-                                                        </div>
-                                                    </div>
-                                                }
-                                                @if (a.Estado == "Facturado")
-                                                {
-                                                    <div class="col-sm-3">
+                                                                <div class="switch">
+                                                                    <a id="btnAgregarMeta" class="btn btn-primary popup" href="@Url.Action("Detalle", "Detalles", new {id=a.id, estatus=a.Estado,codigo=a.Ticket})">Reativar</a>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        @if (a.Estado == "Facturado")
+                                                        {
+                                                            <div class="col-sm-3">
 
-                                                        <div class="switch" id="agregar" >
-                                                            <a id="btnAgregarMeta" class="btn btn-primary active popup" href="@Url.Action("Detalle", "Detalles", new {id=a.id, estatus=a.Estado, codigo=a.Ticket})">Cancelar</a>
-                                                           @* <label><input type="checkbox" data-id="@a.id" id="checkbo"><span class="lever switch-col-red"></span></label>*@
-                                                        </div>
-                                                    </div>
-                                                }
+                                                                <div class="switch" id="agregar">
+                                                                    <a id="btnAgregarMeta" class="btn btn-danger active popup" href="@Url.Action("Detalle", "Detalles", new {id=a.id, estatus=a.Estado, codigo=a.Ticket})">Cancelar</a>
+                                                                </div>
+                                                            </div>
+                                                        }
 
-                                            </td>
-                                            <td>
-                                                @if (a.Estado == "Despachado")
-                                                {
-                                                    <i class="glyphicon glyphicon-pencil"></i>
-                                                }
-                                                else
-                                                {
-                                                    <a href="#myModal" class="btnEditar btn-link btn-info" data-toggle="modal" data-id="@a.id"><i class="glyphicon glyphicon-pencil"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        @if (a.Estado == "Despachado")
+                                                        {
+                                                            <i class="glyphicon glyphicon-pencil"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="#myModal" class="btnEditar btn-link btn-info" data-toggle="modal" data-id="@a.id"><i class="glyphicon glyphicon-pencil"></i></a>
 
-                                                }
-                                            </td>
-                                        </tr>
-                                    }
+                                                        }
+                                                    </td>
+                                                </tr>*@
+                                        @*}*@
+                                </thead>
+                            </table>
 
-                                </table>
-                            }
 
                         </div>
                     </div>
@@ -178,3 +169,13 @@
     </div>
 </div>
 
+@section scripts{
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="~/Content/js/admin.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/CodeTamplate/DetallesScript.js"></script>
+
+}

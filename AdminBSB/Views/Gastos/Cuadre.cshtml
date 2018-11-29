@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Cuadre";
+
+
+}
+
+<div class="row clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+
+            <table class="table">
+                <tr>
+                    <th>
+                        <h4><strong>Venta</strong> </h4>
+                    </th>
+                    <th>
+                        <h4><strong>Gastos</strong></h4>
+                    </th>
+                    <th>
+                        <h4><strong>Total</strong></h4>
+                    </th>
+
+                    @*<th></th>*@
+                </tr>
+
+
+                <tr>
+                    <td style="color:cornflowerblue">
+                        <h5>RD$ @ViewBag.Venta</h5>
+                    </td>
+                    <td style="color:red">
+                        <h5>RD$ @ViewBag.Gastos</h5>
+                    </td>
+                    <td style="color:green">
+                        <h4><strong>RD$ @Convert.ToString(ViewBag.Cuadre)</strong> </h4> -----------
+                    </td>
+
+                    @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        </td>*@
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/CodeTamplate/PaginaPrincipal.js"></script>
+    <script src="~/Content/plugins/sweetalert/sweetalert.min.js"></script>
+}
